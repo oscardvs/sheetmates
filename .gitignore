@@ -16,10 +16,11 @@
 # next.js
 /.next/
 /out/
-
+/.claude
+.claude
 # production
 /build
-
+CLAUDE.md
 # misc
 .DS_Store
 *.pem

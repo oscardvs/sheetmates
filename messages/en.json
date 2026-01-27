@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "title": "SheetMates",
+    "description": "Collaborative sheet metal nesting platform"
+  },
+  "nav": {
+    "home": "Home",
+    "upload": "Upload",
+    "sheets": "Sheets",
+    "queue": "Queue",
+    "export": "Export",
+    "pricing": "Pricing",
+    "account": "Account",
+    "admin": "Admin",
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out"
+  },
+  "landing": {
+    "hero": {
+      "title": "Share Sheet Metal. Cut Costs.",
+      "subtitle": "Collaborative nesting platform that groups parts from multiple users onto shared sheets — reducing waste and cutting costs for everyone.",
+      "cta": "Get Started",
+      "ctaSecondary": "See Pricing"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1Title": "Upload Your Parts",
+      "step1Desc": "Upload DXF files of your parts. We parse them automatically and calculate dimensions.",
+      "step2Title": "Smart Nesting",
+      "step2Desc": "Our algorithm packs parts from multiple users onto shared sheets for maximum material usage.",
+      "step3Title": "Cut & Deliver",
+      "step3Desc": "Sheets are sent to the laser cutter. You pay only for your share of the material."
+    },
+    "benefits": {
+      "title": "Why SheetMates?",
+      "cost": "Lower Costs",
+      "waste": "Less Waste",
+      "turnaround": "Faster Turnaround",
+      "costDesc": "Share sheet space with others and pay only for what you use.",
+      "wasteDesc": "Optimized nesting means less material ends up in the bin.",
+      "turnaroundDesc": "Sheets fill up faster when multiple users contribute parts."
+    },
+    "about": {
+      "title": "Built at Tech-Centrum",
+      "description": "SheetMates was born from Tech-Centrum's maker community. We saw people ordering small batches on full sheets and realized: if we share the sheet, everyone saves."
+    },
+    "footerCta": {
+      "title": "Ready to start sharing sheets?",
+      "cta": "Create Your Account"
+    }
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "signupTitle": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "loginButton": "Log In",
+    "signupButton": "Sign Up",
+    "googleLogin": "Continue with Google",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "forgotPassword": "Forgot password?"
+  },
+  "upload": {
+    "title": "Upload Parts",
+    "dragDrop": "Drag & drop DXF files here",
+    "orBrowse": "or browse files",
+    "fileTypes": "Accepts .dxf files",
+    "quantity": "Quantity",
+    "preview": "Preview",
+    "confirm": "Confirm & Save",
+    "uploading": "Uploading…",
+    "success": "Parts uploaded successfully!",
+    "error": "Failed to upload parts."
+  },
+  "sheets": {
+    "title": "Sheets",
+    "sheetList": "Sheet List",
+    "newSheet": "New Sheet",
+    "dimensions": "Dimensions",
+    "material": "Material",
+    "utilization": "Utilization",
+    "status": "Status",
+    "placements": "Placements",
+    "noSheets": "No sheets yet."
+  },
+  "nesting": {
+    "title": "Nesting",
+    "runNesting": "Run Nesting",
+    "kerf": "Kerf (mm)",
+    "sheetWidth": "Sheet Width (mm)",
+    "sheetHeight": "Sheet Height (mm)",
+    "selectMaterial": "Select Material",
+    "utilization": "Utilization",
+    "partsPlaced": "Parts Placed"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "perArea": "Per cm² rate",
+    "perCut": "Per mm cut rate",
+    "material": "Material",
+    "thickness": "Thickness",
+    "complexity": "Complexity",
+    "subtotal": "Subtotal",
+    "vat": "VAT (21%)",
+    "total": "Total",
+    "minimum": "Minimum order"
+  },
+  "queue": {
+    "title": "Parts Queue",
+    "partName": "Part Name",
+    "status": "Status",
+    "actions": "Actions",
+    "pending": "Pending",
+    "processing": "Processing",
+    "nested": "Nested",
+    "cut": "Cut",
+    "shipped": "Shipped"
+  },
+  "export": {
+    "title": "Export",
+    "selectSheets": "Select Sheets",
+    "generateDxf": "Generate DXF",
+    "download": "Download",
+    "noSheets": "No sheets available for export."
+  },
+  "checkout": {
+    "title": "Checkout",
+    "orderSummary": "Order Summary",
+    "pay": "Pay Now",
+    "processing": "Processing payment…",
+    "success": "Payment Successful!",
+    "successMessage": "Your order has been placed. You will receive a confirmation email shortly.",
+    "backToHome": "Back to Home"
+  },
+  "account": {
+    "title": "Account",
+    "billing": "Billing",
+    "orders": "Orders",
+    "billingAddress": "Billing Address",
+    "vatId": "VAT ID",
+    "orderHistory": "Order History",
+    "invoices": "Invoices",
+    "noOrders": "No orders yet.",
+    "status": "Status"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "overview": "Overview",
+    "users": "Users",
+    "revenue": "Revenue",
+    "recentOrders": "Recent Orders",
+    "pricingConfig": "Pricing Configuration",
+    "editPricing": "Edit Pricing",
+    "save": "Save Changes"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "noResults": "No results found."
+  },
+  "errors": {
+    "notFound": "Page Not Found",
+    "notFoundDesc": "The page you're looking for doesn't exist.",
+    "serverError": "Server Error",
+    "serverErrorDesc": "Something went wrong on our end.",
+    "unauthorized": "You must be logged in to view this page.",
+    "goHome": "Go Home"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "languages": {
+    "en": "English",
+    "fr": "Français",
+    "cs": "Čeština"
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "title": "SheetMates",
+    "description": "Kolaborativní platforma pro skládání plechů"
+  },
+  "nav": {
+    "home": "Domů",
+    "upload": "Nahrát",
+    "sheets": "Plechy",
+    "queue": "Fronta",
+    "export": "Export",
+    "pricing": "Ceník",
+    "account": "Účet",
+    "admin": "Admin",
+    "login": "Přihlásit se",
+    "signup": "Registrace",
+    "logout": "Odhlásit se"
+  },
+  "landing": {
+    "hero": {
+      "title": "Sdílejte plech. Snižte náklady.",
+      "subtitle": "Kolaborativní platforma pro skládání dílů od více uživatelů na sdílené plechy — méně odpadu a nižší náklady pro všechny.",
+      "cta": "Začít",
+      "ctaSecondary": "Zobrazit ceník"
+    },
+    "howItWorks": {
+      "title": "Jak to funguje",
+      "step1Title": "Nahrajte své díly",
+      "step1Desc": "Nahrajte DXF soubory vašich dílů. Automaticky je zpracujeme a vypočítáme rozměry.",
+      "step2Title": "Chytré skládání",
+      "step2Desc": "Náš algoritmus skládá díly od více uživatelů na sdílené plechy pro maximální využití materiálu.",
+      "step3Title": "Řezání & Doručení",
+      "step3Desc": "Plechy se pošlou na laser. Platíte pouze za svůj podíl materiálu."
+    },
+    "benefits": {
+      "title": "Proč SheetMates?",
+      "cost": "Nižší náklady",
+      "waste": "Méně odpadu",
+      "turnaround": "Rychlejší dodání",
+      "costDesc": "Sdílejte prostor na plechu a plaťte jen za to, co využijete.",
+      "wasteDesc": "Optimalizované skládání znamená méně odpadu.",
+      "turnaroundDesc": "Plechy se zaplní rychleji, když přispívá více uživatelů."
+    },
+    "about": {
+      "title": "Vytvořeno v Tech-Centru",
+      "description": "SheetMates vznikl v komunitě makerů Tech-Centra. Viděli jsme lidi objednávat malé série na celých plechách a uvědomili si: když plech sdílíme, ušetří všichni."
+    },
+    "footerCta": {
+      "title": "Připraveni sdílet plechy?",
+      "cta": "Vytvořte si účet"
+    }
+  },
+  "auth": {
+    "loginTitle": "Vítejte zpět",
+    "signupTitle": "Vytvořit účet",
+    "email": "E-mail",
+    "password": "Heslo",
+    "confirmPassword": "Potvrdit heslo",
+    "loginButton": "Přihlásit se",
+    "signupButton": "Registrovat se",
+    "googleLogin": "Pokračovat přes Google",
+    "noAccount": "Nemáte účet?",
+    "hasAccount": "Už máte účet?",
+    "forgotPassword": "Zapomenuté heslo?"
+  },
+  "upload": {
+    "title": "Nahrát díly",
+    "dragDrop": "Přetáhněte sem DXF soubory",
+    "orBrowse": "nebo procházet soubory",
+    "fileTypes": "Přijímá soubory .dxf",
+    "quantity": "Množství",
+    "preview": "Náhled",
+    "confirm": "Potvrdit & Uložit",
+    "uploading": "Nahrávání…",
+    "success": "Díly úspěšně nahrány!",
+    "error": "Nahrávání se nezdařilo."
+  },
+  "sheets": {
+    "title": "Plechy",
+    "sheetList": "Seznam plechů",
+    "newSheet": "Nový plech",
+    "dimensions": "Rozměry",
+    "material": "Materiál",
+    "utilization": "Využití",
+    "status": "Stav",
+    "placements": "Umístění",
+    "noSheets": "Zatím žádné plechy."
+  },
+  "nesting": {
+    "title": "Skládání",
+    "runNesting": "Spustit skládání",
+    "kerf": "Šířka řezu (mm)",
+    "sheetWidth": "Šířka plechu (mm)",
+    "sheetHeight": "Výška plechu (mm)",
+    "selectMaterial": "Vybrat materiál",
+    "utilization": "Využití",
+    "partsPlaced": "Umístěné díly"
+  },
+  "pricing": {
+    "title": "Ceník",
+    "perArea": "Sazba za cm²",
+    "perCut": "Sazba za mm řezu",
+    "material": "Materiál",
+    "thickness": "Tloušťka",
+    "complexity": "Složitost",
+    "subtotal": "Mezisoučet",
+    "vat": "DPH (21%)",
+    "total": "Celkem",
+    "minimum": "Minimální objednávka"
+  },
+  "queue": {
+    "title": "Fronta dílů",
+    "partName": "Název dílu",
+    "status": "Stav",
+    "actions": "Akce",
+    "pending": "Čeká",
+    "processing": "Zpracovává se",
+    "nested": "Složeno",
+    "cut": "Vyříznuto",
+    "shipped": "Odesláno"
+  },
+  "export": {
+    "title": "Export",
+    "selectSheets": "Vybrat plechy",
+    "generateDxf": "Vygenerovat DXF",
+    "download": "Stáhnout",
+    "noSheets": "Žádné plechy k exportu."
+  },
+  "checkout": {
+    "title": "Platba",
+    "orderSummary": "Shrnutí objednávky",
+    "pay": "Zaplatit",
+    "processing": "Zpracování platby…",
+    "success": "Platba proběhla úspěšně!",
+    "successMessage": "Vaše objednávka byla odeslána. Brzy obdržíte potvrzovací e-mail.",
+    "backToHome": "Zpět na úvodní stránku"
+  },
+  "account": {
+    "title": "Účet",
+    "billing": "Fakturace",
+    "orders": "Objednávky",
+    "billingAddress": "Fakturační adresa",
+    "vatId": "DIČ",
+    "orderHistory": "Historie objednávek",
+    "invoices": "Faktury",
+    "noOrders": "Zatím žádné objednávky.",
+    "status": "Stav"
+  },
+  "admin": {
+    "title": "Administrace",
+    "overview": "Přehled",
+    "users": "Uživatelé",
+    "revenue": "Tržby",
+    "recentOrders": "Poslední objednávky",
+    "pricingConfig": "Konfigurace ceníku",
+    "editPricing": "Upravit ceník",
+    "save": "Uložit změny"
+  },
+  "common": {
+    "loading": "Načítání…",
+    "error": "Něco se pokazilo.",
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "edit": "Upravit",
+    "confirm": "Potvrdit",
+    "back": "Zpět",
+    "next": "Další",
+    "search": "Hledat",
+    "noResults": "Žádné výsledky."
+  },
+  "errors": {
+    "notFound": "Stránka nenalezena",
+    "notFoundDesc": "Stránka, kterou hledáte, neexistuje.",
+    "serverError": "Chyba serveru",
+    "serverErrorDesc": "Na naší straně došlo k problému.",
+    "unauthorized": "Pro zobrazení této stránky se musíte přihlásit.",
+    "goHome": "Na úvodní stránku"
+  },
+  "theme": {
+    "light": "Světlý",
+    "dark": "Tmavý",
+    "system": "Systémový"
+  },
+  "languages": {
+    "en": "English",
+    "fr": "Français",
+    "cs": "Čeština"
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "title": "SheetMates",
+    "description": "Plateforme collaborative d'imbrication de tôles"
+  },
+  "nav": {
+    "home": "Accueil",
+    "upload": "Télécharger",
+    "sheets": "Tôles",
+    "queue": "File d'attente",
+    "export": "Exporter",
+    "pricing": "Tarifs",
+    "account": "Compte",
+    "admin": "Admin",
+    "login": "Se connecter",
+    "signup": "S'inscrire",
+    "logout": "Se déconnecter"
+  },
+  "landing": {
+    "hero": {
+      "title": "Partagez la tôle. Réduisez les coûts.",
+      "subtitle": "Plateforme collaborative d'imbrication qui regroupe les pièces de plusieurs utilisateurs sur des tôles partagées — réduisant les déchets et les coûts pour tous.",
+      "cta": "Commencer",
+      "ctaSecondary": "Voir les tarifs"
+    },
+    "howItWorks": {
+      "title": "Comment ça marche",
+      "step1Title": "Téléchargez vos pièces",
+      "step1Desc": "Téléchargez vos fichiers DXF. Nous les analysons automatiquement et calculons les dimensions.",
+      "step2Title": "Imbrication intelligente",
+      "step2Desc": "Notre algorithme place les pièces de plusieurs utilisateurs sur des tôles partagées pour une utilisation maximale.",
+      "step3Title": "Découpe & Livraison",
+      "step3Desc": "Les tôles sont envoyées au laser. Vous ne payez que votre part du matériau."
+    },
+    "benefits": {
+      "title": "Pourquoi SheetMates ?",
+      "cost": "Coûts réduits",
+      "waste": "Moins de déchets",
+      "turnaround": "Délais plus courts",
+      "costDesc": "Partagez l'espace de tôle et ne payez que ce que vous utilisez.",
+      "wasteDesc": "L'imbrication optimisée réduit les pertes de matériau.",
+      "turnaroundDesc": "Les tôles se remplissent plus vite quand plusieurs utilisateurs contribuent."
+    },
+    "about": {
+      "title": "Conçu au Tech-Centrum",
+      "description": "SheetMates est né de la communauté maker du Tech-Centrum. Nous avons vu des gens commander de petits lots sur des tôles entières et réalisé : en partageant la tôle, tout le monde économise."
+    },
+    "footerCta": {
+      "title": "Prêt à partager des tôles ?",
+      "cta": "Créez votre compte"
+    }
+  },
+  "auth": {
+    "loginTitle": "Bon retour",
+    "signupTitle": "Créer un compte",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "loginButton": "Se connecter",
+    "signupButton": "S'inscrire",
+    "googleLogin": "Continuer avec Google",
+    "noAccount": "Pas encore de compte ?",
+    "hasAccount": "Déjà un compte ?",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "upload": {
+    "title": "Télécharger des pièces",
+    "dragDrop": "Glissez-déposez vos fichiers DXF ici",
+    "orBrowse": "ou parcourir les fichiers",
+    "fileTypes": "Accepte les fichiers .dxf",
+    "quantity": "Quantité",
+    "preview": "Aperçu",
+    "confirm": "Confirmer & Enregistrer",
+    "uploading": "Téléchargement…",
+    "success": "Pièces téléchargées avec succès !",
+    "error": "Échec du téléchargement."
+  },
+  "sheets": {
+    "title": "Tôles",
+    "sheetList": "Liste des tôles",
+    "newSheet": "Nouvelle tôle",
+    "dimensions": "Dimensions",
+    "material": "Matériau",
+    "utilization": "Utilisation",
+    "status": "Statut",
+    "placements": "Placements",
+    "noSheets": "Aucune tôle pour le moment."
+  },
+  "nesting": {
+    "title": "Imbrication",
+    "runNesting": "Lancer l'imbrication",
+    "kerf": "Trait de coupe (mm)",
+    "sheetWidth": "Largeur de tôle (mm)",
+    "sheetHeight": "Hauteur de tôle (mm)",
+    "selectMaterial": "Sélectionner le matériau",
+    "utilization": "Utilisation",
+    "partsPlaced": "Pièces placées"
+  },
+  "pricing": {
+    "title": "Tarifs",
+    "perArea": "Tarif par cm²",
+    "perCut": "Tarif par mm de coupe",
+    "material": "Matériau",
+    "thickness": "Épaisseur",
+    "complexity": "Complexité",
+    "subtotal": "Sous-total",
+    "vat": "TVA (21%)",
+    "total": "Total",
+    "minimum": "Commande minimum"
+  },
+  "queue": {
+    "title": "File d'attente",
+    "partName": "Nom de la pièce",
+    "status": "Statut",
+    "actions": "Actions",
+    "pending": "En attente",
+    "processing": "En cours",
+    "nested": "Imbriqué",
+    "cut": "Découpé",
+    "shipped": "Expédié"
+  },
+  "export": {
+    "title": "Exporter",
+    "selectSheets": "Sélectionner les tôles",
+    "generateDxf": "Générer le DXF",
+    "download": "Télécharger",
+    "noSheets": "Aucune tôle disponible pour l'export."
+  },
+  "checkout": {
+    "title": "Paiement",
+    "orderSummary": "Récapitulatif de commande",
+    "pay": "Payer maintenant",
+    "processing": "Traitement du paiement…",
+    "success": "Paiement réussi !",
+    "successMessage": "Votre commande a été passée. Vous recevrez un e-mail de confirmation sous peu.",
+    "backToHome": "Retour à l'accueil"
+  },
+  "account": {
+    "title": "Compte",
+    "billing": "Facturation",
+    "orders": "Commandes",
+    "billingAddress": "Adresse de facturation",
+    "vatId": "Numéro de TVA",
+    "orderHistory": "Historique des commandes",
+    "invoices": "Factures",
+    "noOrders": "Aucune commande pour le moment.",
+    "status": "Statut"
+  },
+  "admin": {
+    "title": "Panneau d'administration",
+    "overview": "Vue d'ensemble",
+    "users": "Utilisateurs",
+    "revenue": "Revenus",
+    "recentOrders": "Commandes récentes",
+    "pricingConfig": "Configuration des tarifs",
+    "editPricing": "Modifier les tarifs",
+    "save": "Enregistrer"
+  },
+  "common": {
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue.",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "next": "Suivant",
+    "search": "Rechercher",
+    "noResults": "Aucun résultat."
+  },
+  "errors": {
+    "notFound": "Page introuvable",
+    "notFoundDesc": "La page que vous cherchez n'existe pas.",
+    "serverError": "Erreur serveur",
+    "serverErrorDesc": "Un problème est survenu de notre côté.",
+    "unauthorized": "Vous devez être connecté pour voir cette page.",
+    "goHome": "Retour à l'accueil"
+  },
+  "theme": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "languages": {
+    "en": "English",
+    "fr": "Français",
+    "cs": "Čeština"
+  }
+}
