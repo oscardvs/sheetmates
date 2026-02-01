@@ -197,6 +197,26 @@
       "markComplete": "Mark Complete",
       "full": "Ready",
       "cutting": "Cutting"
+    },
+    "orders": {
+      "title": "Orders",
+      "loading": "Loading orders...",
+      "search": "Search orders...",
+      "allStatuses": "All Statuses",
+      "noOrders": "No orders found",
+      "orderId": "Order ID",
+      "customer": "Customer",
+      "items": "Items",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "status": "Status",
+      "statusUpdated": "Order status updated",
+      "updateError": "Failed to update order",
+      "status.pending": "Pending",
+      "status.paid": "Paid",
+      "status.processing": "Processing",
+      "status.shipped": "Shipped",
+      "status.delivered": "Delivered"
     }
   },
   "common": {
