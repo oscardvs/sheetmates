@@ -39,3 +39,6 @@ export const queryKeys = {
     byUser: (userId: string) => [...queryKeys.parts.all, "user", userId] as const,
   },
 } as const;
+
+export type QueryKeys = typeof queryKeys;
+export type SheetQueryKeys = typeof queryKeys.sheets;

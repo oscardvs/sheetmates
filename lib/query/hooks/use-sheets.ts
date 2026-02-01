@@ -36,7 +36,7 @@ export function useCreateSheet() {
   return useMutation({
     mutationFn: (data: Omit<SheetDoc, "id" | "createdAt">) => createSheet(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.sheets.all });
+      queryClient.invalidateQueries({ queryKey: queryKeys.sheets.list() });
     },
   });
 }
