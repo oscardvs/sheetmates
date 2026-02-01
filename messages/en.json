@@ -179,6 +179,24 @@
       "error": "Failed to inject sheets",
       "injectedSheets": "Injected Sheets",
       "printLabel": "Print Label"
+    },
+    "queue": {
+      "loading": "Loading production queue...",
+      "inProgress": "Cutting in Progress",
+      "readyToCut": "Ready to Cut",
+      "noCutting": "No sheets currently being cut",
+      "noReady": "No sheets ready for cutting",
+      "statusUpdated": "Sheet status updated",
+      "updateError": "Failed to update status",
+      "material": "Material",
+      "thickness": "Thickness",
+      "size": "Size",
+      "parts": "Parts",
+      "utilization": "Utilization",
+      "startCutting": "Start Cutting",
+      "markComplete": "Mark Complete",
+      "full": "Ready",
+      "cutting": "Cutting"
     }
   },
   "common": {
