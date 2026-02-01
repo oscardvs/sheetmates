@@ -25,22 +25,30 @@ export function ViabilityMeter({
 }: ViabilityMeterProps) {
   const t = useTranslations("viability");
 
-  const utilizationPercent = currentUtilization * 100;
-  const targetPercent = targetUtilization * 100;
-  const isViable = currentUtilization >= targetUtilization;
+  // Clamp values to valid ranges
+  const clampedUtilization = Math.max(0, Math.min(1, currentUtilization));
+  const clampedTarget = Math.max(0, Math.min(1, targetUtilization));
+  const clampedParticipants = Math.max(0, Math.floor(participantCount));
+  const clampedPremium = Math.max(0, busDriverPremium);
 
-  // Determine status color
-  const getStatusColor = () => {
-    if (isViable) return "bg-emerald-500";
-    if (utilizationPercent >= 70) return "bg-amber-500";
-    return "bg-zinc-500";
+  const utilizationPercent = clampedUtilization * 100;
+  const targetPercent = clampedTarget * 100;
+  const isViable = clampedUtilization >= clampedTarget;
+
+  // Determine status color and label for accessibility
+  const getStatus = () => {
+    if (isViable) return { color: "bg-emerald-500", label: "viable" };
+    if (utilizationPercent >= 70) return { color: "bg-amber-500", label: "approaching target" };
+    return { color: "bg-zinc-500", label: "below target" };
   };
+
+  const status = getStatus();
 
   return (
     <Card className={`border-zinc-800 bg-zinc-900 ${className ?? ""}`}>
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-sm">
-          <TargetIcon className="h-4 w-4" />
+          <TargetIcon className="h-4 w-4" aria-hidden="true" />
           {t("sheetViability")}
         </CardTitle>
       </CardHeader>
@@ -50,22 +58,31 @@ export function ViabilityMeter({
           <div className="flex justify-between text-sm">
             <span className="font-mono">{utilizationPercent.toFixed(1)}%</span>
             <span className="text-muted-foreground">
-              {t("target")}: {targetPercent}%
+              {t("target")}: {targetPercent.toFixed(0)}%
             </span>
           </div>
           <div className="relative">
-            <Progress value={utilizationPercent} className="h-4" />
+            <Progress
+              value={utilizationPercent}
+              className="h-4"
+              aria-label={`${t("sheetViability")}: ${utilizationPercent.toFixed(1)}%`}
+            />
             {/* Target marker */}
             <div
               className="absolute top-0 h-4 w-0.5 bg-white"
-              style={{ left: `${targetPercent}%` }}
+              style={{ left: `${Math.min(targetPercent, 100)}%` }}
+              aria-hidden="true"
             />
           </div>
         </div>
 
         {/* Status */}
         <div className="flex items-center gap-2">
-          <div className={`h-2 w-2 rounded-full ${getStatusColor()}`} />
+          <div
+            className={`h-2 w-2 rounded-full ${status.color}`}
+            role="img"
+            aria-label={status.label}
+          />
           <span className="text-sm">
             {isViable ? t("readyToCut") : t("waitingForParticipants")}
           </span>
@@ -73,9 +90,9 @@ export function ViabilityMeter({
 
         {/* Participants */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <UsersIcon className="h-4 w-4" />
+          <UsersIcon className="h-4 w-4" aria-hidden="true" />
           <span>
-            {participantCount} {t("participants")}
+            {clampedParticipants} {t("participants")}
           </span>
         </div>
 
@@ -91,8 +108,8 @@ export function ViabilityMeter({
               className="w-full"
               onClick={onBecomeDriver}
             >
-              <RocketIcon className="mr-2 h-4 w-4" />
-              {t("forceRun")} (+€{busDriverPremium.toFixed(2)})
+              <RocketIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+              {t("forceRun")} (+€{clampedPremium.toFixed(2)})
             </Button>
           </div>
         )}
