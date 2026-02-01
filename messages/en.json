@@ -186,5 +186,14 @@
     "en": "English",
     "fr": "Français",
     "cs": "Čeština"
+  },
+  "canvas": {
+    "snapToGrid": "Snap to Grid",
+    "rotate90": "Rotate 90°",
+    "deleteSelected": "Delete Selected",
+    "resetView": "Reset View",
+    "clearAll": "Clear All",
+    "autoNest": "Auto-Nest",
+    "parts": "parts"
   }
 }

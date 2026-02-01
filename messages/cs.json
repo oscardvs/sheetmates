@@ -186,5 +186,14 @@
     "en": "English",
     "fr": "Français",
     "cs": "Čeština"
+  },
+  "canvas": {
+    "snapToGrid": "Přichytit k mřížce",
+    "rotate90": "Otočit o 90°",
+    "deleteSelected": "Smazat vybrané",
+    "resetView": "Resetovat pohled",
+    "clearAll": "Smazat vše",
+    "autoNest": "Auto-skládání",
+    "parts": "dílů"
   }
 }

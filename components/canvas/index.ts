@@ -3,3 +3,4 @@ export { SheetLayer } from "./sheet-layer";
 export { CanvasPartComponent } from "./canvas-part";
 export { PartsLayer } from "./parts-layer";
 export { NestingCanvas } from "./nesting-canvas";
+export { CanvasToolbar } from "./canvas-toolbar";
