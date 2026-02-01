@@ -195,5 +195,9 @@
     "clearAll": "Tout effacer",
     "autoNest": "Auto-imbrication",
     "parts": "pièces"
+  },
+  "playground": {
+    "upload": "Télécharger",
+    "settings": "Paramètres"
   }
 }

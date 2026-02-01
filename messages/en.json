@@ -195,5 +195,9 @@
     "clearAll": "Clear All",
     "autoNest": "Auto-Nest",
     "parts": "parts"
+  },
+  "playground": {
+    "upload": "Upload",
+    "settings": "Settings"
   }
 }

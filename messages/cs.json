@@ -195,5 +195,9 @@
     "clearAll": "Smazat vše",
     "autoNest": "Auto-skládání",
     "parts": "dílů"
+  },
+  "playground": {
+    "upload": "Nahrát",
+    "settings": "Nastavení"
   }
 }
