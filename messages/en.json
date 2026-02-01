@@ -154,7 +154,15 @@
     "recentOrders": "Recent Orders",
     "pricingConfig": "Pricing Configuration",
     "editPricing": "Edit Pricing",
-    "save": "Save Changes"
+    "save": "Save Changes",
+    "nav": {
+      "inventory": "Inventory",
+      "productionQueue": "Production Queue",
+      "orders": "Orders",
+      "pricing": "Pricing",
+      "settings": "Settings",
+      "logout": "Logout"
+    }
   },
   "common": {
     "loading": "Loading…",
