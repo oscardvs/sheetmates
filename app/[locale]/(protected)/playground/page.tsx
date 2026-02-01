@@ -12,13 +12,16 @@ import { DxfUploader, type UploadedPart } from "@/components/dxf-uploader";
 import { NestingControls } from "@/components/nesting-controls";
 import { useCanvasStore } from "@/lib/stores/canvas-store";
 import { useAppStore } from "@/lib/stores/app-store";
-import { shelfPack } from "@/lib/nesting/shelf-packer";
+import { useWasmNesting } from "@/lib/nesting";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function PlaygroundPage() {
   const t = useTranslations("playground");
   const [uploadedParts, setUploadedParts] = useState<UploadedPart[]>([]);
-  const [nestingLoading, setNestingLoading] = useState(false);
+
+  // WASM nesting hook
+  const { nest, cancel, progress, state, wasmAvailable } = useWasmNesting();
+  const nestingLoading = state.isNesting || state.isLoading;
 
   const {
     sheetWidth,
@@ -55,9 +58,7 @@ export default function PlaygroundPage() {
     [addPart, clearParts]
   );
 
-  const handleRunNesting = useCallback(() => {
-    setNestingLoading(true);
-
+  const handleRunNesting = useCallback(async () => {
     // Convert uploaded parts to nesting input format
     const nestingParts = uploadedParts.map((p) => ({
       id: p.fileName,
@@ -68,27 +69,29 @@ export default function PlaygroundPage() {
     }));
 
     const sheet = { width: sheetWidth, height: sheetHeight };
-    const result = shelfPack(nestingParts, sheet, kerf);
+    
+    // Run nesting via Web Worker (WASM or fallback)
+    const result = await nest(nestingParts, sheet, { spacing: kerf });
 
-    // Update canvas with nesting results
-    clearParts();
-    result.placements.forEach((placement) => {
-      const originalPart = uploadedParts.find(
-        (p) => p.fileName === placement.partId
-      );
-      addPart({
-        partId: placement.partId,
-        x: placement.x,
-        y: placement.y,
-        width: placement.width,
-        height: placement.height,
-        rotation: placement.rotation as 0 | 90 | 180 | 270,
-        svgPath: originalPart?.svgPath,
+    if (result) {
+      // Update canvas with nesting results
+      clearParts();
+      result.placements.forEach((placement) => {
+        const originalPart = uploadedParts.find(
+          (p) => p.fileName === placement.partId
+        );
+        addPart({
+          partId: placement.partId,
+          x: placement.x,
+          y: placement.y,
+          width: placement.width,
+          height: placement.height,
+          rotation: placement.rotation as 0 | 90 | 180 | 270,
+          svgPath: originalPart?.svgPath,
+        });
       });
-    });
-
-    setNestingLoading(false);
-  }, [uploadedParts, sheetWidth, sheetHeight, kerf, clearParts, addPart]);
+    }
+  }, [uploadedParts, sheetWidth, sheetHeight, kerf, clearParts, addPart, nest]);
 
   const utilization = (() => {
     const totalArea = parts.reduce((sum, p) => sum + p.width * p.height, 0);
@@ -139,6 +142,9 @@ export default function PlaygroundPage() {
                   onKerfChange={setKerf}
                   onRunNesting={handleRunNesting}
                   loading={nestingLoading}
+                  progress={progress}
+                  wasmAvailable={wasmAvailable}
+                  onCancel={cancel}
                 />
               </TabsContent>
             </Tabs>
