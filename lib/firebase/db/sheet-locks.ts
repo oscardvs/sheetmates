@@ -10,7 +10,7 @@ const LOCK_DURATION_MS = 10 * 60 * 1000; // 10 minutes
 
 export interface LockResult {
   success: boolean;
-  error?: "ALREADY_LOCKED" | "SHEET_NOT_FOUND" | "SHEET_FULL";
+  error?: "ALREADY_LOCKED" | "SHEET_NOT_FOUND" | "SHEET_FULL" | "TRANSACTION_FAILED";
   lockExpiry?: Date;
 }
 
@@ -55,7 +55,7 @@ export async function acquireSheetLock(
     });
   } catch (error) {
     console.error("Failed to acquire lock:", error);
-    return { success: false, error: "ALREADY_LOCKED" };
+    return { success: false, error: "TRANSACTION_FAILED" };
   }
 }
 
@@ -119,6 +119,6 @@ export async function extendSheetLock(
     });
   } catch (error) {
     console.error("Failed to extend lock:", error);
-    return { success: false, error: "ALREADY_LOCKED" };
+    return { success: false, error: "TRANSACTION_FAILED" };
   }
 }
