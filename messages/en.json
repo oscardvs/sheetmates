@@ -199,5 +199,10 @@
   "playground": {
     "upload": "Upload",
     "settings": "Settings"
+  },
+  "auction": {
+    "floorReached": "Floor Price",
+    "nextDrop": "Next drop",
+    "priceDropping": "Price dropping fast!"
   }
 }
