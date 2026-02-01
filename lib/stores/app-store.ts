@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+const SESSION_LIFETIME_MS = 24 * 60 * 60 * 1000; // 24 hours
+
 interface GuestSession {
   id: string;
   createdAt: number;
@@ -51,7 +53,7 @@ export const useAppStore = create<AppState>()(
       initGuestSession: () => {
         const existing = get().guestSession;
         // Reuse session if less than 24 hours old
-        if (existing && Date.now() - existing.createdAt < 24 * 60 * 60 * 1000) {
+        if (existing && Date.now() - existing.createdAt < SESSION_LIFETIME_MS) {
           return existing.id;
         }
         const id = crypto.randomUUID();
@@ -112,6 +114,7 @@ export const useAppStore = create<AppState>()(
         guestSession: state.guestSession,
         sidebarCollapsed: state.sidebarCollapsed,
         canvasToolbarPosition: state.canvasToolbarPosition,
+        currentSheetId: state.currentSheetId,
         currentMaterial: state.currentMaterial,
         currentThickness: state.currentThickness,
       }),
