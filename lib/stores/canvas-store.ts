@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 
+/**
+ * Canvas part with position and state.
+ * Note: isSelected is intentionally duplicated from selectedPartIds Set
+ * for render optimization (avoids Set.has() lookup per part in render loop).
+ */
 export interface CanvasPart {
   id: string;
   partId: string;
@@ -197,8 +202,8 @@ export const useCanvasStore = create<CanvasState>()(
       }));
     },
 
-    setGridSize: (size: number) => {
-      set({ gridSize: size });
+    setGridSize: (gridSize: number) => {
+      set({ gridSize: Math.max(1, gridSize) });
     },
   }))
 );
