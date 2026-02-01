@@ -28,6 +28,18 @@ export interface SheetDoc {
   utilization: number;
   status: "open" | "full" | "cutting" | "done";
   createdAt: unknown;
+
+  // Auction fields
+  auctionEnabled?: boolean;
+  initialPrice?: number;
+  floorPrice?: number;
+  decayRate?: number;
+  auctionStartTime?: unknown; // Firestore Timestamp
+
+  // Locking fields
+  currentLockHolder?: string | null;
+  lockExpiry?: unknown;
+  lockAcquiredAt?: unknown;
 }
 
 const sheetsCol = collection(db, "sheets");
