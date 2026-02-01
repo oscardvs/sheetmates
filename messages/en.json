@@ -204,5 +204,14 @@
     "floorReached": "Floor Price",
     "nextDrop": "Next drop",
     "priceDropping": "Price dropping fast!"
+  },
+  "viability": {
+    "sheetViability": "Sheet Viability",
+    "target": "Target",
+    "readyToCut": "Ready to cut!",
+    "waitingForParticipants": "Waiting for participants",
+    "participants": "participants",
+    "busDriverDescription": "Pay to force immediate production",
+    "forceRun": "Force Run"
   }
 }
