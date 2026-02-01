@@ -40,9 +40,14 @@ export function CanvasPartComponent({
       const x = snapToGridValue(node.x());
       const y = snapToGridValue(node.y());
 
-      // Clamp to sheet boundaries
-      const clampedX = Math.max(0, Math.min(x, sheetWidth - part.width));
-      const clampedY = Math.max(0, Math.min(y, sheetHeight - part.height));
+      // Account for rotation when calculating effective dimensions
+      const isRotated90or270 = part.rotation === 90 || part.rotation === 270;
+      const effectiveWidth = isRotated90or270 ? part.height : part.width;
+      const effectiveHeight = isRotated90or270 ? part.width : part.height;
+
+      // Clamp to sheet boundaries using effective dimensions
+      const clampedX = Math.max(0, Math.min(x, sheetWidth - effectiveWidth));
+      const clampedY = Math.max(0, Math.min(y, sheetHeight - effectiveHeight));
 
       updatePart(part.id, {
         x: clampedX,
@@ -53,7 +58,7 @@ export function CanvasPartComponent({
       // Snap position visually
       node.position({ x: clampedX, y: clampedY });
     },
-    [part.id, part.width, part.height, sheetWidth, sheetHeight, updatePart, snapToGridValue]
+    [part.id, part.width, part.height, part.rotation, sheetWidth, sheetHeight, updatePart, snapToGridValue]
   );
 
   const handleClick = useCallback(
