@@ -38,6 +38,15 @@ const STATUS_OPTIONS: OrderStatus[] = [
   "delivered",
 ];
 
+// Map status values to translation keys (camelCase)
+const STATUS_TRANSLATION_KEYS: Record<OrderStatus, string> = {
+  pending: "statusPending",
+  paid: "statusPaid",
+  processing: "statusProcessing",
+  shipped: "statusShipped",
+  delivered: "statusDelivered",
+};
+
 const STATUS_COLORS: Record<OrderStatus, string> = {
   pending: "bg-zinc-500",
   paid: "bg-blue-500",
@@ -115,7 +124,7 @@ export function OrderList() {
                 <SelectItem value="all">{t("allStatuses")}</SelectItem>
                 {STATUS_OPTIONS.map((status) => (
                   <SelectItem key={status} value={status}>
-                    {t(`status.${status}`)}
+                    {t(STATUS_TRANSLATION_KEYS[status])}
                   </SelectItem>
                 ))}
               </SelectContent>

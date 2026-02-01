@@ -1,17 +1,19 @@
 import { describe, it, expect } from "vitest";
 import { computeCutLength } from "../compute-cut-length";
-import type { ParsedDxf } from "../parser";
+import type { ParsedDxf, DxfEntity } from "../parser";
 
 // Helper to create a minimal parsed DXF
-function createParsedDxf(entities: ParsedDxf["entities"]): ParsedDxf {
+function createParsedDxf(entities: DxfEntity[]): ParsedDxf {
   return {
     entities,
     width: 100,
     height: 100,
-    minX: 0,
-    minY: 0,
-    maxX: 100,
-    maxY: 100,
+    boundingBox: {
+      minX: 0,
+      minY: 0,
+      maxX: 100,
+      maxY: 100,
+    },
   };
 }
 
@@ -21,8 +23,8 @@ describe("computeCutLength", () => {
       const parsed = createParsedDxf([
         {
           type: "LINE",
-          startPoint: { x: 0, y: 0, z: 0 },
-          endPoint: { x: 100, y: 0, z: 0 },
+          startPoint: { x: 0, y: 0 },
+          endPoint: { x: 100, y: 0 },
         },
       ]);
 
@@ -33,8 +35,8 @@ describe("computeCutLength", () => {
       const parsed = createParsedDxf([
         {
           type: "LINE",
-          startPoint: { x: 0, y: 0, z: 0 },
-          endPoint: { x: 0, y: 50, z: 0 },
+          startPoint: { x: 0, y: 0 },
+          endPoint: { x: 0, y: 50 },
         },
       ]);
 
@@ -45,8 +47,8 @@ describe("computeCutLength", () => {
       const parsed = createParsedDxf([
         {
           type: "LINE",
-          startPoint: { x: 0, y: 0, z: 0 },
-          endPoint: { x: 30, y: 40, z: 0 },
+          startPoint: { x: 0, y: 0 },
+          endPoint: { x: 30, y: 40 },
         },
       ]);
 
@@ -58,13 +60,13 @@ describe("computeCutLength", () => {
       const parsed = createParsedDxf([
         {
           type: "LINE",
-          startPoint: { x: 0, y: 0, z: 0 },
-          endPoint: { x: 100, y: 0, z: 0 },
+          startPoint: { x: 0, y: 0 },
+          endPoint: { x: 100, y: 0 },
         },
         {
           type: "LINE",
-          startPoint: { x: 100, y: 0, z: 0 },
-          endPoint: { x: 100, y: 50, z: 0 },
+          startPoint: { x: 100, y: 0 },
+          endPoint: { x: 100, y: 50 },
         },
       ]);
 
@@ -183,7 +185,7 @@ describe("computeCutLength", () => {
       const parsed = createParsedDxf([
         {
           type: "ELLIPSE",
-          majorAxisEndPoint: { x: 20, y: 0, z: 0 }, // a = 20
+          majorAxisEndPoint: { x: 20, y: 0 }, // a = 20
           axisRatio: 0.5, // b = 10
         },
       ]);
@@ -200,7 +202,7 @@ describe("computeCutLength", () => {
       const parsed = createParsedDxf([
         {
           type: "ELLIPSE",
-          majorAxisEndPoint: { x: 10, y: 0, z: 0 },
+          majorAxisEndPoint: { x: 10, y: 0 },
           axisRatio: 1,
         },
       ]);
@@ -216,9 +218,9 @@ describe("computeCutLength", () => {
         {
           type: "SPLINE",
           controlPoints: [
-            { x: 0, y: 0, z: 0 },
-            { x: 100, y: 0, z: 0 },
-            { x: 100, y: 100, z: 0 },
+            { x: 0, y: 0 },
+            { x: 100, y: 0 },
+            { x: 100, y: 100 },
           ],
         },
       ]);
@@ -231,7 +233,7 @@ describe("computeCutLength", () => {
       const parsed = createParsedDxf([
         {
           type: "SPLINE",
-          controlPoints: [{ x: 0, y: 0, z: 0 }],
+          controlPoints: [{ x: 0, y: 0 }],
         },
       ]);
 
@@ -244,8 +246,8 @@ describe("computeCutLength", () => {
       const parsed = createParsedDxf([
         {
           type: "LINE",
-          startPoint: { x: 0, y: 0, z: 0 },
-          endPoint: { x: 100, y: 0, z: 0 },
+          startPoint: { x: 0, y: 0 },
+          endPoint: { x: 100, y: 0 },
         }, // 100
         { type: "CIRCLE", radius: 10 }, // 2π * 10 ≈ 62.83
       ]);

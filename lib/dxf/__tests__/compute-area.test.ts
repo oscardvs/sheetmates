@@ -12,10 +12,12 @@ function createParsedDxf(
     entities,
     width,
     height,
-    minX: 0,
-    minY: 0,
-    maxX: width,
-    maxY: height,
+    boundingBox: {
+      minX: 0,
+      minY: 0,
+      maxX: width,
+      maxY: height,
+    },
   };
 }
 
@@ -134,8 +136,8 @@ describe("computeArea", () => {
         [
           {
             type: "LINE",
-            startPoint: { x: 0, y: 0, z: 0 },
-            endPoint: { x: 100, y: 100, z: 0 },
+            startPoint: { x: 0, y: 0 },
+            endPoint: { x: 100, y: 100 },
           },
         ],
         150,

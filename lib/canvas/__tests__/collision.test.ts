@@ -19,6 +19,7 @@ function createPart(overrides: Partial<CanvasPart> = {}): CanvasPart {
     height: 50,
     rotation: 0,
     isSelected: false,
+    isDragging: false,
     ...overrides,
   };
 }

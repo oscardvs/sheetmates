@@ -218,11 +218,11 @@
       "status": "Status",
       "statusUpdated": "Order status updated",
       "updateError": "Failed to update order",
-      "status.pending": "Pending",
-      "status.paid": "Paid",
-      "status.processing": "Processing",
-      "status.shipped": "Shipped",
-      "status.delivered": "Delivered"
+      "statusPending": "Pending",
+      "statusPaid": "Paid",
+      "statusProcessing": "Processing",
+      "statusShipped": "Shipped",
+      "statusDelivered": "Delivered"
     }
   },
   "common": {
