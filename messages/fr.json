@@ -94,7 +94,13 @@
     "sheetHeight": "Hauteur de tôle (mm)",
     "selectMaterial": "Sélectionner le matériau",
     "utilization": "Utilisation",
-    "partsPlaced": "Pièces placées"
+    "partsPlaced": "Pièces placées",
+    "optimizing": "Optimisation de la disposition...",
+    "cancel": "Annuler",
+    "generation": "Génération",
+    "currentUtilization": "Meilleur",
+    "wasmAlgorithm": "Imbrication optimisée (WASM)",
+    "fallbackAlgorithm": "Imbrication basique (JS)"
   },
   "pricing": {
     "title": "Tarifs",

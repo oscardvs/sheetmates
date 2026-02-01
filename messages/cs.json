@@ -94,7 +94,13 @@
     "sheetHeight": "Výška plechu (mm)",
     "selectMaterial": "Vybrat materiál",
     "utilization": "Využití",
-    "partsPlaced": "Umístěné díly"
+    "partsPlaced": "Umístěné díly",
+    "optimizing": "Optimalizace rozvržení...",
+    "cancel": "Zrušit",
+    "generation": "Generace",
+    "currentUtilization": "Nejlepší",
+    "wasmAlgorithm": "Optimalizované skládání (WASM)",
+    "fallbackAlgorithm": "Základní skládání (JS)"
   },
   "pricing": {
     "title": "Ceník",

@@ -94,7 +94,13 @@
     "sheetHeight": "Sheet Height (mm)",
     "selectMaterial": "Select Material",
     "utilization": "Utilization",
-    "partsPlaced": "Parts Placed"
+    "partsPlaced": "Parts Placed",
+    "optimizing": "Optimizing layout...",
+    "cancel": "Cancel",
+    "generation": "Generation",
+    "currentUtilization": "Best",
+    "wasmAlgorithm": "Optimized nesting (WASM)",
+    "fallbackAlgorithm": "Basic nesting (JS)"
   },
   "pricing": {
     "title": "Pricing",
