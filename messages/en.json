@@ -94,7 +94,13 @@
     "sheetHeight": "Sheet Height (mm)",
     "selectMaterial": "Select Material",
     "utilization": "Utilization",
-    "partsPlaced": "Parts Placed"
+    "partsPlaced": "Parts Placed",
+    "optimizing": "Optimizing layout...",
+    "cancel": "Cancel",
+    "generation": "Generation",
+    "currentUtilization": "Best",
+    "wasmAlgorithm": "Optimized nesting (WASM)",
+    "fallbackAlgorithm": "Basic nesting (JS)"
   },
   "pricing": {
     "title": "Pricing",
@@ -154,7 +160,70 @@
     "recentOrders": "Recent Orders",
     "pricingConfig": "Pricing Configuration",
     "editPricing": "Edit Pricing",
-    "save": "Save Changes"
+    "save": "Save Changes",
+    "nav": {
+      "inventory": "Inventory",
+      "productionQueue": "Production Queue",
+      "orders": "Orders",
+      "pricing": "Pricing",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "inject": {
+      "title": "Inject Sheets",
+      "description": "Add new sheets to inventory with auction pricing",
+      "width": "Width (mm)",
+      "height": "Height (mm)",
+      "material": "Material",
+      "thickness": "Thickness (mm)",
+      "quantity": "Quantity",
+      "initialPrice": "Initial Price (€)",
+      "floorPrice": "Floor Price (€)",
+      "inject": "Inject Sheets",
+      "injecting": "Injecting...",
+      "success": "{count} sheets injected successfully",
+      "error": "Failed to inject sheets",
+      "injectedSheets": "Injected Sheets",
+      "printLabel": "Print Label"
+    },
+    "queue": {
+      "loading": "Loading production queue...",
+      "inProgress": "Cutting in Progress",
+      "readyToCut": "Ready to Cut",
+      "noCutting": "No sheets currently being cut",
+      "noReady": "No sheets ready for cutting",
+      "statusUpdated": "Sheet status updated",
+      "updateError": "Failed to update status",
+      "material": "Material",
+      "thickness": "Thickness",
+      "size": "Size",
+      "parts": "Parts",
+      "utilization": "Utilization",
+      "startCutting": "Start Cutting",
+      "markComplete": "Mark Complete",
+      "full": "Ready",
+      "cutting": "Cutting"
+    },
+    "orders": {
+      "title": "Orders",
+      "loading": "Loading orders...",
+      "search": "Search orders...",
+      "allStatuses": "All Statuses",
+      "noOrders": "No orders found",
+      "orderId": "Order ID",
+      "customer": "Customer",
+      "items": "Items",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "status": "Status",
+      "statusUpdated": "Order status updated",
+      "updateError": "Failed to update order",
+      "statusPending": "Pending",
+      "statusPaid": "Paid",
+      "statusProcessing": "Processing",
+      "statusShipped": "Shipped",
+      "statusDelivered": "Delivered"
+    }
   },
   "common": {
     "loading": "Loading…",
@@ -186,5 +255,32 @@
     "en": "English",
     "fr": "Français",
     "cs": "Čeština"
+  },
+  "canvas": {
+    "snapToGrid": "Snap to Grid",
+    "rotate90": "Rotate 90°",
+    "deleteSelected": "Delete Selected",
+    "resetView": "Reset View",
+    "clearAll": "Clear All",
+    "autoNest": "Auto-Nest",
+    "parts": "parts"
+  },
+  "playground": {
+    "upload": "Upload",
+    "settings": "Settings"
+  },
+  "auction": {
+    "floorReached": "Floor Price",
+    "nextDrop": "Next drop",
+    "priceDropping": "Price dropping fast!"
+  },
+  "viability": {
+    "sheetViability": "Sheet Viability",
+    "target": "Target",
+    "readyToCut": "Ready to cut!",
+    "waitingForParticipants": "Waiting for participants",
+    "participants": "participants",
+    "busDriverDescription": "Pay to force immediate production",
+    "forceRun": "Force Run"
   }
 }

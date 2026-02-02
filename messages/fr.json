@@ -94,7 +94,13 @@
     "sheetHeight": "Hauteur de tôle (mm)",
     "selectMaterial": "Sélectionner le matériau",
     "utilization": "Utilisation",
-    "partsPlaced": "Pièces placées"
+    "partsPlaced": "Pièces placées",
+    "optimizing": "Optimisation de la disposition...",
+    "cancel": "Annuler",
+    "generation": "Génération",
+    "currentUtilization": "Meilleur",
+    "wasmAlgorithm": "Imbrication optimisée (WASM)",
+    "fallbackAlgorithm": "Imbrication basique (JS)"
   },
   "pricing": {
     "title": "Tarifs",
@@ -186,5 +192,18 @@
     "en": "English",
     "fr": "Français",
     "cs": "Čeština"
+  },
+  "canvas": {
+    "snapToGrid": "Aligner sur la grille",
+    "rotate90": "Rotation 90°",
+    "deleteSelected": "Supprimer la sélection",
+    "resetView": "Réinitialiser la vue",
+    "clearAll": "Tout effacer",
+    "autoNest": "Auto-imbrication",
+    "parts": "pièces"
+  },
+  "playground": {
+    "upload": "Télécharger",
+    "settings": "Paramètres"
   }
 }

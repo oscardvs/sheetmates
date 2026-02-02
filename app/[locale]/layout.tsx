@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
+import { QueryProvider } from "@/components/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "../globals.css";
 
@@ -43,8 +44,10 @@ export default async function LocaleLayout({
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            {children}
-            <Toaster />
+            <QueryProvider>
+              {children}
+              <Toaster />
+            </QueryProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

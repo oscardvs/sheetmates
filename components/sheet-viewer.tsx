@@ -10,13 +10,14 @@ interface SheetViewerProps {
   partSvgPaths?: Record<string, string>;
 }
 
+// Emerald-based color palette for parts
 const COLORS = [
-  "oklch(0.7 0.15 230)",
-  "oklch(0.7 0.15 150)",
-  "oklch(0.7 0.15 30)",
-  "oklch(0.7 0.15 300)",
-  "oklch(0.7 0.15 80)",
-  "oklch(0.7 0.15 190)",
+  "#10b981", // emerald-500
+  "#22d3ee", // cyan-400
+  "#a78bfa", // violet-400
+  "#fb923c", // orange-400
+  "#f472b6", // pink-400
+  "#facc15", // yellow-400
 ];
 
 export function SheetViewer({
@@ -78,11 +79,15 @@ export function SheetViewer({
     colorMap[id] = COLORS[i % COLORS.length];
   });
 
+  // Grid settings
+  const gridSmall = 10; // 10mm grid
+  const gridLarge = 100; // 100mm grid
+
   return (
     <svg
       ref={svgRef}
       viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`}
-      className="w-full rounded-lg border bg-background"
+      className="w-full bg-zinc-950"
       style={{ aspectRatio: `${sheetWidth} / ${sheetHeight}` }}
       onWheel={handleWheel}
       onMouseDown={handleMouseDown}
@@ -90,6 +95,47 @@ export function SheetViewer({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
+      <defs>
+        {/* Small grid pattern */}
+        <pattern
+          id="gridSmall"
+          width={gridSmall}
+          height={gridSmall}
+          patternUnits="userSpaceOnUse"
+        >
+          <path
+            d={`M ${gridSmall} 0 L 0 0 0 ${gridSmall}`}
+            fill="none"
+            stroke="#27272a"
+            strokeWidth="0.5"
+          />
+        </pattern>
+        {/* Large grid pattern */}
+        <pattern
+          id="gridLarge"
+          width={gridLarge}
+          height={gridLarge}
+          patternUnits="userSpaceOnUse"
+        >
+          <rect width={gridLarge} height={gridLarge} fill="url(#gridSmall)" />
+          <path
+            d={`M ${gridLarge} 0 L 0 0 0 ${gridLarge}`}
+            fill="none"
+            stroke="#3f3f46"
+            strokeWidth="1"
+          />
+        </pattern>
+      </defs>
+
+      {/* Grid background */}
+      <rect
+        x={0}
+        y={0}
+        width={sheetWidth}
+        height={sheetHeight}
+        fill="url(#gridLarge)"
+      />
+
       {/* Sheet outline */}
       <rect
         x={0}
@@ -97,9 +143,9 @@ export function SheetViewer({
         width={sheetWidth}
         height={sheetHeight}
         fill="none"
-        stroke="currentColor"
-        strokeWidth={1}
-        strokeDasharray="4 2"
+        stroke="#71717a"
+        strokeWidth={2}
+        strokeOpacity={0.5}
       />
 
       {/* Placed parts */}
@@ -122,9 +168,9 @@ export function SheetViewer({
               <path
                 d={partSvgPaths[p.partId]}
                 fill={colorMap[p.partId]}
-                fillOpacity={hoveredIndex === i ? 0.5 : 0.3}
+                fillOpacity={hoveredIndex === i ? 0.4 : 0.2}
                 stroke={colorMap[p.partId]}
-                strokeWidth={0.5}
+                strokeWidth={hoveredIndex === i ? 1 : 0.5}
               />
             </g>
           ) : (
@@ -132,9 +178,9 @@ export function SheetViewer({
               width={p.width}
               height={p.height}
               fill={colorMap[p.partId]}
-              fillOpacity={hoveredIndex === i ? 0.5 : 0.3}
+              fillOpacity={hoveredIndex === i ? 0.4 : 0.2}
               stroke={colorMap[p.partId]}
-              strokeWidth={0.5}
+              strokeWidth={hoveredIndex === i ? 1 : 0.5}
             />
           )}
 
@@ -145,14 +191,39 @@ export function SheetViewer({
               y={p.height / 2}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize={Math.min(p.width, p.height) * 0.15}
-              fill="currentColor"
+              fontSize={Math.min(p.width, p.height) * 0.12}
+              fill="#ffffff"
+              fontFamily="monospace"
+              fontWeight="bold"
             >
               {p.partId.slice(0, 6)}
             </text>
           )}
         </g>
       ))}
+
+      {/* Dimension labels */}
+      <text
+        x={sheetWidth / 2}
+        y={-5}
+        textAnchor="middle"
+        fontSize={Math.min(sheetWidth, sheetHeight) * 0.015}
+        fill="#71717a"
+        fontFamily="monospace"
+      >
+        {sheetWidth} mm
+      </text>
+      <text
+        x={-5}
+        y={sheetHeight / 2}
+        textAnchor="middle"
+        fontSize={Math.min(sheetWidth, sheetHeight) * 0.015}
+        fill="#71717a"
+        fontFamily="monospace"
+        transform={`rotate(-90, -5, ${sheetHeight / 2})`}
+      >
+        {sheetHeight} mm
+      </text>
     </svg>
   );
 }

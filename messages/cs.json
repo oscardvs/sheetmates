@@ -94,7 +94,13 @@
     "sheetHeight": "Výška plechu (mm)",
     "selectMaterial": "Vybrat materiál",
     "utilization": "Využití",
-    "partsPlaced": "Umístěné díly"
+    "partsPlaced": "Umístěné díly",
+    "optimizing": "Optimalizace rozvržení...",
+    "cancel": "Zrušit",
+    "generation": "Generace",
+    "currentUtilization": "Nejlepší",
+    "wasmAlgorithm": "Optimalizované skládání (WASM)",
+    "fallbackAlgorithm": "Základní skládání (JS)"
   },
   "pricing": {
     "title": "Ceník",
@@ -186,5 +192,18 @@
     "en": "English",
     "fr": "Français",
     "cs": "Čeština"
+  },
+  "canvas": {
+    "snapToGrid": "Přichytit k mřížce",
+    "rotate90": "Otočit o 90°",
+    "deleteSelected": "Smazat vybrané",
+    "resetView": "Resetovat pohled",
+    "clearAll": "Smazat vše",
+    "autoNest": "Auto-skládání",
+    "parts": "dílů"
+  },
+  "playground": {
+    "upload": "Nahrát",
+    "settings": "Nastavení"
   }
 }

@@ -3,7 +3,7 @@ export interface NestingPart {
   width: number;
   height: number;
   quantity: number;
-  svgPath: string;
+  svgPath?: string;
 }
 
 export interface NestingSheet {
