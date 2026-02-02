@@ -272,11 +272,11 @@
     "editPricing": "Edit Pricing",
     "save": "Save Changes",
     "nav": {
+      "overview": "Dashboard",
       "inventory": "Inventory",
       "productionQueue": "Production Queue",
       "orders": "Orders",
       "pricing": "Pricing",
-      "settings": "Settings",
       "logout": "Logout"
     },
     "inject": {

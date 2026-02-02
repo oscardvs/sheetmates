@@ -10,10 +10,12 @@ import {
   CurrencyDollarIcon,
   SignOutIcon,
   PackageIcon,
+  ChartBarIcon,
 } from "@phosphor-icons/react";
 
 const navItems = [
-  { href: "/admin", icon: HardDrivesIcon, labelKey: "inventory" },
+  { href: "/admin", icon: ChartBarIcon, labelKey: "overview" },
+  { href: "/admin/inventory", icon: HardDrivesIcon, labelKey: "inventory" },
   { href: "/admin/queue", icon: QueueIcon, labelKey: "productionQueue" },
   { href: "/admin/orders", icon: PackageIcon, labelKey: "orders" },
   { href: "/admin/pricing", icon: CurrencyDollarIcon, labelKey: "pricing" },

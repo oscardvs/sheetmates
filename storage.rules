@@ -1,0 +1,49 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function to check if user owns the resource
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    // Helper function to validate file size (max 10MB)
+    function isValidSize() {
+      return request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // Helper function to validate DXF file type
+    function isDxfFile() {
+      return request.resource.contentType == 'application/dxf'
+          || request.resource.contentType == 'application/octet-stream'
+          || request.resource.contentType == 'text/plain';
+    }
+
+    // DXF file uploads - users can only upload to their own folder
+    match /dxf/{userId}/{fileName} {
+      allow read: if isAuthenticated() && isOwner(userId);
+      allow write: if isAuthenticated() && isOwner(userId) && isValidSize();
+    }
+
+    // Parts preview images
+    match /parts/{userId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isOwner(userId) && isValidSize();
+    }
+
+    // Sheet exports (admin only via backend)
+    match /exports/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Only via backend/Cloud Functions
+    }
+
+    // Default deny all other paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

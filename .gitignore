@@ -18,6 +18,7 @@
 /out/
 /.claude
 .claude
+/.firebase
 # production
 /build
 # misc
