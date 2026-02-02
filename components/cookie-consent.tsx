@@ -1,32 +1,40 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 const COOKIE_CONSENT_KEY = "cookie-consent";
 
+// Subscribe to nothing - we just need the mounted check
+const emptySubscribe = () => () => {};
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,  // Client: mounted
+    () => false  // Server: not mounted
+  );
+}
+
+function getConsent(): boolean {
+  if (typeof window === "undefined") return true; // Assume consent on server
+  return localStorage.getItem(COOKIE_CONSENT_KEY) === "accepted";
+}
+
 export function CookieConsent() {
   const t = useTranslations("cookieConsent");
-  const [isVisible, setIsVisible] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
-    if (!consent) {
-      setIsVisible(true);
-    }
-  }, []);
+  const isMounted = useIsMounted();
+  const [hasConsent, setHasConsent] = useState(getConsent);
 
   const handleAccept = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
-    setIsVisible(false);
+    setHasConsent(true);
   };
 
-  // Don't render anything until mounted to avoid hydration mismatch
-  if (!mounted || !isVisible) return null;
+  // Don't render on server or if consent already given
+  if (!isMounted || hasConsent) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800 bg-zinc-900">
