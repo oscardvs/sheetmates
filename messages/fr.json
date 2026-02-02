@@ -387,5 +387,434 @@
   "playground": {
     "upload": "Télécharger",
     "settings": "Paramètres"
+  },
+  "auction": {
+    "floorReached": "Prix plancher",
+    "nextDrop": "Prochaine baisse",
+    "priceDropping": "Prix en chute rapide !"
+  },
+  "viability": {
+    "sheetViability": "Viabilité de la tôle",
+    "target": "Objectif",
+    "readyToCut": "Prêt à découper !",
+    "waitingForParticipants": "En attente de participants",
+    "participants": "participants",
+    "busDriverDescription": "Payez pour forcer la production immédiate",
+    "forceRun": "Forcer le lancement"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "help": "Aide",
+    "legal": "Juridique",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "pricing": "Tarifs",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions générales",
+    "cookies": "Politique de cookies"
+  },
+  "cookieConsent": {
+    "message": "Nous utilisons des cookies essentiels pour le fonctionnement du site et les paiements sécurisés.",
+    "accept": "Accepter",
+    "learnMore": "En savoir plus"
+  },
+  "contact": {
+    "badge": "NOUS CONTACTER",
+    "title": "Contactez-nous",
+    "subtitle": "Une question, besoin d'un devis ou envie de discuter d'un projet ? Nous sommes là pour vous aider.",
+    "fields": {
+      "reason": {
+        "label": "Motif du contact",
+        "options": {
+          "general": "Question générale",
+          "quote": "Demande de devis",
+          "orderSupport": "Support commande",
+          "technical": "Problème technique",
+          "other": "Autre"
+        }
+      },
+      "name": {
+        "label": "Nom",
+        "placeholder": "Votre nom"
+      },
+      "email": {
+        "label": "E-mail",
+        "placeholder": "vous@exemple.com"
+      },
+      "orderReference": {
+        "label": "Référence commande",
+        "placeholder": "ex: ORD-12345"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Dites-nous comment nous pouvons vous aider..."
+      }
+    },
+    "submit": "Envoyer le message",
+    "submitting": "Envoi en cours...",
+    "success": "Message envoyé avec succès !",
+    "error": "Échec de l'envoi. Veuillez réessayer.",
+    "successTitle": "Message envoyé",
+    "successMessage": "Merci de nous avoir contactés. Nous vous répondrons sous 24-48 heures.",
+    "sendAnother": "Envoyer un autre message",
+    "directEmail": "Ou écrivez-nous directement"
+  },
+  "faq": {
+    "badge": "CENTRE D'AIDE",
+    "title": "Questions fréquentes",
+    "subtitle": "Trouvez des réponses aux questions courantes sur notre service de découpe laser, les tarifs et la livraison.",
+    "categories": {
+      "gettingStarted": {
+        "title": "Pour commencer",
+        "items": [
+          {
+            "question": "Qu'est-ce que SheetMates ?",
+            "answer": "SheetMates est une plateforme collaborative de découpe laser où plusieurs utilisateurs partagent des tôles pour réduire les coûts. Nous regroupons les pièces de différents makers sur des tôles partagées, vous ne payez que le matériau que vous utilisez réellement."
+          },
+          {
+            "question": "Comment ça fonctionne ?",
+            "answer": "Téléchargez vos fichiers DXF, et notre système calcule la surface et la longueur de coupe. Vos pièces sont imbriquées avec d'autres sur des tôles partagées. Une fois qu'une tôle atteint 85% d'utilisation, elle part en production. Vous ne payez que votre part du matériau et des coûts de découpe."
+          },
+          {
+            "question": "Ai-je besoin d'un compte pour commencer ?",
+            "answer": "Vous pouvez explorer et télécharger des fichiers sans compte, mais vous devrez en créer un pour passer commande. L'inscription est gratuite et ne prend qu'une minute."
+          },
+          {
+            "question": "Quels formats de fichiers acceptez-vous ?",
+            "answer": "Nous acceptons les fichiers DXF (AutoCAD R12-R2018). Pour de meilleurs résultats, exportez vos designs avec des polylignes et assurez-vous que tous les chemins de découpe sont sur le calque 0."
+          }
+        ]
+      },
+      "pricing": {
+        "title": "Tarification",
+        "items": [
+          {
+            "question": "Comment les prix sont-ils calculés ?",
+            "answer": "Les prix sont basés sur deux facteurs : la surface du matériau (par cm²) et la longueur de coupe (par mm). Ces tarifs de base sont multipliés par des facteurs de type de matériau et d'épaisseur. Vous pouvez voir la formule exacte sur notre page Tarifs."
+          },
+          {
+            "question": "Y a-t-il des frais de commande minimum ?",
+            "answer": "Oui, nous avons une valeur de commande minimum de 5,00 € pour couvrir les frais de traitement. Si vos pièces coûtent moins que ce montant, le minimum s'appliquera."
+          },
+          {
+            "question": "Qu'est-ce qui est inclus dans le prix ?",
+            "answer": "Le prix comprend le matériau, la découpe laser et la livraison standard en Belgique. La TVA (21%) est ajoutée au paiement pour les clients de l'UE."
+          },
+          {
+            "question": "Comment le modèle de tôle partagée permet-il d'économiser ?",
+            "answer": "Les services traditionnels facturent une tôle entière même si vous n'en utilisez que 10%. Avec SheetMates, vous ne payez que votre utilisation réelle de matériau. Plus la tôle se remplit, plus tout le monde économise."
+          }
+        ]
+      },
+      "materials": {
+        "title": "Matériaux et capacités",
+        "items": [
+          {
+            "question": "Quels matériaux pouvez-vous découper ?",
+            "answer": "Nous découpons l'acier, l'acier inoxydable, l'aluminium et le cuivre. Chaque matériau a des multiplicateurs de prix différents selon la difficulté de découpe et le coût du matériau."
+          },
+          {
+            "question": "Quelles épaisseurs sont disponibles ?",
+            "answer": "Nous acceptons des épaisseurs de 0,5 mm à 20 mm pour l'acier, et de 0,5 mm à 25 mm pour l'aluminium. Les matériaux plus épais ont des multiplicateurs plus élevés en raison de vitesses de découpe plus lentes."
+          },
+          {
+            "question": "Quelle est la taille maximale des pièces ?",
+            "answer": "Nos tôles font 3000 mm x 1500 mm. Vos pièces doivent tenir dans ces dimensions avec une marge pour l'imbrication. Le système vous avertira si une pièce est trop grande."
+          },
+          {
+            "question": "Quelle précision puis-je attendre ?",
+            "answer": "Notre Trumpf TruLaser 3030 Fiber atteint une précision de ±0,1 mm. Pour les tolérances critiques, veuillez le noter dans votre commande."
+          }
+        ]
+      },
+      "dxfBestPractices": {
+        "title": "Bonnes pratiques DXF",
+        "items": [
+          {
+            "question": "Comment exporter un DXF depuis mon logiciel CAO ?",
+            "answer": "La plupart des logiciels CAO (Fusion 360, SolidWorks, AutoCAD, FreeCAD) ont une option 'Enregistrer sous' ou 'Exporter' pour DXF. Choisissez le format AutoCAD R12-R2018 pour une meilleure compatibilité."
+          },
+          {
+            "question": "Quels paramètres d'export dois-je utiliser ?",
+            "answer": "Utilisez les millimètres comme unités, convertissez les splines en polylignes, et placez toute la géométrie de découpe sur le calque 0. Évitez les hachures, les cotes et le texte dans le fichier de découpe."
+          },
+          {
+            "question": "Quelles sont les erreurs courantes à éviter ?",
+            "answer": "Problèmes courants : chemins ouverts (lignes non connectées), géométrie qui se chevauche, unités en pouces au lieu de mm, et lignes de construction incluses. Notre système signalera la plupart de ces problèmes."
+          },
+          {
+            "question": "Dois-je tenir compte du trait de coupe (kerf) ?",
+            "answer": "Pour la plupart des applications, vous n'avez pas besoin d'ajouter de compensation de trait de coupe. Si vous avez besoin d'ajustements très précis (comme des assemblages à tenons), ajoutez 0,05-0,1 mm aux dimensions des trous. Nos guides expliquent cela en détail."
+          }
+        ]
+      },
+      "delivery": {
+        "title": "Livraison et délais",
+        "items": [
+          {
+            "question": "Combien de temps avant l'expédition de mes pièces ?",
+            "answer": "Une fois que votre tôle atteint le seuil de production (85% d'utilisation), la découpe se fait généralement sous 2-3 jours ouvrables. La livraison ajoute 1-3 jours selon la destination."
+          },
+          {
+            "question": "Qu'est-ce que le seuil de viabilité ?",
+            "answer": "Les tôles partent en production quand elles atteignent 85% d'utilisation. Cela garantit une utilisation efficace du matériau. Vous pouvez suivre la progression du remplissage en temps réel."
+          },
+          {
+            "question": "Puis-je accélérer ma commande ?",
+            "answer": "Oui ! L'option 'Bus Driver' vous permet de payer un supplément pour forcer la production immédiate d'une tôle, même si elle n'a pas atteint le seuil d'utilisation."
+          },
+          {
+            "question": "Où livrez-vous ?",
+            "answer": "Nous livrons actuellement dans l'UE. La livraison standard en Belgique est incluse. D'autres pays de l'UE peuvent avoir des frais de livraison supplémentaires affichés au paiement."
+          }
+        ]
+      },
+      "support": {
+        "title": "Commandes et support",
+        "items": [
+          {
+            "question": "Comment suivre ma commande ?",
+            "answer": "Connectez-vous à votre compte et visitez la page File d'attente pour voir le statut en temps réel de vos pièces : en attente, imbriqué, en découpe ou expédié."
+          },
+          {
+            "question": "Puis-je annuler ou modifier une commande ?",
+            "answer": "Vous pouvez annuler ou modifier les commandes avant que la tôle parte en production. Une fois la découpe commencée, les modifications ne sont plus possibles. Contactez-nous immédiatement si vous avez besoin de changements."
+          },
+          {
+            "question": "Que faire si quelque chose ne va pas avec mes pièces ?",
+            "answer": "Nous contrôlons la qualité de toutes les découpes avant expédition. Si vous recevez des pièces défectueuses dues à notre erreur, nous les remplacerons gratuitement. Contactez-nous sous 7 jours avec des photos."
+          }
+        ]
+      }
+    },
+    "cta": {
+      "title": "Vous avez encore des questions ?",
+      "subtitle": "Vous ne trouvez pas ce que vous cherchez ? Notre équipe est là pour vous aider.",
+      "button": "Nous contacter"
+    }
+  },
+  "legal": {
+    "privacy": {
+      "badge": "JURIDIQUE",
+      "title": "Politique de confidentialité",
+      "lastUpdated": "Dernière mise à jour : Février 2026",
+      "sections": {
+        "intro": {
+          "title": "Introduction",
+          "content": "SheetMates (« nous », « notre ») s'engage à protéger votre vie privée. Cette Politique de confidentialité explique comment nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez notre plateforme de découpe laser."
+        },
+        "controller": {
+          "title": "Responsable du traitement",
+          "content": "SheetMates est le responsable du traitement de vos informations personnelles. Vous pouvez nous contacter pour toute question relative à la confidentialité :"
+        },
+        "dataCollected": {
+          "title": "Données collectées",
+          "intro": "Nous collectons les catégories suivantes de données personnelles :",
+          "account": {
+            "title": "Données de compte",
+            "content": "Adresse e-mail, nom et hash du mot de passe lors de la création de votre compte."
+          },
+          "order": {
+            "title": "Données de commande",
+            "content": "Adresse de livraison, adresse de facturation, historique des commandes et informations de paiement (traitées par Stripe)."
+          },
+          "technical": {
+            "title": "Données techniques",
+            "content": "Adresse IP, type de navigateur et informations sur l'appareil pour la sécurité et l'amélioration du service."
+          },
+          "files": {
+            "title": "Fichiers téléchargés",
+            "content": "Fichiers DXF que vous téléchargez pour la découpe laser. Ils sont stockés pour traiter vos commandes."
+          }
+        },
+        "dataUse": {
+          "title": "Utilisation de vos données",
+          "purposes": {
+            "orders": "Traiter et exécuter vos commandes de découpe laser",
+            "communication": "Envoyer des confirmations de commande, mises à jour d'expédition et répondre aux demandes",
+            "improvement": "Améliorer notre plateforme et nos services",
+            "legal": "Respecter les obligations légales et prévenir la fraude"
+          }
+        },
+        "processors": {
+          "title": "Sous-traitants",
+          "intro": "Nous partageons vos données avec les sous-traitants tiers suivants qui nous aident à fournir nos services :",
+          "firebase": "Authentification, base de données et stockage de fichiers (région UE : europe-west1)",
+          "stripe": "Traitement des paiements. Stripe est conforme PCI-DSS et gère toutes les données de carte de paiement."
+        },
+        "storage": {
+          "title": "Stockage et sécurité des données",
+          "content": "Toutes les données sont stockées dans l'Union européenne (région Google Cloud europe-west1 en Belgique). Nous utilisons le chiffrement en transit (TLS) et au repos. L'accès aux données personnelles est limité au personnel autorisé uniquement."
+        },
+        "rights": {
+          "title": "Vos droits RGPD",
+          "intro": "En vertu du Règlement général sur la protection des données (RGPD), vous disposez des droits suivants :",
+          "access": {
+            "title": "Droit d'accès",
+            "content": "Demander une copie de vos données personnelles."
+          },
+          "rectification": {
+            "title": "Droit de rectification",
+            "content": "Demander la correction de données inexactes."
+          },
+          "erasure": {
+            "title": "Droit à l'effacement",
+            "content": "Demander la suppression de vos données personnelles (« droit à l'oubli »)."
+          },
+          "portability": {
+            "title": "Droit à la portabilité",
+            "content": "Recevoir vos données dans un format lisible par machine."
+          },
+          "object": {
+            "title": "Droit d'opposition",
+            "content": "S'opposer au traitement de vos données pour certaines finalités."
+          },
+          "exercise": "Pour exercer l'un de ces droits, veuillez nous contacter à contact@sheetmates.com. Nous répondrons sous 30 jours."
+        },
+        "retention": {
+          "title": "Conservation des données",
+          "account": "Données de compte : Conservées jusqu'à demande de suppression",
+          "orders": "Données de commande : Conservées 7 ans pour raisons légales/fiscales",
+          "guest": "Données de session invité : Supprimées automatiquement après 24 heures"
+        },
+        "contact": {
+          "title": "Nous contacter",
+          "content": "Pour toute question relative à la confidentialité ou pour exercer vos droits, contactez-nous à contact@sheetmates.com."
+        }
+      }
+    },
+    "terms": {
+      "badge": "JURIDIQUE",
+      "title": "Conditions générales",
+      "lastUpdated": "Dernière mise à jour : Février 2026",
+      "sections": {
+        "intro": {
+          "title": "Introduction et acceptation",
+          "content": "En accédant ou en utilisant SheetMates (le « Service »), vous acceptez d'être lié par ces Conditions générales. Si vous n'êtes pas d'accord, veuillez ne pas utiliser le Service."
+        },
+        "service": {
+          "title": "Description du service",
+          "content": "SheetMates est une plateforme collaborative de découpe laser qui permet aux utilisateurs de :",
+          "features": {
+            "upload": "Télécharger des fichiers de conception DXF pour la découpe laser",
+            "nesting": "Faire imbriquer leurs pièces avec d'autres utilisateurs sur des tôles partagées",
+            "cutting": "Recevoir des pièces découpées au laser avec précision dans divers matériaux",
+            "delivery": "Faire livrer les pièces finies à leur adresse"
+          }
+        },
+        "account": {
+          "title": "Inscription au compte",
+          "content": "Vous devrez peut-être créer un compte pour utiliser certaines fonctionnalités. Vous êtes responsable de la confidentialité de vos identifiants de compte et de toutes les activités sous votre compte. Vous devez fournir des informations exactes et les mettre à jour si nécessaire."
+        },
+        "orders": {
+          "title": "Commandes et paiements",
+          "content": "Lorsque vous passez une commande via SheetMates :",
+          "points": {
+            "pricing": "Les prix sont calculés en fonction de la surface du matériau, de la longueur de coupe, du type de matériau et de l'épaisseur comme indiqué sur notre page Tarifs.",
+            "payment": "Le paiement est traité de manière sécurisée via Stripe. Nous acceptons les principales cartes de crédit.",
+            "confirmation": "Les commandes sont confirmées une fois le paiement réussi. Vous recevrez un e-mail de confirmation.",
+            "vat": "Les prix sont hors TVA. Pour les clients de l'UE, la TVA belge de 21% est ajoutée au paiement."
+          }
+        },
+        "production": {
+          "title": "Production et livraison",
+          "content": "Les tôles partent en production lorsqu'elles atteignent 85% d'utilisation ou lorsqu'un utilisateur déclenche la production immédiate (option « Bus Driver »). Les délais varient selon les taux de remplissage et le planning de production. Nous visons une expédition sous 2-5 jours ouvrables après la découpe. La livraison standard en Belgique est incluse ; d'autres destinations UE peuvent entraîner des frais supplémentaires."
+        },
+        "quality": {
+          "title": "Qualité et retours",
+          "content": "Nous nous efforçons d'obtenir des découpes de haute qualité sur chaque commande :",
+          "points": {
+            "dfm": "Les vérifications DFM (Design for Manufacturing) sont données à titre indicatif uniquement. La responsabilité finale de l'adéquation du design incombe à l'utilisateur.",
+            "defects": "Si les pièces présentent des défauts de fabrication dus à notre erreur, nous les remplacerons sans frais.",
+            "claims": "Les réclamations qualité doivent être soumises sous 7 jours après livraison avec des photos du problème."
+          }
+        },
+        "obligations": {
+          "title": "Obligations de l'utilisateur",
+          "points": {
+            "accurate": "Fournir des fichiers de conception précis avec des dimensions correctes en millimètres.",
+            "legal": "Ne télécharger que des designs que vous avez le droit de fabriquer.",
+            "ip": "Ne pas télécharger de designs qui enfreignent la propriété intellectuelle d'autrui.",
+            "prohibited": "Ne pas utiliser le service pour des articles interdits (armes, biens illégaux)."
+          }
+        },
+        "ip": {
+          "title": "Propriété intellectuelle",
+          "content": "Vous conservez tous les droits de propriété intellectuelle sur vos designs téléchargés. En téléchargeant, vous nous accordez une licence limitée pour traiter et fabriquer vos designs. Nous ne revendiquons pas la propriété de vos designs. La marque SheetMates, le logiciel et la plateforme sont notre propriété intellectuelle."
+        },
+        "liability": {
+          "title": "Limitation de responsabilité",
+          "content": "La responsabilité de SheetMates est limitée à la valeur de la commande concernée. Nous ne sommes pas responsables des dommages indirects, consécutifs ou accessoires. Nous ne garantissons pas la disponibilité ininterrompue du service."
+        },
+        "law": {
+          "title": "Droit applicable",
+          "content": "Ces Conditions sont régies par le droit belge. Tout litige sera résolu devant les tribunaux de Bruxelles, Belgique."
+        },
+        "changes": {
+          "title": "Modifications des conditions",
+          "content": "Nous pouvons mettre à jour ces Conditions de temps en temps. L'utilisation continue du Service après les modifications constitue une acceptation des nouvelles Conditions. Nous informerons les utilisateurs enregistrés des changements importants par e-mail."
+        },
+        "contact": {
+          "title": "Contact",
+          "content": "Pour toute question sur ces Conditions, contactez-nous à contact@sheetmates.com."
+        }
+      }
+    },
+    "cookies": {
+      "badge": "JURIDIQUE",
+      "title": "Politique de cookies",
+      "lastUpdated": "Dernière mise à jour : Février 2026",
+      "sections": {
+        "what": {
+          "title": "Qu'est-ce qu'un cookie",
+          "content": "Les cookies sont de petits fichiers texte stockés sur votre appareil lorsque vous visitez des sites web. Ils aident les sites à mémoriser vos préférences et à améliorer votre expérience."
+        },
+        "used": {
+          "title": "Cookies que nous utilisons",
+          "intro": "SheetMates n'utilise que des cookies essentiels nécessaires au fonctionnement de la plateforme. Nous n'utilisons pas de cookies publicitaires ou de suivi."
+        },
+        "noTracking": {
+          "title": "Pas de suivi ni d'analytique",
+          "content": "Nous n'utilisons pas Google Analytics, Facebook Pixel ou tout autre cookie de suivi/publicité. Votre activité de navigation n'est pas suivie ni partagée avec des tiers à des fins publicitaires."
+        },
+        "managing": {
+          "title": "Gestion des cookies",
+          "content": "Vous pouvez contrôler les cookies via les paramètres de votre navigateur. La plupart des navigateurs vous permettent de bloquer ou de supprimer les cookies. Cependant, bloquer les cookies essentiels peut vous empêcher d'utiliser certaines fonctionnalités de notre plateforme.",
+          "warning": "Note : Bloquer les cookies d'authentification vous empêchera de vous connecter."
+        },
+        "contact": {
+          "title": "Nous contacter",
+          "content": "Si vous avez des questions sur nos pratiques en matière de cookies, contactez-nous à contact@sheetmates.com."
+        }
+      },
+      "table": {
+        "cookie": "Cookie",
+        "purpose": "Finalité",
+        "type": "Type",
+        "duration": "Durée"
+      },
+      "cookies": {
+        "auth": {
+          "purpose": "Vous maintient connecté",
+          "type": "Essentiel",
+          "duration": "Session"
+        },
+        "stripeMid": {
+          "purpose": "Prévention fraude Stripe",
+          "type": "Essentiel",
+          "duration": "1 an"
+        },
+        "stripeSid": {
+          "purpose": "Identifiant session Stripe",
+          "type": "Essentiel",
+          "duration": "30 minutes"
+        },
+        "consent": {
+          "purpose": "Mémorise votre choix de cookies",
+          "type": "Essentiel",
+          "duration": "1 an"
+        }
+      }
+    }
   }
 }

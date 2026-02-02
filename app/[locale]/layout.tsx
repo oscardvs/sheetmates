@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { CookieConsent } from "@/components/cookie-consent";
 import { SITE_CONFIG, generatePageMetadata } from "@/lib/seo/metadata";
 import { createOrganizationSchema } from "@/lib/seo/schema";
 import "../globals.css";
@@ -72,6 +73,7 @@ export default async function LocaleLayout({
             <QueryProvider>
               {children}
               <Toaster />
+              <CookieConsent />
             </QueryProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
