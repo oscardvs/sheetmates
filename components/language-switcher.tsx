@@ -19,11 +19,11 @@ export function LanguageSwitcher() {
       <select
         value={locale}
         onChange={(e) => onValueChange(e.target.value)}
-        className="h-8 appearance-none border border-border bg-transparent pl-7 pr-3 font-mono text-xs text-foreground transition-colors hover:border-primary focus:border-primary focus:outline-none"
+        className="h-8 appearance-none border border-border bg-background pl-7 pr-3 font-mono text-xs text-foreground transition-colors hover:border-primary focus:border-primary focus:outline-none"
       >
-        <option value="en">{t("en")}</option>
-        <option value="fr">{t("fr")}</option>
-        <option value="cs">{t("cs")}</option>
+        <option value="en" className="bg-background text-foreground">{t("en")}</option>
+        <option value="fr" className="bg-background text-foreground">{t("fr")}</option>
+        <option value="cs" className="bg-background text-foreground">{t("cs")}</option>
       </select>
       <GlobeIcon className="pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
     </div>
