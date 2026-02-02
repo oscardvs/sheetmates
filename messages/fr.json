@@ -152,7 +152,8 @@
     "thickness": "Épaisseur",
     "unitConverted": "Dimensions converties de {unit} en mm",
     "partsTooLarge": "{count} pièce(s) trop grande(s) pour les tôles standard",
-    "nestedSuccess": "Pièces imbriquées sur la tôle — {utilization}% d'utilisation"
+    "nestedSuccess": "Pièces imbriquées sur la tôle — {utilization}% d'utilisation",
+    "noMatchingSheet": "Aucune tôle {material} {thickness}mm disponible. Pièces enregistrées dans la file."
   },
   "sheets": {
     "title": "Tôles",

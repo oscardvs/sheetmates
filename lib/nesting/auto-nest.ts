@@ -8,7 +8,6 @@ import {
 } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
 import {
-  createSheet,
   type SheetDoc,
   type SheetPlacement,
 } from "@/lib/firebase/db/sheets";
@@ -16,24 +15,27 @@ import { type PartDoc } from "@/lib/firebase/db/parts";
 import { shelfPack } from "./shelf-packer";
 import type { NestingPart } from "./types";
 
-// Standard TC buffer sheet dimensions
-const STANDARD_SHEET_WIDTH = 3000;
-const STANDARD_SHEET_HEIGHT = 1500;
-
 // Utilization threshold for marking sheet as full
 const FULL_THRESHOLD = 0.85;
+
+export class NoMatchingSheetError extends Error {
+  constructor(material: string, thickness: number) {
+    super(`No open sheet available for ${material} ${thickness}mm. Please contact admin.`);
+    this.name = "NoMatchingSheetError";
+  }
+}
 
 export interface AutoNestResult {
   sheetId: string;
   utilization: number;
   placedPartIds: string[];
   unplacedPartIds: string[];
-  isNewSheet: boolean;
 }
 
 /**
  * Auto-nest parts onto a matching sheet.
- * Finds an open sheet with the same material/thickness, or creates one.
+ * Finds an open sheet with the same material/thickness.
+ * Throws NoMatchingSheetError if no matching sheet exists (admin must create sheets).
  * Then runs the shelf-packer and updates Firestore.
  */
 export async function autoNestParts(
@@ -42,32 +44,11 @@ export async function autoNestParts(
   thickness: number
 ): Promise<AutoNestResult> {
   // 1. Find an open sheet with matching material/thickness
-  let sheet = await findOpenSheet(material, thickness);
-  let isNewSheet = false;
+  const sheet = await findOpenSheet(material, thickness);
 
   if (!sheet) {
-    // Create a new sheet
-    const sheetId = await createSheet({
-      width: STANDARD_SHEET_WIDTH,
-      height: STANDARD_SHEET_HEIGHT,
-      material,
-      thickness,
-      placements: [],
-      utilization: 0,
-      status: "open",
-    });
-    sheet = {
-      id: sheetId,
-      width: STANDARD_SHEET_WIDTH,
-      height: STANDARD_SHEET_HEIGHT,
-      material,
-      thickness,
-      placements: [],
-      utilization: 0,
-      status: "open",
-      createdAt: null,
-    };
-    isNewSheet = true;
+    // No matching sheet - admin needs to create one first
+    throw new NoMatchingSheetError(material, thickness);
   }
 
   // 2. Gather all parts to nest (existing + new)
@@ -152,7 +133,6 @@ export async function autoNestParts(
     utilization,
     placedPartIds: placedNewPartIds,
     unplacedPartIds,
-    isNewSheet,
   };
 }
 

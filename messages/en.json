@@ -152,7 +152,8 @@
     "thickness": "Thickness",
     "unitConverted": "Dimensions converted from {unit} to mm",
     "partsTooLarge": "{count} part(s) too large for standard sheets",
-    "nestedSuccess": "Parts nested onto sheet — {utilization}% utilization"
+    "nestedSuccess": "Parts nested onto sheet — {utilization}% utilization",
+    "noMatchingSheet": "No open {material} {thickness}mm sheet available. Parts saved to queue."
   },
   "sheets": {
     "title": "Sheets",

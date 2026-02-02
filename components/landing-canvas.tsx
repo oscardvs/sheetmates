@@ -3,6 +3,7 @@
 import { useCallback, useState, useMemo, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { useAuth } from "@/components/providers/auth-provider";
 import { parseDxfString, type ParsedDxf } from "@/lib/dxf/parser";
 import { dxfToSvgPath } from "@/lib/dxf/to-svg";
 import { computeArea } from "@/lib/dxf/compute-area";
@@ -52,6 +53,7 @@ const STORAGE_KEY = "sheetmates_landing_parts";
 export function LandingCanvas() {
   const t = useTranslations("landing.canvas");
   const tHero = useTranslations("landing.hero");
+  const { user } = useAuth();
   const [parts, setParts] = useState<UploadedPart[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -334,7 +336,7 @@ export function LandingCanvas() {
               size="lg"
               className="w-full bg-primary font-mono text-primary-foreground hover:bg-primary/90"
             >
-              <Link href={parts.length > 0 ? "/signup" : "/signup"}>
+              <Link href={user ? "/upload" : "/signup"}>
                 {parts.length > 0 ? (
                   <>
                     {t("ctaContinue")}

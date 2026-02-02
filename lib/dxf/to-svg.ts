@@ -3,36 +3,49 @@ import type { DxfEntity, ParsedDxf } from "./parser";
 export function dxfToSvgPath(parsed: ParsedDxf): string {
   const paths: string[] = [];
 
+  // Offset to normalize coordinates to (0,0) origin
+  const offsetX = parsed.boundingBox.minX;
+  const offsetY = parsed.boundingBox.minY;
+  // For Y-flip, use height instead of maxY
+  const height = parsed.boundingBox.maxY - parsed.boundingBox.minY;
+
   for (const entity of parsed.entities) {
-    const path = entityToSvgPath(entity, parsed.boundingBox.maxY);
+    const path = entityToSvgPath(entity, offsetX, offsetY, height);
     if (path) paths.push(path);
   }
 
   return paths.join(" ");
 }
 
-function flipY(y: number, maxY: number): number {
-  return maxY - y;
+// Transform coordinate: subtract offset and flip Y
+function transformX(x: number, offsetX: number): number {
+  return x - offsetX;
+}
+
+function transformY(y: number, offsetY: number, height: number): number {
+  return height - (y - offsetY);
 }
 
 function entityToSvgPath(
   entity: DxfEntity,
-  maxY: number
+  offsetX: number,
+  offsetY: number,
+  height: number
 ): string | null {
   switch (entity.type) {
     case "LINE": {
       if (!entity.startPoint || !entity.endPoint) return null;
-      const sx = entity.startPoint.x;
-      const sy = flipY(entity.startPoint.y, maxY);
-      const ex = entity.endPoint.x;
-      const ey = flipY(entity.endPoint.y, maxY);
+      const sx = transformX(entity.startPoint.x, offsetX);
+      const sy = transformY(entity.startPoint.y, offsetY, height);
+      const ex = transformX(entity.endPoint.x, offsetX);
+      const ey = transformY(entity.endPoint.y, offsetY, height);
       return `M ${sx} ${sy} L ${ex} ${ey}`;
     }
 
     case "CIRCLE": {
       if (!entity.center || entity.radius == null) return null;
-      const cx = entity.center.x;
-      const cy = flipY(entity.center.y, maxY);
+      const cx = transformX(entity.center.x, offsetX);
+      const cy = transformY(entity.center.y, offsetY, height);
       const r = entity.radius;
       return (
         `M ${cx - r} ${cy} ` +
@@ -54,10 +67,10 @@ function entityToSvgPath(
       const r = entity.radius;
       const sa = (entity.startAngle * Math.PI) / 180;
       const ea = (entity.endAngle * Math.PI) / 180;
-      const sx = cx + r * Math.cos(sa);
-      const sy = flipY(cy + r * Math.sin(sa), maxY);
-      const ex = cx + r * Math.cos(ea);
-      const ey = flipY(cy + r * Math.sin(ea), maxY);
+      const sx = transformX(cx + r * Math.cos(sa), offsetX);
+      const sy = transformY(cy + r * Math.sin(sa), offsetY, height);
+      const ex = transformX(cx + r * Math.cos(ea), offsetX);
+      const ey = transformY(cy + r * Math.sin(ea), offsetY, height);
       let angle = entity.endAngle - entity.startAngle;
       if (angle < 0) angle += 360;
       const largeArc = angle > 180 ? 1 : 0;
@@ -66,8 +79,8 @@ function entityToSvgPath(
 
     case "ELLIPSE": {
       if (!entity.center || !entity.majorAxisEndPoint) return null;
-      const cx = entity.center.x;
-      const cy = flipY(entity.center.y, maxY);
+      const cx = transformX(entity.center.x, offsetX);
+      const cy = transformY(entity.center.y, offsetY, height);
       const mx = entity.majorAxisEndPoint.x;
       const my = entity.majorAxisEndPoint.y;
       const major = Math.sqrt(mx * mx + my * my);
@@ -86,16 +99,18 @@ function entityToSvgPath(
       const parts: string[] = [];
       for (let i = 0; i < entity.vertices.length; i++) {
         const v = entity.vertices[i];
-        const x = v.x;
-        const y = flipY(v.y, maxY);
+        const x = transformX(v.x, offsetX);
+        const y = transformY(v.y, offsetY, height);
         if (i === 0) {
           parts.push(`M ${x} ${y}`);
         } else {
           const prev = entity.vertices[i - 1];
           if (prev.bulge && prev.bulge !== 0) {
             const bulge = prev.bulge;
-            const dx = x - prev.x;
-            const dy = flipY(v.y, maxY) - flipY(prev.y, maxY);
+            const prevX = transformX(prev.x, offsetX);
+            const prevY = transformY(prev.y, offsetY, height);
+            const dx = x - prevX;
+            const dy = y - prevY;
             const chord = Math.sqrt(dx * dx + dy * dy);
             const sagitta = Math.abs(bulge) * (chord / 2);
             const r =
@@ -125,15 +140,15 @@ function entityToSvgPath(
         return null;
       const pts = entity.controlPoints;
       const parts: string[] = [
-        `M ${pts[0].x} ${flipY(pts[0].y, maxY)}`,
+        `M ${transformX(pts[0].x, offsetX)} ${transformY(pts[0].y, offsetY, height)}`,
       ];
       if (pts.length === 2) {
         parts.push(
-          `L ${pts[1].x} ${flipY(pts[1].y, maxY)}`
+          `L ${transformX(pts[1].x, offsetX)} ${transformY(pts[1].y, offsetY, height)}`
         );
       } else if (pts.length === 3) {
         parts.push(
-          `Q ${pts[1].x} ${flipY(pts[1].y, maxY)} ${pts[2].x} ${flipY(pts[2].y, maxY)}`
+          `Q ${transformX(pts[1].x, offsetX)} ${transformY(pts[1].y, offsetY, height)} ${transformX(pts[2].x, offsetX)} ${transformY(pts[2].y, offsetY, height)}`
         );
       } else {
         for (let i = 1; i < pts.length - 2; i += 3) {
@@ -141,7 +156,7 @@ function entityToSvgPath(
           const p2 = pts[Math.min(i + 1, pts.length - 1)];
           const p3 = pts[Math.min(i + 2, pts.length - 1)];
           parts.push(
-            `C ${p1.x} ${flipY(p1.y, maxY)} ${p2.x} ${flipY(p2.y, maxY)} ${p3.x} ${flipY(p3.y, maxY)}`
+            `C ${transformX(p1.x, offsetX)} ${transformY(p1.y, offsetY, height)} ${transformX(p2.x, offsetX)} ${transformY(p2.y, offsetY, height)} ${transformX(p3.x, offsetX)} ${transformY(p3.y, offsetY, height)}`
           );
         }
       }

@@ -7,7 +7,7 @@ import { DxfUploader, type UploadedPart } from "@/components/dxf-uploader";
 import { useAuth } from "@/components/providers/auth-provider";
 import { createPart, getPart, type PartDoc } from "@/lib/firebase/db/parts";
 import { uploadDxfFile } from "@/lib/firebase/storage";
-import { autoNestParts } from "@/lib/nesting/auto-nest";
+import { autoNestParts, NoMatchingSheetError } from "@/lib/nesting/auto-nest";
 import { toast } from "sonner";
 import { UploadIcon, SpinnerIcon, CheckCircleIcon, CaretDownIcon } from "@phosphor-icons/react";
 
@@ -114,21 +114,34 @@ export default function UploadPage() {
       }
 
       // 3. Auto-nest the parts onto a sheet
-      const result = await autoNestParts(savedParts, material, thickness);
+      try {
+        const result = await autoNestParts(savedParts, material, thickness);
 
-      // 4. Show appropriate toast
-      if (result.unplacedPartIds.length > 0) {
-        toast.warning(t("partsTooLarge", { count: result.unplacedPartIds.length }));
+        // 4. Show appropriate toast
+        if (result.unplacedPartIds.length > 0) {
+          toast.warning(t("partsTooLarge", { count: result.unplacedPartIds.length }));
+        }
+
+        const utilizationPercent = (result.utilization * 100).toFixed(1);
+        toast.success(t("nestedSuccess", { utilization: utilizationPercent }));
+
+        setShowRestored(false);
+        setRestoredParts([]);
+
+        // 5. Redirect to sheet view to see the nested parts
+        router.push(`/sheets/${result.sheetId}`);
+      } catch (nestError) {
+        if (nestError instanceof NoMatchingSheetError) {
+          // No matching sheet - parts saved but not nested
+          toast.warning(t("noMatchingSheet", { material, thickness }));
+          setShowRestored(false);
+          setRestoredParts([]);
+          // Redirect to queue - parts are saved with pending status
+          router.push("/queue");
+        } else {
+          throw nestError;
+        }
       }
-
-      const utilizationPercent = (result.utilization * 100).toFixed(1);
-      toast.success(t("nestedSuccess", { utilization: utilizationPercent }));
-
-      setShowRestored(false);
-      setRestoredParts([]);
-
-      // 5. Redirect to sheet view to see the nested parts
-      router.push(`/sheets/${result.sheetId}`);
     } catch (err) {
       console.error("Upload failed:", err);
       toast.error(t("error"));
