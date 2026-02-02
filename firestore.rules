@@ -94,7 +94,7 @@ service cloud.firestore {
       allow create: if isAuth() &&
         request.resource.data.userId == request.auth.uid &&
         // Validate required fields
-        request.resource.data.keys().hasAll(['userId', 'name', 'createdAt']);
+        request.resource.data.keys().hasAll(['userId', 'fileName', 'createdAt']);
 
       // Users can update/delete their own parts
       allow update, delete: if isAuth() &&

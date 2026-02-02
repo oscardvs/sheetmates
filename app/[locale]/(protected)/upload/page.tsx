@@ -82,7 +82,8 @@ export default function UploadPage() {
       toast.success(t("success"));
       setShowRestored(false);
       setRestoredParts([]);
-    } catch {
+    } catch (err) {
+      console.error("Upload failed:", err);
       toast.error(t("error"));
     } finally {
       setUploading(false);
