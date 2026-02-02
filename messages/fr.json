@@ -48,7 +48,10 @@
     "footerCta": {
       "title": "Prêt à partager des tôles ?",
       "cta": "Créez votre compte",
-      "tagline": "Rejoignez la communauté. Partagez la tôle. Économisez à chaque découpe."
+      "tagline": "Rejoignez la communauté. Partagez la tôle. Économisez à chaque découpe.",
+      "loggedInTitle": "Prêt à télécharger vos pièces ?",
+      "loggedInCta": "Aller au téléchargement",
+      "loggedInTagline": "Vos fichiers DXF attendent d'être imbriqués."
     },
     "badges": {
       "process": "PROCESSUS",
@@ -63,6 +66,27 @@
     "equipment": "PROPULSÉ PAR TRUMPF TRULASER 3030 FIBER",
     "footer": {
       "copyright": "© 2026 SheetMates. Société belge. Toutes les données hébergées dans l'UE (europe-west1)."
+    },
+    "canvas": {
+      "badge": "TECH-CENTRUM // RÉSEAU DE TÔLES TAMPONS",
+      "heroDrop": "DÉPOSEZ",
+      "heroDxf": ".DXF",
+      "heroArrow": "→ OBTENEZ",
+      "heroParts": "PIÈCES",
+      "heroSubtitle": "Téléchargez vos fichiers CAO. Nous les imbriquons avec d'autres makers. Vous ne payez que votre part.",
+      "processing": "TRAITEMENT...",
+      "dropZone": "DÉPOSEZ LES FICHIERS DXF ICI",
+      "dropHelper": "ou cliquez pour parcourir • prend en charge .dxf",
+      "loadedParts": "PIÈCES CHARGÉES",
+      "clearAll": "TOUT EFFACER",
+      "metricParts": "PIÈCES",
+      "metricArea": "SURFACE",
+      "metricCutLength": "LONGUEUR DE COUPE",
+      "metricPrice": "PRIX EST.",
+      "ctaContinue": "CONTINUER VERS L'IMBRICATION",
+      "sheetPreview": "APERÇU TÔLE 3000mm × 1500mm",
+      "emptyPreview": "DÉPOSEZ FICHIERS POUR APERÇU",
+      "sheetUtilization": "UTILISATION DE LA TÔLE"
     }
   },
   "auth": {
@@ -189,7 +213,18 @@
     "processing": "En cours",
     "nested": "Imbriqué",
     "cut": "Découpé",
-    "shipped": "Expédié"
+    "shipped": "Expédié",
+    "loading": "Chargement de la file d'attente...",
+    "badge": "PRODUCTION",
+    "partsCount": "{count} {type} dans la file d'attente",
+    "partSingular": "pièce",
+    "partPlural": "pièces",
+    "emptyState": "Aucune pièce dans la file d'attente.",
+    "emptyStateCta": "Téléchargez votre premier fichier DXF",
+    "dimensions": "Dimensions",
+    "qty": "Qté",
+    "reset": "Réinitialiser",
+    "proceedToCheckout": "Procéder au paiement"
   },
   "export": {
     "title": "Exporter",

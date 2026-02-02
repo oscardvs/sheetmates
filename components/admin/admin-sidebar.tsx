@@ -8,7 +8,6 @@ import {
   HardDrivesIcon,
   QueueIcon,
   CurrencyDollarIcon,
-  GearIcon,
   SignOutIcon,
   PackageIcon,
 } from "@phosphor-icons/react";
@@ -18,7 +17,6 @@ const navItems = [
   { href: "/admin/queue", icon: QueueIcon, labelKey: "productionQueue" },
   { href: "/admin/orders", icon: PackageIcon, labelKey: "orders" },
   { href: "/admin/pricing", icon: CurrencyDollarIcon, labelKey: "pricing" },
-  { href: "/admin/settings", icon: GearIcon, labelKey: "settings" },
 ];
 
 export function AdminSidebar() {

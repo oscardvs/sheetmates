@@ -48,7 +48,10 @@
     "footerCta": {
       "title": "Ready to start sharing sheets?",
       "cta": "Create Your Account",
-      "tagline": "Join the community. Share the sheet. Save on every cut."
+      "tagline": "Join the community. Share the sheet. Save on every cut.",
+      "loggedInTitle": "Ready to upload your parts?",
+      "loggedInCta": "Go to Upload",
+      "loggedInTagline": "Your DXF files are waiting to be nested."
     },
     "badges": {
       "process": "PROCESS",
@@ -63,6 +66,27 @@
     "equipment": "POWERED BY TRUMPF TRULASER 3030 FIBER",
     "footer": {
       "copyright": "© 2026 SheetMates. Belgian-incorporated. All data hosted in EU (europe-west1)."
+    },
+    "canvas": {
+      "badge": "TECH-CENTRUM // BUFFER SHEET NETWORK",
+      "heroDrop": "DROP",
+      "heroDxf": ".DXF",
+      "heroArrow": "→ GET",
+      "heroParts": "PARTS",
+      "heroSubtitle": "Upload your CAD files. We nest them with other makers. You pay only for your share.",
+      "processing": "PROCESSING...",
+      "dropZone": "DROP DXF FILES HERE",
+      "dropHelper": "or click to browse • supports .dxf",
+      "loadedParts": "LOADED PARTS",
+      "clearAll": "CLEAR ALL",
+      "metricParts": "PARTS",
+      "metricArea": "AREA",
+      "metricCutLength": "CUT LENGTH",
+      "metricPrice": "EST. PRICE",
+      "ctaContinue": "CONTINUE TO NEST",
+      "sheetPreview": "3000mm × 1500mm SHEET PREVIEW",
+      "emptyPreview": "DROP FILES TO PREVIEW",
+      "sheetUtilization": "SHEET UTILIZATION"
     }
   },
   "auth": {
@@ -189,7 +213,18 @@
     "processing": "Processing",
     "nested": "Nested",
     "cut": "Cut",
-    "shipped": "Shipped"
+    "shipped": "Shipped",
+    "loading": "Loading queue...",
+    "badge": "PRODUCTION",
+    "partsCount": "{count} {type} in queue",
+    "partSingular": "part",
+    "partPlural": "parts",
+    "emptyState": "No parts in queue.",
+    "emptyStateCta": "Upload your first DXF file",
+    "dimensions": "Dimensions",
+    "qty": "Qty",
+    "reset": "Reset",
+    "proceedToCheckout": "Proceed to Checkout"
   },
   "export": {
     "title": "Export",

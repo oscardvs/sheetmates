@@ -48,7 +48,10 @@
     "footerCta": {
       "title": "Připraveni sdílet plechy?",
       "cta": "Vytvořte si účet",
-      "tagline": "Připojte se ke komunitě. Sdílejte plech. Šetřete na každém řezu."
+      "tagline": "Připojte se ke komunitě. Sdílejte plech. Šetřete na každém řezu.",
+      "loggedInTitle": "Připraveni nahrát své díly?",
+      "loggedInCta": "Přejít na nahrávání",
+      "loggedInTagline": "Vaše DXF soubory čekají na vnořování."
     },
     "badges": {
       "process": "PROCES",
@@ -63,6 +66,27 @@
     "equipment": "POHÁNĚNO TRUMPF TRULASER 3030 FIBER",
     "footer": {
       "copyright": "© 2026 SheetMates. Belgická společnost. Všechna data hostována v EU (europe-west1)."
+    },
+    "canvas": {
+      "badge": "TECH-CENTRUM // SÍŤ VYROVNÁVACÍCH PLECHŮ",
+      "heroDrop": "PŘETÁHNĚTE",
+      "heroDxf": ".DXF",
+      "heroArrow": "→ ZÍSKEJTE",
+      "heroParts": "DÍLY",
+      "heroSubtitle": "Nahrajte své CAD soubory. Složíme je s ostatními makery. Platíte pouze svůj podíl.",
+      "processing": "ZPRACOVÁNÍ...",
+      "dropZone": "PŘETÁHNĚTE DXF SOUBORY SEM",
+      "dropHelper": "nebo klikněte pro procházení • podporuje .dxf",
+      "loadedParts": "NAČTENÉ DÍLY",
+      "clearAll": "VYMAZAT VŠE",
+      "metricParts": "DÍLY",
+      "metricArea": "PLOCHA",
+      "metricCutLength": "DÉLKA ŘEZU",
+      "metricPrice": "ODH. CENA",
+      "ctaContinue": "POKRAČOVAT KE SKLÁDÁNÍ",
+      "sheetPreview": "NÁHLED PLECHU 3000mm × 1500mm",
+      "emptyPreview": "PŘETÁHNĚTE SOUBORY PRO NÁHLED",
+      "sheetUtilization": "VYUŽITÍ PLECHU"
     }
   },
   "auth": {
@@ -189,7 +213,18 @@
     "processing": "Zpracovává se",
     "nested": "Složeno",
     "cut": "Vyříznuto",
-    "shipped": "Odesláno"
+    "shipped": "Odesláno",
+    "loading": "Načítání fronty...",
+    "badge": "PRODUKCE",
+    "partsCount": "{count} {type} ve frontě",
+    "partSingular": "díl",
+    "partPlural": "dílů",
+    "emptyState": "Ve frontě nejsou žádné díly.",
+    "emptyStateCta": "Nahrajte svůj první DXF soubor",
+    "dimensions": "Rozměry",
+    "qty": "Množ.",
+    "reset": "Resetovat",
+    "proceedToCheckout": "Pokračovat k platbě"
   },
   "export": {
     "title": "Export",
