@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/navbar";
 import { AuthProvider } from "@/components/providers/auth-provider";
-import { LandingCanvas } from "@/components/landing-canvas";
+import { LandingCanvasStatic } from "@/components/landing-canvas-static";
+import { LandingCanvasWrapper } from "@/components/landing-canvas-wrapper";
 import { LandingFooterLinks } from "@/components/landing-footer-links";
 import { LandingCta } from "@/components/landing-cta";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -55,8 +56,15 @@ export default function LandingPage() {
       <div className="flex min-h-screen flex-col bg-background">
         <Navbar />
 
-        {/* Interactive Canvas Hero */}
-        <LandingCanvas />
+        {/* Canvas Hero with Progressive Enhancement */}
+        {/* Static version renders immediately for fast LCP */}
+        <div className="relative">
+          <LandingCanvasStatic />
+          {/* Interactive version loads after hydration, replaces static */}
+          <div className="absolute inset-0">
+            <LandingCanvasWrapper />
+          </div>
+        </div>
 
         {/* How It Works */}
         <section className="relative border-t border-border bg-background">
