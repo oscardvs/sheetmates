@@ -12,7 +12,7 @@ export default function AdminLayout({
     <ProtectedRoute adminOnly>
       <div className="flex h-screen">
         <AdminSidebar />
-        <main className="flex-1 overflow-auto bg-zinc-950">{children}</main>
+        <main className="flex-1 overflow-auto bg-background">{children}</main>
       </div>
     </ProtectedRoute>
   );

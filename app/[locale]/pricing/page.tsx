@@ -13,6 +13,8 @@ import {
 
 export default function PricingPage() {
   const t = useTranslations("pricing");
+  const tNav = useTranslations("nav");
+  const tLanding = useTranslations("landing");
   const config = defaultPricingConfig;
 
   return (
@@ -34,13 +36,13 @@ export default function PricingPage() {
           />
           <div className="relative mx-auto max-w-6xl px-4 py-16 text-center">
             <div className="mb-4 inline-block border border-primary/30 bg-primary/10 px-3 py-1">
-              <span className="font-mono text-xs text-primary">TRANSPARENT PRICING</span>
+              <span className="font-mono text-xs text-primary">{t("badge")}</span>
             </div>
             <h1 className="mb-4 font-mono text-4xl font-bold text-foreground md:text-5xl">
               {t("title")}
             </h1>
             <p className="mx-auto max-w-2xl font-mono text-sm text-muted-foreground">
-              Pay only for what you use. No hidden fees. All prices shown exclude VAT.
+              {t("subtitle")}
             </p>
           </div>
         </section>
@@ -51,7 +53,7 @@ export default function PricingPage() {
             <div className="mb-8 flex items-center gap-2">
               <div className="h-px w-8 bg-primary" />
               <span className="font-mono text-xs uppercase tracking-widest text-primary">
-                BASE RATES
+                {t("baseRates")}
               </span>
             </div>
 
@@ -107,7 +109,7 @@ export default function PricingPage() {
             <div className="mb-8 flex items-center gap-2">
               <div className="h-px w-8 bg-border" />
               <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                {t("material")} MULTIPLIERS
+                {t("materialMultipliers")}
               </span>
             </div>
 
@@ -130,7 +132,7 @@ export default function PricingPage() {
             <div className="mb-8 flex items-center gap-2">
               <div className="h-px w-8 bg-border" />
               <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                {t("thickness")} MULTIPLIERS
+                {t("thicknessMultipliers")}
               </span>
             </div>
 
@@ -142,7 +144,7 @@ export default function PricingPage() {
                       {t("thickness")} (mm)
                     </th>
                     <th className="py-3 text-right font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                      Multiplier
+                      {t("multiplier")}
                     </th>
                   </tr>
                 </thead>
@@ -167,7 +169,7 @@ export default function PricingPage() {
             <div className="mb-8 flex items-center gap-2">
               <div className="h-px w-8 bg-border" />
               <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                PRICING FORMULA
+                {t("formulaBadge")}
               </span>
             </div>
 
@@ -193,16 +195,16 @@ export default function PricingPage() {
         <section className="bg-background">
           <div className="mx-auto max-w-6xl px-4 py-16 text-center">
             <h2 className="mb-4 font-mono text-2xl font-bold text-foreground">
-              Ready to calculate your price?
+              {t("ctaHeading")}
             </h2>
             <p className="mb-8 font-mono text-sm text-muted-foreground">
-              Upload your DXF files and get an instant quote
+              {t("ctaSubtitle")}
             </p>
             <Link
               href="/signup"
               className="group inline-flex items-center gap-2 bg-primary px-8 py-4 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Get Started
+              {t("ctaButton")}
               <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -213,14 +215,14 @@ export default function PricingPage() {
           <div className="mx-auto max-w-6xl px-4">
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
               <div className="font-mono text-xs text-muted-foreground">
-                © 2026 SheetMates. Belgian-incorporated. All data hosted in EU (europe-west1).
+                {tLanding("footer.copyright")}
               </div>
               <div className="flex gap-6">
                 <Link href="/" className="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground">
-                  Home
+                  {tNav("home")}
                 </Link>
                 <Link href="/login" className="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground">
-                  Login
+                  {tNav("login")}
                 </Link>
               </div>
             </div>

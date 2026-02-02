@@ -35,15 +35,15 @@ export default function QueuePage() {
   const statusColor = (status: string) => {
     switch (status) {
       case "pending":
-        return "text-amber-400 border-amber-500/30 bg-amber-500/10";
+        return "text-amber-600 dark:text-amber-400 border-amber-500/30 bg-amber-500/10";
       case "nested":
-        return "text-cyan-400 border-cyan-500/30 bg-cyan-500/10";
+        return "text-cyan-600 dark:text-cyan-400 border-cyan-500/30 bg-cyan-500/10";
       case "cut":
-        return "text-emerald-400 border-emerald-500/30 bg-emerald-500/10";
+        return "text-emerald-600 dark:text-emerald-400 border-emerald-500/30 bg-emerald-500/10";
       case "shipped":
-        return "text-violet-400 border-violet-500/30 bg-violet-500/10";
+        return "text-violet-600 dark:text-violet-400 border-violet-500/30 bg-violet-500/10";
       default:
-        return "text-zinc-400 border-zinc-700 bg-zinc-800/50";
+        return "text-muted-foreground border-border bg-muted/50";
     }
   };
 
@@ -88,8 +88,8 @@ export default function QueuePage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20">
-        <SpinnerIcon className="h-8 w-8 animate-spin text-emerald-400" />
-        <p className="font-mono text-sm text-zinc-500">Loading queue...</p>
+        <SpinnerIcon className="h-8 w-8 animate-spin text-primary" />
+        <p className="font-mono text-sm text-muted-foreground">Loading queue...</p>
       </div>
     );
   }
@@ -99,50 +99,50 @@ export default function QueuePage() {
       {/* Header */}
       <div>
         <div className="mb-4 flex items-center gap-2">
-          <div className="h-px w-8 bg-emerald-500" />
-          <span className="font-mono text-xs uppercase tracking-widest text-emerald-400">
+          <div className="h-px w-8 bg-primary" />
+          <span className="font-mono text-xs uppercase tracking-widest text-primary">
             PRODUCTION
           </span>
         </div>
         <div className="flex items-center justify-between">
-          <h1 className="font-mono text-3xl font-bold text-white">{t("title")}</h1>
-          <div className="font-mono text-xs text-zinc-500">
+          <h1 className="font-mono text-3xl font-bold text-foreground">{t("title")}</h1>
+          <div className="font-mono text-xs text-muted-foreground">
             {parts.length} {parts.length === 1 ? "part" : "parts"} in queue
           </div>
         </div>
       </div>
 
       {parts.length === 0 ? (
-        <div className="flex flex-col items-center justify-center gap-4 border border-zinc-800 bg-zinc-900/50 py-20">
-          <div className="flex h-16 w-16 items-center justify-center border border-zinc-700 bg-zinc-800/50">
-            <ListIcon className="h-8 w-8 text-zinc-600" weight="light" />
+        <div className="flex flex-col items-center justify-center gap-4 border border-border bg-muted/50 py-20">
+          <div className="flex h-16 w-16 items-center justify-center border border-border bg-card/50">
+            <ListIcon className="h-8 w-8 text-muted-foreground" weight="light" />
           </div>
-          <p className="font-mono text-sm text-zinc-500">No parts in queue.</p>
+          <p className="font-mono text-sm text-foreground">No parts in queue.</p>
           <Link
             href="/upload"
-            className="font-mono text-xs text-emerald-400 transition-colors hover:text-emerald-300"
+            className="font-mono text-xs text-primary transition-colors hover:text-primary/80"
           >
             Upload your first DXF file
           </Link>
         </div>
       ) : (
-        <div className="overflow-hidden border border-zinc-800">
+        <div className="overflow-hidden border border-border">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-zinc-800 bg-zinc-900/50">
-                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+              <tr className="border-b border-border bg-muted/50">
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-muted-foreground">
                   {t("partName")}
                 </th>
-                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-muted-foreground">
                   Dimensions
                 </th>
-                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-muted-foreground">
                   Qty
                 </th>
-                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-muted-foreground">
                   {t("status")}
                 </th>
-                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-muted-foreground">
                   {t("actions")}
                 </th>
               </tr>
@@ -151,16 +151,16 @@ export default function QueuePage() {
               {parts.map((part) => (
                 <tr
                   key={part.id}
-                  className="border-b border-zinc-800/50 transition-colors hover:bg-zinc-900/30"
+                  className="border-b border-border/50 transition-colors hover:bg-muted/30"
                 >
-                  <td className="px-4 py-4 font-mono text-sm font-medium text-white">
+                  <td className="px-4 py-4 font-mono text-sm font-medium text-foreground">
                     {part.fileName}
                   </td>
-                  <td className="px-4 py-4 font-mono text-sm text-zinc-400">
+                  <td className="px-4 py-4 font-mono text-sm text-muted-foreground">
                     {part.boundingBox.width.toFixed(1)} x{" "}
                     {part.boundingBox.height.toFixed(1)} mm
                   </td>
-                  <td className="px-4 py-4 font-mono text-sm text-zinc-300">
+                  <td className="px-4 py-4 font-mono text-sm text-muted-foreground">
                     {part.quantity}
                   </td>
                   <td className="px-4 py-4">
@@ -175,7 +175,7 @@ export default function QueuePage() {
                     {part.status === "pending" && (
                       <button
                         onClick={() => handleReset(part.id)}
-                        className="inline-flex items-center gap-1 font-mono text-xs text-zinc-500 transition-colors hover:text-white"
+                        className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
                       >
                         <ArrowCounterClockwiseIcon className="h-3 w-3" />
                         Reset
@@ -194,7 +194,7 @@ export default function QueuePage() {
         <div className="flex justify-end">
           <Link
             href="/checkout"
-            className="group inline-flex items-center gap-2 bg-emerald-500 px-6 py-3 font-mono text-sm font-semibold text-black transition-colors hover:bg-emerald-400"
+            className="group inline-flex items-center gap-2 bg-primary px-6 py-3 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Proceed to Checkout
           </Link>

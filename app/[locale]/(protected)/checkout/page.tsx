@@ -21,6 +21,7 @@ import {
 
 export default function CheckoutPage() {
   const t = useTranslations("checkout");
+  const tPricing = useTranslations("pricing");
   const { user } = useAuth();
   const [parts, setParts] = useState<PartDoc[]>([]);
   const [loading, setLoading] = useState(false);
@@ -100,34 +101,34 @@ export default function CheckoutPage() {
       <div>
         <Link
           href="/queue"
-          className="mb-2 inline-flex items-center gap-1 font-mono text-xs text-zinc-500 transition-colors hover:text-white"
+          className="mb-2 inline-flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeftIcon className="h-3 w-3" />
-          Back to Queue
+          {t("backToQueue")}
         </Link>
         <div className="mb-4 flex items-center gap-2">
-          <div className="h-px w-8 bg-emerald-500" />
-          <span className="font-mono text-xs uppercase tracking-widest text-emerald-400">
-            CHECKOUT
+          <div className="h-px w-8 bg-primary" />
+          <span className="font-mono text-xs uppercase tracking-widest text-primary">
+            {t("badge")}
           </span>
         </div>
-        <h1 className="font-mono text-3xl font-bold text-white">{t("title")}</h1>
-        <p className="mt-2 font-mono text-sm text-zinc-400">
-          Review your order and proceed to secure payment
+        <h1 className="font-mono text-3xl font-bold text-foreground">{t("title")}</h1>
+        <p className="mt-2 font-mono text-sm text-muted-foreground">
+          {t("description")}
         </p>
       </div>
 
       {parts.length === 0 ? (
-        <div className="flex flex-col items-center justify-center gap-4 border border-zinc-800 bg-zinc-900/50 py-20">
-          <div className="flex h-16 w-16 items-center justify-center border border-zinc-700 bg-zinc-800/50">
-            <ShoppingCartIcon className="h-8 w-8 text-zinc-600" weight="light" />
+        <div className="flex flex-col items-center justify-center gap-4 border border-border bg-muted/50 py-20">
+          <div className="flex h-16 w-16 items-center justify-center border border-border bg-card/50">
+            <ShoppingCartIcon className="h-8 w-8 text-muted-foreground" weight="light" />
           </div>
-          <p className="font-mono text-sm text-zinc-500">No parts to checkout.</p>
+          <p className="font-mono text-sm text-foreground">{t("emptyState")}</p>
           <Link
             href="/upload"
-            className="font-mono text-xs text-emerald-400 transition-colors hover:text-emerald-300"
+            className="font-mono text-xs text-primary transition-colors hover:text-primary/80"
           >
-            Upload some parts to get started
+            {t("emptyStateCta")}
           </Link>
         </div>
       ) : (
@@ -135,20 +136,23 @@ export default function CheckoutPage() {
           {/* Parts list */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="h-px w-4 bg-zinc-700" />
-              <span className="font-mono text-xs uppercase tracking-wider text-zinc-500">
-                {parts.length} {parts.length === 1 ? "ITEM" : "ITEMS"}
+              <div className="h-px w-4 bg-border" />
+              <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                {t("itemCount", {
+                  count: parts.length,
+                  type: parts.length === 1 ? t("itemSingular") : t("itemPlural")
+                })}
               </span>
-              <div className="h-px flex-1 bg-zinc-700" />
+              <div className="h-px flex-1 bg-border" />
             </div>
 
             {parts.map((part, i) => (
-              <div key={part.id} className="border border-zinc-800 bg-zinc-900/50 p-6">
+              <div key={part.id} className="border border-border bg-muted/50 p-6">
                 <div className="mb-4 flex items-center justify-between">
-                  <h3 className="font-mono text-sm font-medium text-white">
+                  <h3 className="font-mono text-sm font-medium text-foreground">
                     {part.fileName}
                   </h3>
-                  <span className="font-mono text-xs text-zinc-500">
+                  <span className="font-mono text-xs text-muted-foreground">
                     x{part.quantity}
                   </span>
                 </div>
@@ -161,27 +165,27 @@ export default function CheckoutPage() {
           </div>
 
           {/* Order summary */}
-          <div className="border border-zinc-800 bg-zinc-900/50 p-6">
-            <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-zinc-500">
+          <div className="border border-border bg-muted/50 p-6">
+            <h3 className="mb-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
               {t("orderSummary")}
             </h3>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-sm text-zinc-400">Subtotal</span>
-                <span className="font-mono text-sm text-white">
+                <span className="font-mono text-sm text-muted-foreground">{tPricing("subtotal")}</span>
+                <span className="font-mono text-sm text-foreground">
                   €{totalBeforeVat.toFixed(2)}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-mono text-sm text-zinc-400">VAT (21%)</span>
-                <span className="font-mono text-sm text-white">
+                <span className="font-mono text-sm text-muted-foreground">{tPricing("vat")}</span>
+                <span className="font-mono text-sm text-foreground">
                   €{totalVat.toFixed(2)}
                 </span>
               </div>
-              <div className="my-3 h-px bg-zinc-800" />
+              <div className="my-3 h-px bg-border" />
               <div className="flex items-center justify-between">
-                <span className="font-mono text-lg font-bold text-white">Total</span>
-                <span className="font-mono text-2xl font-bold text-emerald-400">
+                <span className="font-mono text-lg font-bold text-foreground">{tPricing("total")}</span>
+                <span className="font-mono text-2xl font-bold text-primary">
                   €{grandTotal.toFixed(2)}
                 </span>
               </div>
@@ -192,7 +196,7 @@ export default function CheckoutPage() {
           <button
             onClick={handlePay}
             disabled={loading}
-            className="group flex w-full items-center justify-center gap-2 bg-emerald-500 px-6 py-4 font-mono text-sm font-semibold text-black transition-colors hover:bg-emerald-400 disabled:opacity-50"
+            className="group flex w-full items-center justify-center gap-2 bg-primary px-6 py-4 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
           >
             {loading ? (
               <>
@@ -209,9 +213,9 @@ export default function CheckoutPage() {
           </button>
 
           {/* Security note */}
-          <div className="flex items-center justify-center gap-2 font-mono text-xs text-zinc-600">
+          <div className="flex items-center justify-center gap-2 font-mono text-xs text-muted-foreground/70">
             <LockIcon className="h-3 w-3" />
-            <span>Secure payment via Stripe. Your data is encrypted.</span>
+            <span>{t("securityNote")}</span>
           </div>
         </>
       )}

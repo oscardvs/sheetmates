@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { Navbar } from "@/components/navbar";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { LandingCanvas } from "@/components/landing-canvas";
+import { LandingFooterLinks } from "@/components/landing-footer-links";
 import {
   UploadIcon,
   GridFourIcon,
@@ -45,7 +46,7 @@ export default function LandingPage() {
             <div className="mb-4 flex items-center justify-center gap-2">
               <div className="h-px w-12 bg-primary" />
               <span className="font-mono text-xs uppercase tracking-widest text-primary">
-                PROCESS
+                {t("badges.process")}
               </span>
               <div className="h-px w-12 bg-primary" />
             </div>
@@ -111,7 +112,7 @@ export default function LandingPage() {
             <div className="mb-4 flex items-center justify-center gap-2">
               <div className="h-px w-12 bg-border" />
               <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-                ADVANTAGES
+                {t("badges.advantages")}
               </span>
               <div className="h-px w-12 bg-border" />
             </div>
@@ -165,19 +166,19 @@ export default function LandingPage() {
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
               <div className="text-center">
                 <div className="font-mono text-4xl font-bold text-primary">3000</div>
-                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">mm sheet width</div>
+                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.sheetWidth")}</div>
               </div>
               <div className="text-center">
                 <div className="font-mono text-4xl font-bold text-primary">0.1</div>
-                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">mm precision</div>
+                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.precision")}</div>
               </div>
               <div className="text-center">
                 <div className="font-mono text-4xl font-bold text-primary">85%</div>
-                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">target utilization</div>
+                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.utilization")}</div>
               </div>
               <div className="text-center">
                 <div className="font-mono text-4xl font-bold text-primary">EU</div>
-                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">manufactured</div>
+                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.manufactured")}</div>
               </div>
             </div>
           </div>
@@ -199,7 +200,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-8 inline-block border border-border bg-card/30 px-4 py-2">
               <span className="font-mono text-xs text-muted-foreground">
-                POWERED BY TRUMPF TRULASER 3030 FIBER
+                {t("equipment")}
               </span>
             </div>
           </div>
@@ -222,7 +223,7 @@ export default function LandingPage() {
               {t("footerCta.title")}
             </h2>
             <p className="mb-8 font-mono text-sm text-muted-foreground">
-              Join the community. Share the sheet. Save on every cut.
+              {t("footerCta.tagline")}
             </p>
             <Link
               href="/signup"
@@ -239,16 +240,9 @@ export default function LandingPage() {
           <div className="mx-auto max-w-6xl px-4">
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
               <div className="font-mono text-xs text-muted-foreground">
-                © 2026 SheetMates. Belgian-incorporated. All data hosted in EU (europe-west1).
+                {t("footer.copyright")}
               </div>
-              <div className="flex gap-6">
-                <Link href="/pricing" className="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground">
-                  Pricing
-                </Link>
-                <Link href="/login" className="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground">
-                  Login
-                </Link>
-              </div>
+              <LandingFooterLinks />
             </div>
           </div>
         </footer>

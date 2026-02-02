@@ -21,7 +21,7 @@ export default function SignupPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error(t("passwordMismatch"));
       return;
     }
     setLoading(true);
@@ -33,7 +33,7 @@ export default function SignupPage() {
       });
       router.push("/upload");
     } catch {
-      toast.error(t("signupButton") + " failed");
+      toast.error(t("signupFailed"));
     } finally {
       setLoading(false);
     }
@@ -48,7 +48,7 @@ export default function SignupPage() {
       });
       router.push("/upload");
     } catch {
-      toast.error(t("googleLogin") + " failed");
+      toast.error(t("googleLoginFailed"));
     }
   }
 
@@ -73,33 +73,33 @@ export default function SignupPage() {
           </Link>
           <div>
             <div className="mb-4 inline-block border border-primary/30 bg-primary/10 px-3 py-1">
-              <span className="font-mono text-xs text-primary">NEW ACCOUNT</span>
+              <span className="font-mono text-xs text-primary">{t("signupBadge")}</span>
             </div>
             <h1 className="mb-4 font-mono text-4xl font-bold text-foreground">
-              JOIN THE<br />
-              <span className="text-primary">COMMUNITY</span>
+              {t("signupHeading")}<br />
+              <span className="text-primary">{t("signupHeadingHighlight")}</span>
             </h1>
             <p className="max-w-md font-mono text-sm text-muted-foreground">
-              Create your account to start uploading parts and sharing sheets with makers across Europe.
+              {t("signupSubtitle")}
             </p>
             <div className="mt-8 space-y-3">
               <div className="flex items-center gap-3 font-mono text-sm text-muted-foreground">
                 <div className="flex h-6 w-6 items-center justify-center border border-border text-primary">✓</div>
-                <span>Upload unlimited DXF files</span>
+                <span>{t("feature1")}</span>
               </div>
               <div className="flex items-center gap-3 font-mono text-sm text-muted-foreground">
                 <div className="flex h-6 w-6 items-center justify-center border border-border text-primary">✓</div>
-                <span>Share sheet space & save costs</span>
+                <span>{t("feature2")}</span>
               </div>
               <div className="flex items-center gap-3 font-mono text-sm text-muted-foreground">
                 <div className="flex h-6 w-6 items-center justify-center border border-border text-primary">✓</div>
-                <span>Track orders in real-time</span>
+                <span>{t("feature3")}</span>
               </div>
             </div>
           </div>
           <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
             <ShieldCheckIcon className="h-4 w-4" />
-            <span>GDPR COMPLIANT • DATA HOSTED IN EU</span>
+            <span>{t("gdprBadge")}</span>
           </div>
         </div>
       </div>
@@ -117,14 +117,14 @@ export default function SignupPage() {
           <div className="mb-8">
             <h2 className="font-mono text-2xl font-bold text-foreground">{t("signupTitle")}</h2>
             <p className="mt-2 font-mono text-sm text-muted-foreground">
-              Fill in your details to get started
+              {t("fillDetails")}
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="displayName" className="mb-2 block font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                Name
+                {t("name")}
               </label>
               <input
                 id="displayName"
@@ -134,7 +134,7 @@ export default function SignupPage() {
                 required
                 autoComplete="name"
                 className="w-full border border-border bg-card/50 px-4 py-3 font-mono text-sm text-foreground placeholder-muted-foreground transition-colors focus:border-primary focus:outline-none"
-                placeholder="Your name"
+                placeholder={t("namePlaceholder")}
               />
             </div>
 
@@ -150,7 +150,7 @@ export default function SignupPage() {
                 required
                 autoComplete="email"
                 className="w-full border border-border bg-card/50 px-4 py-3 font-mono text-sm text-foreground placeholder-muted-foreground transition-colors focus:border-primary focus:outline-none"
-                placeholder="you@example.com"
+                placeholder={t("emailPlaceholder")}
               />
             </div>
 
@@ -167,7 +167,7 @@ export default function SignupPage() {
                 autoComplete="new-password"
                 minLength={6}
                 className="w-full border border-border bg-card/50 px-4 py-3 font-mono text-sm text-foreground placeholder-muted-foreground transition-colors focus:border-primary focus:outline-none"
-                placeholder="Min. 6 characters"
+                placeholder={t("passwordMinPlaceholder")}
               />
             </div>
 
@@ -184,7 +184,7 @@ export default function SignupPage() {
                 autoComplete="new-password"
                 minLength={6}
                 className="w-full border border-border bg-card/50 px-4 py-3 font-mono text-sm text-foreground placeholder-muted-foreground transition-colors focus:border-primary focus:outline-none"
-                placeholder="Confirm password"
+                placeholder={t("confirmPasswordPlaceholder")}
               />
             </div>
 
@@ -194,7 +194,7 @@ export default function SignupPage() {
               className="group flex w-full items-center justify-center gap-2 bg-primary px-4 py-3 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
             >
               {loading ? (
-                <span className="animate-pulse">CREATING ACCOUNT...</span>
+                <span className="animate-pulse">{t("creatingAccount")}</span>
               ) : (
                 <>
                   {t("signupButton")}
@@ -206,7 +206,7 @@ export default function SignupPage() {
 
           <div className="my-6 flex items-center gap-4">
             <div className="h-px flex-1 bg-border" />
-            <span className="font-mono text-xs uppercase text-muted-foreground">or</span>
+            <span className="font-mono text-xs uppercase text-muted-foreground">{t("divider")}</span>
             <div className="h-px flex-1 bg-border" />
           </div>
 

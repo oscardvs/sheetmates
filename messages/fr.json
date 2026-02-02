@@ -47,7 +47,22 @@
     },
     "footerCta": {
       "title": "Prêt à partager des tôles ?",
-      "cta": "Créez votre compte"
+      "cta": "Créez votre compte",
+      "tagline": "Rejoignez la communauté. Partagez la tôle. Économisez à chaque découpe."
+    },
+    "badges": {
+      "process": "PROCESSUS",
+      "advantages": "AVANTAGES"
+    },
+    "stats": {
+      "sheetWidth": "mm largeur de tôle",
+      "precision": "mm précision",
+      "utilization": "utilisation cible",
+      "manufactured": "fabriqué"
+    },
+    "equipment": "PROPULSÉ PAR TRUMPF TRULASER 3030 FIBER",
+    "footer": {
+      "copyright": "© 2026 SheetMates. Société belge. Toutes les données hébergées dans l'UE (europe-west1)."
     }
   },
   "auth": {
@@ -61,7 +76,34 @@
     "googleLogin": "Continuer avec Google",
     "noAccount": "Pas encore de compte ?",
     "hasAccount": "Déjà un compte ?",
-    "forgotPassword": "Mot de passe oublié ?"
+    "forgotPassword": "Mot de passe oublié ?",
+    "badge": "AUTHENTIFICATION",
+    "loginHeading": "ACCÉDEZ À VOTRE",
+    "loginHeadingHighlight": "ATELIER",
+    "loginSubtitle": "Connectez-vous pour gérer vos pièces, suivre vos commandes et accéder aux tôles partagées.",
+    "securityBadge": "SÉCURISÉ • CHIFFRÉ • HÉBERGÉ EN UE",
+    "enterCredentials": "Entrez vos identifiants pour continuer",
+    "emailPlaceholder": "vous@exemple.com",
+    "authenticating": "AUTHENTIFICATION...",
+    "divider": "ou",
+    "loginFailed": "Échec de la connexion",
+    "googleLoginFailed": "Échec de la connexion Google",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "signupFailed": "Échec de l'inscription",
+    "signupBadge": "NOUVEAU COMPTE",
+    "signupHeading": "REJOIGNEZ LA",
+    "signupHeadingHighlight": "COMMUNAUTÉ",
+    "signupSubtitle": "Créez votre compte pour commencer à télécharger des pièces et partager des tôles avec des makers à travers l'Europe.",
+    "feature1": "Téléchargez des fichiers DXF illimités",
+    "feature2": "Partagez l'espace de tôle et économisez",
+    "feature3": "Suivez vos commandes en temps réel",
+    "gdprBadge": "CONFORME RGPD • DONNÉES HÉBERGÉES EN UE",
+    "fillDetails": "Remplissez vos informations pour commencer",
+    "name": "Nom",
+    "namePlaceholder": "Votre nom",
+    "passwordMinPlaceholder": "Min. 6 caractères",
+    "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+    "creatingAccount": "CRÉATION DU COMPTE..."
   },
   "upload": {
     "title": "Télécharger des pièces",
@@ -73,7 +115,14 @@
     "confirm": "Confirmer & Enregistrer",
     "uploading": "Téléchargement…",
     "success": "Pièces téléchargées avec succès !",
-    "error": "Échec du téléchargement."
+    "error": "Échec du téléchargement.",
+    "badge": "ÉTAPE 1",
+    "description": "Téléchargez vos fichiers DXF et nous calculerons automatiquement la surface et la longueur de coupe",
+    "restoredTitle": "Pièces de la page d'accueil détectées",
+    "restoredMessage": "Vous avez téléchargé {count} pièce{plural} sur la page d'accueil. Téléchargez à nouveau les fichiers DXF originaux ci-dessous pour les sauvegarder sur votre compte.",
+    "dismiss": "Ignorer",
+    "helpTitle": "Formats supportés",
+    "helpDescription": "Nous acceptons les fichiers DXF (R12-R2018). Pour de meilleurs résultats, exportez avec des polylignes et assurez-vous que toutes les entités sont sur le calque 0."
   },
   "sheets": {
     "title": "Tôles",
@@ -84,7 +133,14 @@
     "utilization": "Utilisation",
     "status": "Statut",
     "placements": "Placements",
-    "noSheets": "Aucune tôle pour le moment."
+    "noSheets": "Aucune tôle pour le moment.",
+    "loading": "Chargement des tôles...",
+    "badge": "TÔLES EN DIRECT",
+    "sheetCount": "{count} {type} disponibles",
+    "sheetSingular": "tôle",
+    "sheetPlural": "tôles",
+    "emptyStateMessage": "Téléchargez des pièces pour les voir imbriquées dans des tôles",
+    "view": "Voir"
   },
   "nesting": {
     "title": "Imbrication",
@@ -112,7 +168,17 @@
     "subtotal": "Sous-total",
     "vat": "TVA (21%)",
     "total": "Total",
-    "minimum": "Commande minimum"
+    "minimum": "Commande minimum",
+    "badge": "TARIFICATION TRANSPARENTE",
+    "subtitle": "Payez uniquement ce que vous utilisez. Aucun frais caché. Tous les prix sont hors TVA.",
+    "baseRates": "TARIFS DE BASE",
+    "materialMultipliers": "MULTIPLICATEURS DE MATÉRIAU",
+    "thicknessMultipliers": "MULTIPLICATEURS D'ÉPAISSEUR",
+    "multiplier": "Multiplicateur",
+    "formulaBadge": "FORMULE DE TARIFICATION",
+    "ctaHeading": "Prêt à calculer votre prix ?",
+    "ctaSubtitle": "Téléchargez vos fichiers DXF et obtenez un devis instantané",
+    "ctaButton": "Commencer"
   },
   "queue": {
     "title": "File d'attente",
@@ -139,7 +205,16 @@
     "processing": "Traitement du paiement…",
     "success": "Paiement réussi !",
     "successMessage": "Votre commande a été passée. Vous recevrez un e-mail de confirmation sous peu.",
-    "backToHome": "Retour à l'accueil"
+    "backToHome": "Retour à l'accueil",
+    "backToQueue": "Retour à la file d'attente",
+    "badge": "PAIEMENT",
+    "description": "Vérifiez votre commande et procédez au paiement sécurisé",
+    "emptyState": "Aucune pièce à payer.",
+    "emptyStateCta": "Téléchargez des pièces pour commencer",
+    "itemCount": "{count} {type}",
+    "itemSingular": "ARTICLE",
+    "itemPlural": "ARTICLES",
+    "securityNote": "Paiement sécurisé via Stripe. Vos données sont cryptées."
   },
   "account": {
     "title": "Compte",

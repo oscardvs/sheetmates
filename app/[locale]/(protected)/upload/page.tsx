@@ -101,12 +101,12 @@ export default function UploadPage() {
         <div className="mb-4 flex items-center gap-2">
           <div className="h-px w-8 bg-primary" />
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
-            STEP 1
+            {t("badge")}
           </span>
         </div>
         <h1 className="font-mono text-3xl font-bold text-foreground">{t("title")}</h1>
         <p className="mt-2 font-mono text-sm text-muted-foreground">
-          Upload your DXF files and we&apos;ll calculate the area and cut length automatically
+          {t("description")}
         </p>
       </div>
 
@@ -117,11 +117,13 @@ export default function UploadPage() {
             <CheckCircleIcon className="h-5 w-5 shrink-0 text-primary" weight="fill" />
             <div className="flex-1">
               <p className="font-mono text-sm font-medium text-foreground">
-                Parts from landing page detected
+                {t("restoredTitle")}
               </p>
               <p className="mt-1 font-mono text-xs text-muted-foreground">
-                You uploaded {restoredParts.length} part{restoredParts.length > 1 ? "s" : ""} on the landing page.
-                Re-upload the original DXF files below to save them to your account.
+                {t("restoredMessage", {
+                  count: restoredParts.length,
+                  plural: restoredParts.length > 1 ? "s" : ""
+                })}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {restoredParts.map((part) => (
@@ -144,7 +146,7 @@ export default function UploadPage() {
                 onClick={dismissRestored}
                 className="mt-3 font-mono text-xs text-muted-foreground underline hover:text-foreground"
               >
-                Dismiss
+                {t("dismiss")}
               </button>
             </div>
           </div>
@@ -167,9 +169,9 @@ export default function UploadPage() {
             <UploadIcon className="h-5 w-5 text-muted-foreground" weight="light" />
           </div>
           <div>
-            <h3 className="font-mono text-sm font-semibold text-foreground">Supported Formats</h3>
+            <h3 className="font-mono text-sm font-semibold text-foreground">{t("helpTitle")}</h3>
             <p className="mt-1 font-mono text-xs text-muted-foreground">
-              We accept DXF files (R12-R2018). For best results, export with polylines and ensure all entities are on layer 0.
+              {t("helpDescription")}
             </p>
           </div>
         </div>

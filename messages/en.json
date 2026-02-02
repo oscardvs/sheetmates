@@ -47,7 +47,22 @@
     },
     "footerCta": {
       "title": "Ready to start sharing sheets?",
-      "cta": "Create Your Account"
+      "cta": "Create Your Account",
+      "tagline": "Join the community. Share the sheet. Save on every cut."
+    },
+    "badges": {
+      "process": "PROCESS",
+      "advantages": "ADVANTAGES"
+    },
+    "stats": {
+      "sheetWidth": "mm sheet width",
+      "precision": "mm precision",
+      "utilization": "target utilization",
+      "manufactured": "manufactured"
+    },
+    "equipment": "POWERED BY TRUMPF TRULASER 3030 FIBER",
+    "footer": {
+      "copyright": "© 2026 SheetMates. Belgian-incorporated. All data hosted in EU (europe-west1)."
     }
   },
   "auth": {
@@ -61,7 +76,34 @@
     "googleLogin": "Continue with Google",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
-    "forgotPassword": "Forgot password?"
+    "forgotPassword": "Forgot password?",
+    "badge": "AUTHENTICATION",
+    "loginHeading": "ACCESS YOUR",
+    "loginHeadingHighlight": "WORKSHOP",
+    "loginSubtitle": "Sign in to manage your parts, track orders, and access community sheets.",
+    "securityBadge": "SECURE • ENCRYPTED • EU-HOSTED",
+    "enterCredentials": "Enter your credentials to continue",
+    "emailPlaceholder": "you@example.com",
+    "authenticating": "AUTHENTICATING...",
+    "divider": "or",
+    "loginFailed": "Login failed",
+    "googleLoginFailed": "Google login failed",
+    "passwordMismatch": "Passwords do not match",
+    "signupFailed": "Sign up failed",
+    "signupBadge": "NEW ACCOUNT",
+    "signupHeading": "JOIN THE",
+    "signupHeadingHighlight": "COMMUNITY",
+    "signupSubtitle": "Create your account to start uploading parts and sharing sheets with makers across Europe.",
+    "feature1": "Upload unlimited DXF files",
+    "feature2": "Share sheet space & save costs",
+    "feature3": "Track orders in real-time",
+    "gdprBadge": "GDPR COMPLIANT • DATA HOSTED IN EU",
+    "fillDetails": "Fill in your details to get started",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "passwordMinPlaceholder": "Min. 6 characters",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "creatingAccount": "CREATING ACCOUNT..."
   },
   "upload": {
     "title": "Upload Parts",
@@ -73,7 +115,14 @@
     "confirm": "Confirm & Save",
     "uploading": "Uploading…",
     "success": "Parts uploaded successfully!",
-    "error": "Failed to upload parts."
+    "error": "Failed to upload parts.",
+    "badge": "STEP 1",
+    "description": "Upload your DXF files and we'll calculate the area and cut length automatically",
+    "restoredTitle": "Parts from landing page detected",
+    "restoredMessage": "You uploaded {count} part{plural} on the landing page. Re-upload the original DXF files below to save them to your account.",
+    "dismiss": "Dismiss",
+    "helpTitle": "Supported Formats",
+    "helpDescription": "We accept DXF files (R12-R2018). For best results, export with polylines and ensure all entities are on layer 0."
   },
   "sheets": {
     "title": "Sheets",
@@ -84,7 +133,14 @@
     "utilization": "Utilization",
     "status": "Status",
     "placements": "Placements",
-    "noSheets": "No sheets yet."
+    "noSheets": "No sheets yet.",
+    "loading": "Loading sheets...",
+    "badge": "LIVE SHEETS",
+    "sheetCount": "{count} {type} available",
+    "sheetSingular": "sheet",
+    "sheetPlural": "sheets",
+    "emptyStateMessage": "Upload parts to see them nested into sheets",
+    "view": "View"
   },
   "nesting": {
     "title": "Nesting",
@@ -112,7 +168,17 @@
     "subtotal": "Subtotal",
     "vat": "VAT (21%)",
     "total": "Total",
-    "minimum": "Minimum order"
+    "minimum": "Minimum order",
+    "badge": "TRANSPARENT PRICING",
+    "subtitle": "Pay only for what you use. No hidden fees. All prices shown exclude VAT.",
+    "baseRates": "BASE RATES",
+    "materialMultipliers": "MATERIAL MULTIPLIERS",
+    "thicknessMultipliers": "THICKNESS MULTIPLIERS",
+    "multiplier": "Multiplier",
+    "formulaBadge": "PRICING FORMULA",
+    "ctaHeading": "Ready to calculate your price?",
+    "ctaSubtitle": "Upload your DXF files and get an instant quote",
+    "ctaButton": "Get Started"
   },
   "queue": {
     "title": "Parts Queue",
@@ -139,7 +205,16 @@
     "processing": "Processing payment…",
     "success": "Payment Successful!",
     "successMessage": "Your order has been placed. You will receive a confirmation email shortly.",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "backToQueue": "Back to Queue",
+    "badge": "CHECKOUT",
+    "description": "Review your order and proceed to secure payment",
+    "emptyState": "No parts to checkout.",
+    "emptyStateCta": "Upload some parts to get started",
+    "itemCount": "{count} {type}",
+    "itemSingular": "ITEM",
+    "itemPlural": "ITEMS",
+    "securityNote": "Secure payment via Stripe. Your data is encrypted."
   },
   "account": {
     "title": "Account",

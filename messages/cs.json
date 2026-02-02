@@ -47,7 +47,22 @@
     },
     "footerCta": {
       "title": "Připraveni sdílet plechy?",
-      "cta": "Vytvořte si účet"
+      "cta": "Vytvořte si účet",
+      "tagline": "Připojte se ke komunitě. Sdílejte plech. Šetřete na každém řezu."
+    },
+    "badges": {
+      "process": "PROCES",
+      "advantages": "VÝHODY"
+    },
+    "stats": {
+      "sheetWidth": "mm šířka plechu",
+      "precision": "mm přesnost",
+      "utilization": "cílové využití",
+      "manufactured": "vyrobeno"
+    },
+    "equipment": "POHÁNĚNO TRUMPF TRULASER 3030 FIBER",
+    "footer": {
+      "copyright": "© 2026 SheetMates. Belgická společnost. Všechna data hostována v EU (europe-west1)."
     }
   },
   "auth": {
@@ -61,7 +76,34 @@
     "googleLogin": "Pokračovat přes Google",
     "noAccount": "Nemáte účet?",
     "hasAccount": "Už máte účet?",
-    "forgotPassword": "Zapomenuté heslo?"
+    "forgotPassword": "Zapomenuté heslo?",
+    "badge": "AUTENTIZACE",
+    "loginHeading": "PŘÍSTUP DO VAŠÍ",
+    "loginHeadingHighlight": "DÍLNY",
+    "loginSubtitle": "Přihlaste se pro správu dílů, sledování objednávek a přístup ke sdíleným plechům.",
+    "securityBadge": "ZABEZPEČENO • ŠIFROVÁNO • HOSTOVÁNO V EU",
+    "enterCredentials": "Zadejte přihlašovací údaje",
+    "emailPlaceholder": "vas@priklad.cz",
+    "authenticating": "AUTENTIZACE...",
+    "divider": "nebo",
+    "loginFailed": "Přihlášení selhalo",
+    "googleLoginFailed": "Přihlášení přes Google selhalo",
+    "passwordMismatch": "Hesla se neshodují",
+    "signupFailed": "Registrace selhala",
+    "signupBadge": "NOVÝ ÚČET",
+    "signupHeading": "PŘIPOJTE SE KE",
+    "signupHeadingHighlight": "KOMUNITĚ",
+    "signupSubtitle": "Vytvořte si účet a začněte nahrávat díly a sdílet plechy s makery po celé Evropě.",
+    "feature1": "Nahrajte neomezené množství DXF souborů",
+    "feature2": "Sdílejte prostor na plechu a šetřete",
+    "feature3": "Sledujte objednávky v reálném čase",
+    "gdprBadge": "VYHOVUJE GDPR • DATA HOSTOVÁNA V EU",
+    "fillDetails": "Vyplňte své údaje a začněte",
+    "name": "Jméno",
+    "namePlaceholder": "Vaše jméno",
+    "passwordMinPlaceholder": "Min. 6 znaků",
+    "confirmPasswordPlaceholder": "Potvrďte heslo",
+    "creatingAccount": "VYTVÁŘENÍ ÚČTU..."
   },
   "upload": {
     "title": "Nahrát díly",
@@ -73,7 +115,14 @@
     "confirm": "Potvrdit & Uložit",
     "uploading": "Nahrávání…",
     "success": "Díly úspěšně nahrány!",
-    "error": "Nahrávání se nezdařilo."
+    "error": "Nahrávání se nezdařilo.",
+    "badge": "KROK 1",
+    "description": "Nahrajte své DXF soubory a automaticky vypočítáme plochu a délku řezu",
+    "restoredTitle": "Zjištěny díly z úvodní stránky",
+    "restoredMessage": "Nahráli jste {count} díl{plural} na úvodní stránce. Znovu nahrajte původní DXF soubory níže, abyste je uložili do svého účtu.",
+    "dismiss": "Zavřít",
+    "helpTitle": "Podporované formáty",
+    "helpDescription": "Přijímáme DXF soubory (R12-R2018). Pro nejlepší výsledky exportujte s polyčarami a ujistěte se, že všechny entity jsou na vrstvě 0."
   },
   "sheets": {
     "title": "Plechy",
@@ -84,7 +133,14 @@
     "utilization": "Využití",
     "status": "Stav",
     "placements": "Umístění",
-    "noSheets": "Zatím žádné plechy."
+    "noSheets": "Zatím žádné plechy.",
+    "loading": "Načítání plechů...",
+    "badge": "ŽIVÉ PLECHY",
+    "sheetCount": "{count} {type} k dispozici",
+    "sheetSingular": "plech",
+    "sheetPlural": "plechů",
+    "emptyStateMessage": "Nahrajte díly, abyste je viděli složené na plechech",
+    "view": "Zobrazit"
   },
   "nesting": {
     "title": "Skládání",
@@ -112,7 +168,17 @@
     "subtotal": "Mezisoučet",
     "vat": "DPH (21%)",
     "total": "Celkem",
-    "minimum": "Minimální objednávka"
+    "minimum": "Minimální objednávka",
+    "badge": "TRANSPARENTNÍ CENÍK",
+    "subtitle": "Plaťte pouze za to, co použijete. Žádné skryté poplatky. Všechny ceny jsou bez DPH.",
+    "baseRates": "ZÁKLADNÍ SAZBY",
+    "materialMultipliers": "NÁSOBKY MATERIÁLU",
+    "thicknessMultipliers": "NÁSOBKY TLOUŠŤKY",
+    "multiplier": "Násobek",
+    "formulaBadge": "VZOREC CENÍKU",
+    "ctaHeading": "Připraveni vypočítat vaši cenu?",
+    "ctaSubtitle": "Nahrajte své DXF soubory a získejte okamžitou nabídku",
+    "ctaButton": "Začít"
   },
   "queue": {
     "title": "Fronta dílů",
@@ -139,7 +205,16 @@
     "processing": "Zpracování platby…",
     "success": "Platba proběhla úspěšně!",
     "successMessage": "Vaše objednávka byla odeslána. Brzy obdržíte potvrzovací e-mail.",
-    "backToHome": "Zpět na úvodní stránku"
+    "backToHome": "Zpět na úvodní stránku",
+    "backToQueue": "Zpět do fronty",
+    "badge": "PLATBA",
+    "description": "Zkontrolujte objednávku a pokračujte k zabezpečené platbě",
+    "emptyState": "Žádné díly k zaplacení.",
+    "emptyStateCta": "Nahrajte díly, abyste mohli začít",
+    "itemCount": "{count} {type}",
+    "itemSingular": "POLOŽKA",
+    "itemPlural": "POLOŽEK",
+    "securityNote": "Zabezpečená platba přes Stripe. Vaše data jsou šifrována."
   },
   "account": {
     "title": "Účet",

@@ -51,19 +51,19 @@ export function NestingControls({
 
   return (
     <div className="space-y-6">
-      <h3 className="font-mono text-sm font-semibold uppercase tracking-wider text-white">
+      <h3 className="font-mono text-sm font-semibold uppercase tracking-wider text-foreground">
         {t("title")}
       </h3>
 
       {/* Material Select */}
       <div className="space-y-2">
-        <label className="font-mono text-xs uppercase tracking-wider text-zinc-400">
+        <label className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
           {t("selectMaterial")}
         </label>
         <select
           value={material}
           onChange={(e) => onMaterialChange(e.target.value)}
-          className="w-full border border-zinc-700 bg-zinc-800/50 px-3 py-2 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none"
+          className="w-full border border-border bg-card/50 px-3 py-2 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
         >
           <option value="steel">Steel</option>
           <option value="stainless">Stainless Steel</option>
@@ -75,7 +75,7 @@ export function NestingControls({
       {/* Sheet Dimensions */}
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-2">
-          <label className="font-mono text-xs uppercase tracking-wider text-zinc-400">
+          <label className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
             {t("sheetWidth")}
           </label>
           <input
@@ -83,11 +83,11 @@ export function NestingControls({
             value={sheetWidth}
             onChange={(e) => onSheetWidthChange(Number(e.target.value))}
             disabled={loading}
-            className="w-full border border-zinc-700 bg-zinc-800/50 px-3 py-2 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50"
+            className="w-full border border-border bg-card/50 px-3 py-2 font-mono text-sm text-foreground focus:border-primary focus:outline-none disabled:opacity-50"
           />
         </div>
         <div className="space-y-2">
-          <label className="font-mono text-xs uppercase tracking-wider text-zinc-400">
+          <label className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
             {t("sheetHeight")}
           </label>
           <input
@@ -95,14 +95,14 @@ export function NestingControls({
             value={sheetHeight}
             onChange={(e) => onSheetHeightChange(Number(e.target.value))}
             disabled={loading}
-            className="w-full border border-zinc-700 bg-zinc-800/50 px-3 py-2 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50"
+            className="w-full border border-border bg-card/50 px-3 py-2 font-mono text-sm text-foreground focus:border-primary focus:outline-none disabled:opacity-50"
           />
         </div>
       </div>
 
       {/* Kerf */}
       <div className="space-y-2">
-        <label className="font-mono text-xs uppercase tracking-wider text-zinc-400">
+        <label className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
           {t("kerf")} (mm)
         </label>
         <input
@@ -111,45 +111,45 @@ export function NestingControls({
           value={kerf}
           onChange={(e) => onKerfChange(Number(e.target.value))}
           disabled={loading}
-          className="w-full border border-zinc-700 bg-zinc-800/50 px-3 py-2 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50"
+          className="w-full border border-border bg-card/50 px-3 py-2 font-mono text-sm text-foreground focus:border-primary focus:outline-none disabled:opacity-50"
         />
       </div>
 
       {/* Nesting Progress Panel */}
       {isNesting ? (
-        <div className="space-y-3 border border-emerald-500/30 bg-emerald-500/10 p-4">
+        <div className="space-y-3 border border-primary/30 bg-primary/10 p-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 font-mono text-sm text-emerald-400">
+            <div className="flex items-center gap-2 font-mono text-sm text-primary">
               <SpinnerIcon className="h-4 w-4 animate-spin" />
               <span>{t("optimizing")}</span>
             </div>
             {onCancel && (
               <button
                 onClick={onCancel}
-                className="flex h-6 w-6 items-center justify-center text-zinc-400 transition-colors hover:text-white"
+                className="flex h-6 w-6 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
               >
                 <XIcon className="h-4 w-4" />
               </button>
             )}
           </div>
 
-          <div className="h-1.5 bg-zinc-800">
+          <div className="h-1.5 bg-muted">
             <div
-              className="h-full bg-emerald-500 transition-all"
+              className="h-full bg-primary transition-all"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-2 font-mono text-xs text-zinc-400">
+          <div className="grid grid-cols-2 gap-2 font-mono text-xs text-muted-foreground">
             <div>
               <span>{t("generation")}: </span>
-              <span className="text-white">
+              <span className="text-foreground">
                 {progress.iteration}/{progress.totalIterations}
               </span>
             </div>
             <div className="text-right">
               <span>{t("currentUtilization")}: </span>
-              <span className="text-emerald-400">
+              <span className="text-primary">
                 {(progress.utilization * 100).toFixed(1)}%
               </span>
             </div>
@@ -159,7 +159,7 @@ export function NestingControls({
         <button
           onClick={onRunNesting}
           disabled={loading}
-          className="group flex w-full items-center justify-center gap-2 bg-emerald-500 px-4 py-3 font-mono text-sm font-semibold text-black transition-colors hover:bg-emerald-400 disabled:opacity-50"
+          className="group flex w-full items-center justify-center gap-2 bg-primary px-4 py-3 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
         >
           {loading ? (
             <SpinnerIcon className="h-4 w-4 animate-spin" />
@@ -172,7 +172,7 @@ export function NestingControls({
 
       {/* Algorithm Badge */}
       {wasmAvailable !== undefined && (
-        <div className="flex items-center gap-2 font-mono text-xs text-zinc-500">
+        <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
           {wasmAvailable ? (
             <>
               <CpuIcon className="h-3 w-3" />
@@ -188,22 +188,22 @@ export function NestingControls({
       )}
 
       {/* Stats */}
-      <div className="space-y-3 border border-zinc-800 bg-zinc-950 p-4">
+      <div className="space-y-3 border border-border bg-card p-4">
         <div className="flex items-center justify-between">
-          <span className="font-mono text-xs uppercase text-zinc-500">{t("utilization")}</span>
-          <span className="font-mono text-lg font-bold text-emerald-400">
+          <span className="font-mono text-xs uppercase text-muted-foreground">{t("utilization")}</span>
+          <span className="font-mono text-lg font-bold text-primary">
             {(utilization * 100).toFixed(1)}%
           </span>
         </div>
-        <div className="h-1.5 bg-zinc-800">
+        <div className="h-1.5 bg-muted">
           <div
-            className="h-full bg-emerald-500"
+            className="h-full bg-primary"
             style={{ width: `${utilization * 100}%` }}
           />
         </div>
         <div className="flex items-center justify-between">
-          <span className="font-mono text-xs uppercase text-zinc-500">{t("partsPlaced")}</span>
-          <span className="font-mono text-lg font-bold text-white">{partsPlaced}</span>
+          <span className="font-mono text-xs uppercase text-muted-foreground">{t("partsPlaced")}</span>
+          <span className="font-mono text-lg font-bold text-foreground">{partsPlaced}</span>
         </div>
       </div>
     </div>

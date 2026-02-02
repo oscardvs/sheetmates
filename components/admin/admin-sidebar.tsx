@@ -26,11 +26,11 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex w-64 flex-col border-r border-zinc-800 bg-zinc-900">
+    <div className="flex w-64 flex-col border-r border-border bg-card">
       {/* Logo */}
-      <div className="flex h-14 items-center border-b border-zinc-800 px-4">
-        <span className="font-mono text-lg font-bold">SheetMates</span>
-        <span className="ml-2 rounded bg-amber-500/20 px-1.5 py-0.5 text-xs font-medium text-amber-500">
+      <div className="flex h-14 items-center border-b border-border px-4">
+        <span className="font-mono text-lg font-bold text-foreground">SheetMates</span>
+        <span className="ml-2 rounded bg-amber-500/20 px-1.5 py-0.5 text-xs font-medium text-amber-600 dark:text-amber-500">
           ADMIN
         </span>
       </div>
@@ -48,8 +48,8 @@ export function AdminSidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
                 isActive
-                  ? "bg-zinc-800 text-white"
-                  : "text-zinc-400 hover:bg-zinc-800/50 hover:text-white"
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               )}
             >
               <Icon className="h-5 w-5" />
@@ -60,8 +60,8 @@ export function AdminSidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-zinc-800 p-2">
-        <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800/50 hover:text-white">
+      <div className="border-t border-border p-2">
+        <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground">
           <SignOutIcon className="h-5 w-5" />
           {t("logout")}
         </button>

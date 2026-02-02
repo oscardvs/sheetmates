@@ -22,7 +22,7 @@ export default function LoginPage() {
       await login(email, password);
       router.push("/upload");
     } catch {
-      toast.error(t("loginButton") + " failed");
+      toast.error(t("loginFailed"));
     } finally {
       setLoading(false);
     }
@@ -33,7 +33,7 @@ export default function LoginPage() {
       await loginWithGoogle();
       router.push("/upload");
     } catch {
-      toast.error(t("googleLogin") + " failed");
+      toast.error(t("googleLoginFailed"));
     }
   }
 
@@ -58,19 +58,19 @@ export default function LoginPage() {
           </Link>
           <div>
             <div className="mb-4 inline-block border border-primary/30 bg-primary/10 px-3 py-1">
-              <span className="font-mono text-xs text-primary">AUTHENTICATION</span>
+              <span className="font-mono text-xs text-primary">{t("badge")}</span>
             </div>
             <h1 className="mb-4 font-mono text-4xl font-bold text-foreground">
-              ACCESS YOUR<br />
-              <span className="text-primary">WORKSHOP</span>
+              {t("loginHeading")}<br />
+              <span className="text-primary">{t("loginHeadingHighlight")}</span>
             </h1>
             <p className="max-w-md font-mono text-sm text-muted-foreground">
-              Sign in to manage your parts, track orders, and access community sheets.
+              {t("loginSubtitle")}
             </p>
           </div>
           <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
             <TerminalIcon className="h-4 w-4" />
-            <span>SECURE • ENCRYPTED • EU-HOSTED</span>
+            <span>{t("securityBadge")}</span>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@ export default function LoginPage() {
           <div className="mb-8">
             <h2 className="font-mono text-2xl font-bold text-foreground">{t("loginTitle")}</h2>
             <p className="mt-2 font-mono text-sm text-muted-foreground">
-              Enter your credentials to continue
+              {t("enterCredentials")}
             </p>
           </div>
 
@@ -105,7 +105,7 @@ export default function LoginPage() {
                 required
                 autoComplete="email"
                 className="w-full border border-border bg-card/50 px-4 py-3 font-mono text-sm text-foreground placeholder-muted-foreground transition-colors focus:border-primary focus:outline-none"
-                placeholder="you@example.com"
+                placeholder={t("emailPlaceholder")}
               />
             </div>
 
@@ -131,7 +131,7 @@ export default function LoginPage() {
               className="group flex w-full items-center justify-center gap-2 bg-primary px-4 py-3 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
             >
               {loading ? (
-                <span className="animate-pulse">AUTHENTICATING...</span>
+                <span className="animate-pulse">{t("authenticating")}</span>
               ) : (
                 <>
                   {t("loginButton")}
@@ -143,7 +143,7 @@ export default function LoginPage() {
 
           <div className="my-8 flex items-center gap-4">
             <div className="h-px flex-1 bg-border" />
-            <span className="font-mono text-xs uppercase text-muted-foreground">or</span>
+            <span className="font-mono text-xs uppercase text-muted-foreground">{t("divider")}</span>
             <div className="h-px flex-1 bg-border" />
           </div>
 
