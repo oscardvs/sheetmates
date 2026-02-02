@@ -2,13 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { GlobeIcon } from "@phosphor-icons/react";
 
 export function LanguageSwitcher() {
   const t = useTranslations("languages");
@@ -21,15 +15,17 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <Select value={locale} onValueChange={onValueChange}>
-      <SelectTrigger className="w-[130px]">
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="en">{t("en")}</SelectItem>
-        <SelectItem value="fr">{t("fr")}</SelectItem>
-        <SelectItem value="cs">{t("cs")}</SelectItem>
-      </SelectContent>
-    </Select>
+    <div className="relative">
+      <select
+        value={locale}
+        onChange={(e) => onValueChange(e.target.value)}
+        className="h-8 appearance-none border border-border bg-transparent pl-7 pr-3 font-mono text-xs text-foreground transition-colors hover:border-primary focus:border-primary focus:outline-none"
+      >
+        <option value="en">{t("en")}</option>
+        <option value="fr">{t("fr")}</option>
+        <option value="cs">{t("cs")}</option>
+      </select>
+      <GlobeIcon className="pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+    </div>
   );
 }
