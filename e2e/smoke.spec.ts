@@ -27,8 +27,8 @@ test.describe("Homepage", () => {
   test("should navigate to login page", async ({ page }) => {
     await page.goto("/en");
 
-    // Find and click login link in header
-    const loginLink = page.locator("header").getByRole("link", { name: /login|sign in/i });
+    // Find and click login link in header - text is "Log in" from translations
+    const loginLink = page.locator("header").getByRole("link", { name: /log in/i });
     await expect(loginLink).toBeVisible();
     await loginLink.click();
     await expect(page).toHaveURL(/\/login/);
@@ -46,14 +46,12 @@ test.describe("Homepage", () => {
 });
 
 test.describe("Locale Routing", () => {
-  test("should redirect root to default locale", async ({ page }) => {
+  test("should serve default locale at root", async ({ page }) => {
+    // With localePrefix: "as-needed", root URL serves default locale (en)
     await page.goto("/");
 
-    // Wait for navigation to complete
-    await page.waitForURL(/\/(en|cs|fr)/, { timeout: 5000 });
-
-    // Should redirect to /en or default locale
-    expect(page.url()).toMatch(/\/(en|cs|fr)/);
+    // Page should load successfully at root (no redirect needed for default locale)
+    await expect(page).toHaveTitle(/SheetMates/i);
   });
 
   test("should load Czech locale", async ({ page }) => {
