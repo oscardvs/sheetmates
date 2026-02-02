@@ -5,6 +5,7 @@ import {
   getDocs,
   addDoc,
   updateDoc,
+  deleteDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../config";
@@ -69,4 +70,8 @@ export async function updateSheet(
   data: Partial<Omit<SheetDoc, "id" | "createdAt">>
 ): Promise<void> {
   await updateDoc(doc(db, "sheets", id), data);
+}
+
+export async function deleteSheet(id: string): Promise<void> {
+  await deleteDoc(doc(db, "sheets", id));
 }

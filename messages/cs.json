@@ -296,6 +296,15 @@
       "injectedSheets": "Vložené plechy",
       "printLabel": "Vytisknout štítek"
     },
+    "inventory": {
+      "deleteTitle": "Smazat plech",
+      "deleteDescription": "Opravdu chcete smazat tento {material} plech o tloušťce {thickness}mm? Tuto akci nelze vrátit zpět.",
+      "deleteSuccess": "Plech byl úspěšně smazán",
+      "deleteError": "Smazání plechu selhalo",
+      "delete": "Smazat",
+      "deleting": "Mazání...",
+      "cancel": "Zrušit"
+    },
     "queue": {
       "loading": "Načítání produkční fronty...",
       "inProgress": "Právě se řeže",

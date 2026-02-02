@@ -296,6 +296,15 @@
       "injectedSheets": "Injected Sheets",
       "printLabel": "Print Label"
     },
+    "inventory": {
+      "deleteTitle": "Delete Sheet",
+      "deleteDescription": "Are you sure you want to delete this {material} {thickness}mm sheet? This action cannot be undone.",
+      "deleteSuccess": "Sheet deleted successfully",
+      "deleteError": "Failed to delete sheet",
+      "delete": "Delete",
+      "deleting": "Deleting...",
+      "cancel": "Cancel"
+    },
     "queue": {
       "loading": "Loading production queue...",
       "inProgress": "Cutting in Progress",

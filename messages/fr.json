@@ -296,6 +296,15 @@
       "injectedSheets": "Tôles ajoutées",
       "printLabel": "Imprimer étiquette"
     },
+    "inventory": {
+      "deleteTitle": "Supprimer la tôle",
+      "deleteDescription": "Êtes-vous sûr de vouloir supprimer cette tôle {material} de {thickness}mm ? Cette action est irréversible.",
+      "deleteSuccess": "Tôle supprimée avec succès",
+      "deleteError": "Échec de la suppression",
+      "delete": "Supprimer",
+      "deleting": "Suppression...",
+      "cancel": "Annuler"
+    },
     "queue": {
       "loading": "Chargement de la file de production...",
       "inProgress": "Découpe en cours",

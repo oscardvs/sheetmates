@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { injectSheet, type InjectedSheet } from "@/lib/firebase/db/inject-sheet";
+import { printQRLabel } from "@/lib/qr/print-label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -41,6 +42,7 @@ export function InjectSheetForm() {
   const t = useTranslations("admin.inject");
   const [loading, setLoading] = useState(false);
   const [injectedSheets, setInjectedSheets] = useState<InjectedSheet[]>([]);
+  const [lastFormData, setLastFormData] = useState<FormData | null>(null);
 
   const { register, handleSubmit, watch, setValue } = useForm<FormData>({
     defaultValues: {
@@ -59,12 +61,32 @@ export function InjectSheetForm() {
     try {
       const results = await injectSheet(data);
       setInjectedSheets(results);
+      setLastFormData(data);
       toast.success(t("success", { count: results.length }));
     } catch (error) {
       console.error("Injection failed:", error);
       toast.error(t("error"));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePrintLabel = async (sheet: InjectedSheet) => {
+    try {
+      await printQRLabel({
+        qrCode: sheet.qrCode,
+        sheetId: sheet.id,
+        material: lastFormData?.material,
+        thickness: lastFormData?.thickness,
+        dimensions: lastFormData
+          ? `${lastFormData.width}mm × ${lastFormData.height}mm`
+          : undefined,
+      });
+    } catch (error) {
+      console.error("Print failed:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to print label"
+      );
     }
   };
 
@@ -193,7 +215,11 @@ export function InjectSheetForm() {
                   className="flex items-center justify-between rounded border border-border bg-muted/50 p-2"
                 >
                   <code className="text-xs">{sheet.qrCode}</code>
-                  <Button variant="ghost" size="sm">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handlePrintLabel(sheet)}
+                  >
                     {t("printLabel")}
                   </Button>
                 </div>
