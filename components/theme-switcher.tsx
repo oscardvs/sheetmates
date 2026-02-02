@@ -2,42 +2,32 @@
 
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
-import { Sun, Moon, Monitor } from "@phosphor-icons/react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import { SunIcon, MoonIcon, DesktopIcon } from "@phosphor-icons/react";
 
 export function ThemeSwitcher() {
-  const { setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const t = useTranslations("theme");
 
+  const cycleTheme = () => {
+    if (theme === "light") setTheme("dark");
+    else if (theme === "dark") setTheme("system");
+    else setTheme("light");
+  };
+
+  // Use resolvedTheme for the icon (handles SSR gracefully)
+  const displayTheme = theme === "system" ? "system" : resolvedTheme;
+  const Icon = displayTheme === "dark" ? MoonIcon : displayTheme === "light" ? SunIcon : DesktopIcon;
+  const label = theme === "dark" ? t("dark") : theme === "light" ? t("light") : t("system");
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" className="h-8 w-8">
-          <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Sun className="mr-2 h-4 w-4" />
-          {t("light")}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Moon className="mr-2 h-4 w-4" />
-          {t("dark")}
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          <Monitor className="mr-2 h-4 w-4" />
-          {t("system")}
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <button
+      onClick={cycleTheme}
+      className="flex h-8 items-center gap-1.5 border border-border bg-transparent px-2 font-mono text-xs text-foreground transition-colors hover:border-primary"
+      title={label}
+      suppressHydrationWarning
+    >
+      <Icon className="h-4 w-4" />
+      <span className="hidden sm:inline" suppressHydrationWarning>{label}</span>
+    </button>
   );
 }
