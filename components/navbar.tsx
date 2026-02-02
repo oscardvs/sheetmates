@@ -13,10 +13,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { List, User } from "@phosphor-icons/react";
+import { ListIcon, UserIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 
-export function Navbar() {
+interface NavbarProps {
+  variant?: "default" | "dark";
+}
+
+export function Navbar({ variant = "dark" }: NavbarProps) {
   const t = useTranslations("nav");
   const { user, userDoc } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -36,24 +40,53 @@ export function Navbar() {
       ? [{ href: "/admin" as const, label: t("admin") }]
       : [];
 
+  const isDark = variant === "dark";
+
   return (
-    <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      className={`border-b ${
+        isDark
+          ? "border-zinc-800 bg-zinc-950/95 backdrop-blur"
+          : "border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      }`}
+    >
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
-        <Link href="/" className="text-lg font-bold tracking-tight">
+        <Link
+          href="/"
+          className={`font-mono text-lg font-bold tracking-tight ${
+            isDark ? "text-white" : ""
+          }`}
+        >
           SheetMates
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
-            <Button key={link.href} variant="ghost" size="sm" asChild>
-              <Link href={link.href}>{link.label}</Link>
-            </Button>
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-3 py-2 font-mono text-sm transition-colors ${
+                isDark
+                  ? "text-zinc-400 hover:text-white"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {link.label}
+            </Link>
           ))}
           {adminLinks.map((link) => (
-            <Button key={link.href} variant="ghost" size="sm" asChild>
-              <Link href={link.href}>{link.label}</Link>
-            </Button>
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-3 py-2 font-mono text-sm transition-colors ${
+                isDark
+                  ? "text-zinc-400 hover:text-white"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {link.label}
+            </Link>
           ))}
         </nav>
 
@@ -63,8 +96,16 @@ export function Navbar() {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
-                  <User className="mr-1 h-4 w-4" />
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={
+                    isDark
+                      ? "border-zinc-700 bg-transparent font-mono text-white hover:bg-zinc-800"
+                      : "font-mono"
+                  }
+                >
+                  <UserIcon className="mr-1 h-4 w-4" />
                   {userDoc?.displayName || user.email}
                 </Button>
               </DropdownMenuTrigger>
@@ -79,12 +120,26 @@ export function Navbar() {
             </DropdownMenu>
           ) : (
             <div className="flex gap-2">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/login">{t("login")}</Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link href="/signup">{t("signup")}</Link>
-              </Button>
+              <Link
+                href="/login"
+                className={`px-3 py-2 font-mono text-sm transition-colors ${
+                  isDark
+                    ? "text-zinc-400 hover:text-white"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t("login")}
+              </Link>
+              <Link
+                href="/signup"
+                className={`px-4 py-2 font-mono text-sm font-medium transition-colors ${
+                  isDark
+                    ? "bg-emerald-500 text-black hover:bg-emerald-400"
+                    : "bg-primary text-primary-foreground hover:bg-primary/90"
+                }`}
+              >
+                {t("signup")}
+              </Link>
             </div>
           )}
         </div>
@@ -93,40 +148,44 @@ export function Navbar() {
         <Button
           variant="ghost"
           size="sm"
-          className="md:hidden"
+          className={`md:hidden ${isDark ? "text-white hover:bg-zinc-800" : ""}`}
           onClick={() => setMobileOpen(!mobileOpen)}
         >
-          <List className="h-5 w-5" />
+          <ListIcon className="h-5 w-5" />
         </Button>
       </div>
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <nav className="border-t px-4 py-2 md:hidden">
+        <nav
+          className={`border-t px-4 py-2 md:hidden ${
+            isDark ? "border-zinc-800 bg-zinc-950" : ""
+          }`}
+        >
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
-              <Button
+              <Link
                 key={link.href}
-                variant="ghost"
-                size="sm"
-                className="justify-start"
-                asChild
+                href={link.href}
+                className={`px-3 py-2 font-mono text-sm ${
+                  isDark ? "text-zinc-400 hover:text-white" : ""
+                }`}
                 onClick={() => setMobileOpen(false)}
               >
-                <Link href={link.href}>{link.label}</Link>
-              </Button>
+                {link.label}
+              </Link>
             ))}
             {adminLinks.map((link) => (
-              <Button
+              <Link
                 key={link.href}
-                variant="ghost"
-                size="sm"
-                className="justify-start"
-                asChild
+                href={link.href}
+                className={`px-3 py-2 font-mono text-sm ${
+                  isDark ? "text-zinc-400 hover:text-white" : ""
+                }`}
                 onClick={() => setMobileOpen(false)}
               >
-                <Link href={link.href}>{link.label}</Link>
-              </Button>
+                {link.label}
+              </Link>
             ))}
             <div className="flex items-center gap-2 py-2">
               <LanguageSwitcher />
@@ -134,31 +193,43 @@ export function Navbar() {
             </div>
             {user ? (
               <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="justify-start"
-                  asChild
+                <Link
+                  href="/account/orders"
+                  className={`px-3 py-2 font-mono text-sm ${
+                    isDark ? "text-zinc-400 hover:text-white" : ""
+                  }`}
                 >
-                  <Link href="/account/orders">{t("account")}</Link>
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="justify-start"
+                  {t("account")}
+                </Link>
+                <button
+                  className={`px-3 py-2 text-left font-mono text-sm ${
+                    isDark ? "text-zinc-400 hover:text-white" : ""
+                  }`}
                   onClick={() => logout()}
                 >
                   {t("logout")}
-                </Button>
+                </button>
               </>
             ) : (
               <>
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href="/login">{t("login")}</Link>
-                </Button>
-                <Button size="sm" asChild>
-                  <Link href="/signup">{t("signup")}</Link>
-                </Button>
+                <Link
+                  href="/login"
+                  className={`px-3 py-2 font-mono text-sm ${
+                    isDark ? "text-zinc-400 hover:text-white" : ""
+                  }`}
+                >
+                  {t("login")}
+                </Link>
+                <Link
+                  href="/signup"
+                  className={`mx-3 my-2 px-4 py-2 text-center font-mono text-sm font-medium ${
+                    isDark
+                      ? "bg-emerald-500 text-black"
+                      : "bg-primary text-primary-foreground"
+                  }`}
+                >
+                  {t("signup")}
+                </Link>
               </>
             )}
           </div>
