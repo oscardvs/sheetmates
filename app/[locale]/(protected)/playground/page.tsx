@@ -32,7 +32,7 @@ export default function PlaygroundPage() {
     parts,
   } = useCanvasStore();
 
-  const { currentMaterial, setCurrentMaterial } = useAppStore();
+  const { currentMaterial, currentThickness } = useAppStore();
 
   const [kerf, setKerf] = useState(2);
 
@@ -133,12 +133,10 @@ export default function PlaygroundPage() {
                   sheetWidth={sheetWidth}
                   sheetHeight={sheetHeight}
                   material={currentMaterial}
+                  thickness={parseFloat(currentThickness) || 2}
                   kerf={kerf}
                   utilization={utilization}
                   partsPlaced={parts.length}
-                  onSheetWidthChange={(w) => setSheetDimensions(w, sheetHeight)}
-                  onSheetHeightChange={(h) => setSheetDimensions(sheetWidth, h)}
-                  onMaterialChange={setCurrentMaterial}
                   onKerfChange={setKerf}
                   onRunNesting={handleRunNesting}
                   loading={nestingLoading}

@@ -8,6 +8,10 @@ interface SheetViewerProps {
   sheetHeight: number;
   placements: NestingPlacement[];
   partSvgPaths?: Record<string, string>;
+  /** Current user's ID - used to determine which parts to show in detail */
+  currentUserId?: string;
+  /** Map of partId -> userId for ownership check */
+  partOwners?: Record<string, string>;
 }
 
 // Emerald-based color palette for parts
@@ -25,6 +29,8 @@ export function SheetViewer({
   sheetHeight,
   placements,
   partSvgPaths = {},
+  currentUserId,
+  partOwners = {},
 }: SheetViewerProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -154,58 +160,66 @@ export function SheetViewer({
       />
 
       {/* Placed parts */}
-      {placements.map((p, i) => (
-        <g
-          key={i}
-          transform={`translate(${p.x}, ${p.y})`}
-          onMouseEnter={() => setHoveredIndex(i)}
-          onMouseLeave={() => setHoveredIndex(null)}
-          className="cursor-pointer"
-        >
-          {partSvgPaths[p.partId] ? (
-            <g
-              transform={
-                p.rotation === 90
-                  ? `rotate(90, ${p.width / 2}, ${p.height / 2})`
-                  : undefined
-              }
-            >
-              <path
-                d={partSvgPaths[p.partId]}
-                fill={colorMap[p.partId]}
-                fillOpacity={hoveredIndex === i ? 0.4 : 0.2}
-                stroke={colorMap[p.partId]}
-                strokeWidth={hoveredIndex === i ? 1 : 0.5}
-              />
-            </g>
-          ) : (
-            <rect
-              width={p.width}
-              height={p.height}
-              fill={colorMap[p.partId]}
-              fillOpacity={hoveredIndex === i ? 0.4 : 0.2}
-              stroke={colorMap[p.partId]}
-              strokeWidth={hoveredIndex === i ? 1 : 0.5}
-            />
-          )}
+      {placements.map((p, i) => {
+        // Check if this part belongs to the current user
+        const isOwnPart = !currentUserId || partOwners[p.partId] === currentUserId;
+        // Only show SVG path for user's own parts (privacy protection)
+        const showSvgPath = isOwnPart && partSvgPaths[p.partId];
 
-          {/* Tooltip */}
-          {hoveredIndex === i && (
-            <text
-              x={p.width / 2}
-              y={p.height / 2}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fontSize={Math.min(p.width, p.height) * 0.12}
-              fill="#ffffff"
-              fontFamily="monospace"
-              fontWeight="bold"
-            >
-              {p.partId.slice(0, 6)}
-            </text>
-          )}
-        </g>
-      ))}
+        return (
+          <g
+            key={i}
+            transform={`translate(${p.x}, ${p.y})`}
+            onMouseEnter={() => setHoveredIndex(i)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            className="cursor-pointer"
+          >
+            {showSvgPath ? (
+              <g
+                transform={
+                  p.rotation === 90
+                    ? `rotate(90, ${p.width / 2}, ${p.height / 2})`
+                    : undefined
+                }
+              >
+                <path
+                  d={partSvgPaths[p.partId]}
+                  fill={colorMap[p.partId]}
+                  fillOpacity={hoveredIndex === i ? 0.4 : 0.2}
+                  stroke={colorMap[p.partId]}
+                  strokeWidth={hoveredIndex === i ? 1 : 0.5}
+                />
+              </g>
+            ) : (
+              <rect
+                width={p.width}
+                height={p.height}
+                fill={isOwnPart ? colorMap[p.partId] : "#52525b"}
+                fillOpacity={hoveredIndex === i ? 0.4 : 0.15}
+                stroke={isOwnPart ? colorMap[p.partId] : "#71717a"}
+                strokeWidth={hoveredIndex === i ? 1 : 0.5}
+                strokeDasharray={isOwnPart ? undefined : "4 2"}
+              />
+            )}
+
+            {/* Tooltip - only show part ID for own parts */}
+            {hoveredIndex === i && (
+              <text
+                x={p.width / 2}
+                y={p.height / 2}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fontSize={Math.min(p.width, p.height) * 0.12}
+                fill="#ffffff"
+                fontFamily="monospace"
+                fontWeight="bold"
+              >
+                {isOwnPart ? p.partId.slice(0, 6) : "Other"}
+              </text>
+            )}
+          </g>
+        );
+      })}
 
       {/* Dimension labels */}
       <text

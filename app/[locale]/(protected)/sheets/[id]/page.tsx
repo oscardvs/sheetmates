@@ -9,6 +9,7 @@ import { shelfPack } from "@/lib/nesting";
 import type { NestingPlacement } from "@/lib/nesting/types";
 import { Link } from "@/i18n/navigation";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
+import { useAuth } from "@/components/providers/auth-provider";
 
 export default function SheetDetailPage({
   params,
@@ -16,6 +17,7 @@ export default function SheetDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const { user } = useAuth();
   const [_sheet, setSheet] = useState<SheetDoc | null>(null);
   const [pendingParts, setPendingParts] = useState<PartDoc[]>([]);
   const [sheetParts, setSheetParts] = useState<PartDoc[]>([]);
@@ -23,6 +25,7 @@ export default function SheetDetailPage({
   const [sheetWidth, setSheetWidth] = useState(2500);
   const [sheetHeight, setSheetHeight] = useState(1250);
   const [material, setMaterial] = useState("steel");
+  const [thickness, setThickness] = useState(2);
   const [kerf, setKerf] = useState(2);
   const [utilization, setUtilization] = useState(0);
 
@@ -39,6 +42,7 @@ export default function SheetDetailPage({
         setSheetWidth(sheet.width);
         setSheetHeight(sheet.height);
         setMaterial(sheet.material);
+        setThickness(sheet.thickness);
         if (sheet.placements.length > 0) {
           setPlacements(
             sheet.placements.map((p) => ({
@@ -94,13 +98,16 @@ export default function SheetDetailPage({
     setUtilization(result.utilization[0] || 0);
   }
 
-  // Build SVG paths from both sheet parts and pending parts
+  // Build SVG paths and ownership from both sheet parts and pending parts
   const partSvgPaths: Record<string, string> = {};
+  const partOwners: Record<string, string> = {};
   for (const p of sheetParts) {
     partSvgPaths[p.id] = p.svgPath;
+    partOwners[p.id] = p.userId;
   }
   for (const p of pendingParts) {
     partSvgPaths[p.id] = p.svgPath;
+    partOwners[p.id] = p.userId;
   }
 
   return (
@@ -138,6 +145,8 @@ export default function SheetDetailPage({
             sheetHeight={sheetHeight}
             placements={placements}
             partSvgPaths={partSvgPaths}
+            currentUserId={user?.uid}
+            partOwners={partOwners}
           />
         </div>
 
@@ -147,12 +156,10 @@ export default function SheetDetailPage({
             sheetWidth={sheetWidth}
             sheetHeight={sheetHeight}
             material={material}
+            thickness={thickness}
             kerf={kerf}
             utilization={utilization}
             partsPlaced={placements.length}
-            onSheetWidthChange={setSheetWidth}
-            onSheetHeightChange={setSheetHeight}
-            onMaterialChange={setMaterial}
             onKerfChange={setKerf}
             onRunNesting={handleRunNesting}
           />

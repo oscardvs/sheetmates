@@ -8,12 +8,10 @@ interface NestingControlsProps {
   sheetWidth: number;
   sheetHeight: number;
   material: string;
+  thickness: number;
   kerf: number;
   utilization: number;
   partsPlaced: number;
-  onSheetWidthChange: (v: number) => void;
-  onSheetHeightChange: (v: number) => void;
-  onMaterialChange: (v: string) => void;
   onKerfChange: (v: number) => void;
   onRunNesting: () => void;
   loading?: boolean;
@@ -25,16 +23,22 @@ interface NestingControlsProps {
   onCancel?: () => void;
 }
 
+// Material display labels
+const MATERIAL_LABELS: Record<string, string> = {
+  steel: "Steel",
+  stainless: "Stainless Steel",
+  aluminum: "Aluminum",
+  copper: "Copper",
+};
+
 export function NestingControls({
   sheetWidth,
   sheetHeight,
   material,
+  thickness,
   kerf,
   utilization,
   partsPlaced,
-  onSheetWidthChange,
-  onSheetHeightChange,
-  onMaterialChange,
   onKerfChange,
   onRunNesting,
   loading,
@@ -55,48 +59,19 @@ export function NestingControls({
         {t("title")}
       </h3>
 
-      {/* Material Select */}
-      <div className="space-y-2">
-        <label className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          {t("selectMaterial")}
-        </label>
-        <select
-          value={material}
-          onChange={(e) => onMaterialChange(e.target.value)}
-          className="w-full border border-border bg-card/50 px-3 py-2 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
-        >
-          <option value="steel">Steel</option>
-          <option value="stainless">Stainless Steel</option>
-          <option value="aluminum">Aluminum</option>
-          <option value="copper">Copper</option>
-        </select>
-      </div>
-
-      {/* Sheet Dimensions */}
-      <div className="grid grid-cols-2 gap-3">
-        <div className="space-y-2">
-          <label className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-            {t("sheetWidth")}
-          </label>
-          <input
-            type="number"
-            value={sheetWidth}
-            onChange={(e) => onSheetWidthChange(Number(e.target.value))}
-            disabled={loading}
-            className="w-full border border-border bg-card/50 px-3 py-2 font-mono text-sm text-foreground focus:border-primary focus:outline-none disabled:opacity-50"
-          />
+      {/* Sheet Info (read-only) */}
+      <div className="space-y-2 border border-border bg-card/30 p-3">
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-xs uppercase text-muted-foreground">Sheet</span>
+          <span className="font-mono text-sm text-foreground">
+            {sheetWidth} × {sheetHeight} mm
+          </span>
         </div>
-        <div className="space-y-2">
-          <label className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-            {t("sheetHeight")}
-          </label>
-          <input
-            type="number"
-            value={sheetHeight}
-            onChange={(e) => onSheetHeightChange(Number(e.target.value))}
-            disabled={loading}
-            className="w-full border border-border bg-card/50 px-3 py-2 font-mono text-sm text-foreground focus:border-primary focus:outline-none disabled:opacity-50"
-          />
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-xs uppercase text-muted-foreground">Material</span>
+          <span className="font-mono text-sm text-foreground">
+            {MATERIAL_LABELS[material] || material} {thickness}mm
+          </span>
         </div>
       </div>
 
