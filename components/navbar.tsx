@@ -19,15 +19,15 @@ export function Navbar() {
         { href: "/upload" as const, label: t("upload") },
         { href: "/sheets" as const, label: t("sheets") },
         { href: "/queue" as const, label: t("queue") },
-        { href: "/export" as const, label: t("export") },
         { href: "/pricing" as const, label: t("pricing") },
+        // Export is admin-only (factory tool for laser cutter)
+        ...(userDoc?.role === "admin"
+          ? [{ href: "/export" as const, label: t("export") }]
+          : []),
       ]
     : [];
 
-  const adminLinks =
-    userDoc?.role === "admin"
-      ? [{ href: "/admin" as const, label: t("admin") }]
-      : [];
+  // Admin links removed from center nav - using dedicated red badge in right side instead
 
   return (
     <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -44,15 +44,6 @@ export function Navbar() {
         {navLinks.length > 0 && (
           <nav className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-3 py-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {adminLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -80,10 +71,10 @@ export function Navbar() {
           {user && userDoc?.role === "admin" && (
             <Link
               href="/admin"
-              className="flex items-center gap-1.5 px-3 py-2 font-mono text-sm text-amber-600 transition-colors hover:text-amber-500 dark:text-amber-500 dark:hover:text-amber-400"
+              className="flex items-center gap-1.5 px-3 py-2 font-mono text-sm text-red-600 transition-colors hover:text-red-500 dark:text-red-500 dark:hover:text-red-400"
             >
               {t("admin")}
-              <span className="rounded bg-amber-500/20 px-1 py-0.5 text-[10px] font-medium">
+              <span className="rounded bg-red-500/20 px-1 py-0.5 text-[10px] font-medium">
                 ●
               </span>
             </Link>
@@ -166,16 +157,6 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            {adminLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-3 py-2 font-mono text-sm text-muted-foreground hover:text-foreground"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
 
             <div className="my-2 h-px bg-border" />
 
@@ -192,11 +173,11 @@ export function Navbar() {
                 {userDoc?.role === "admin" && (
                   <Link
                     href="/admin"
-                    className="flex items-center gap-2 px-3 py-2 font-mono text-sm text-amber-600 hover:text-amber-500 dark:text-amber-500 dark:hover:text-amber-400"
+                    className="flex items-center gap-2 px-3 py-2 font-mono text-sm text-red-600 hover:text-red-500 dark:text-red-500 dark:hover:text-red-400"
                     onClick={() => setMobileOpen(false)}
                   >
                     {t("admin")}
-                    <span className="rounded bg-amber-500/20 px-1 py-0.5 text-[10px] font-medium">
+                    <span className="rounded bg-red-500/20 px-1 py-0.5 text-[10px] font-medium">
                       ●
                     </span>
                   </Link>
