@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useState, useMemo, useEffect } from "react";
 import { Link } from "@/i18n/navigation";
 import { parseDxfString, type ParsedDxf } from "@/lib/dxf/parser";
 import { dxfToSvgPath } from "@/lib/dxf/to-svg";
@@ -8,14 +8,14 @@ import { computeArea } from "@/lib/dxf/compute-area";
 import { computeCutLength } from "@/lib/dxf/compute-cut-length";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Upload, 
-  ArrowRight,
-  X,
-  Crosshair,
-  Ruler,
-  Scissors,
-  CurrencyEur,
+import {
+  UploadIcon,
+  ArrowRightIcon,
+  XIcon,
+  CrosshairIcon,
+  RulerIcon,
+  ScissorsIcon,
+  CurrencyEurIcon,
 } from "@phosphor-icons/react";
 
 interface UploadedPart {
@@ -29,7 +29,7 @@ interface UploadedPart {
 }
 
 const PART_COLORS = [
-  "rgb(16, 185, 129)", // emerald-500
+  "var(--color-primary)",
   "rgb(59, 130, 246)", // blue-500
   "rgb(168, 85, 247)", // purple-500
   "rgb(249, 115, 22)", // orange-500
@@ -45,15 +45,36 @@ const SHEET_HEIGHT = 1500;
 const PRICE_PER_CM2 = 0.003; // €/cm²
 const PRICE_PER_MM_CUT = 0.002; // €/mm
 
+// Storage key for persisting parts across navigation
+const STORAGE_KEY = "sheetmates_landing_parts";
+
 export function LandingCanvas() {
   const [parts, setParts] = useState<UploadedPart[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  // Save parts to sessionStorage when they change
+  useEffect(() => {
+    if (parts.length > 0) {
+      const serializable = parts.map(p => ({
+        id: p.id,
+        fileName: p.fileName,
+        parsed: p.parsed,
+        svgPath: p.svgPath,
+        area: p.area,
+        cutLength: p.cutLength,
+        color: p.color,
+      }));
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(serializable));
+    } else {
+      sessionStorage.removeItem(STORAGE_KEY);
+    }
+  }, [parts]);
+
   const handleFiles = useCallback(async (files: FileList | File[]) => {
     setIsProcessing(true);
     const newParts: UploadedPart[] = [];
-    
+
     for (const file of Array.from(files)) {
       if (!file.name.toLowerCase().endsWith(".dxf")) continue;
       try {
@@ -62,7 +83,7 @@ export function LandingCanvas() {
         const svgPath = dxfToSvgPath(parsed);
         const area = computeArea(parsed);
         const cutLength = computeCutLength(parsed);
-        
+
         newParts.push({
           id: crypto.randomUUID(),
           fileName: file.name,
@@ -76,7 +97,7 @@ export function LandingCanvas() {
         console.error(`Failed to parse ${file.name}:`, err);
       }
     }
-    
+
     setParts((prev) => [...prev, ...newParts]);
     setIsProcessing(false);
   }, [parts.length]);
@@ -108,7 +129,7 @@ export function LandingCanvas() {
     const sheetArea = SHEET_WIDTH * SHEET_HEIGHT;
     const utilization = totalArea / sheetArea;
     const estimatedPrice = (totalArea / 100) * PRICE_PER_CM2 + totalCut * PRICE_PER_MM_CUT;
-    
+
     return {
       totalArea,
       totalCut,
@@ -125,57 +146,57 @@ export function LandingCanvas() {
     let currentY = 10;
     let rowHeight = 0;
     const gap = 10;
-    
+
     for (const part of parts) {
       const w = part.parsed.width;
       const h = part.parsed.height;
-      
+
       if (currentX + w > SHEET_WIDTH - 10) {
         currentX = 10;
         currentY += rowHeight + gap;
         rowHeight = 0;
       }
-      
+
       if (currentY + h <= SHEET_HEIGHT - 10) {
         result.push({ part, x: currentX, y: currentY });
         currentX += w + gap;
         rowHeight = Math.max(rowHeight, h);
       }
     }
-    
+
     return result;
   }, [parts]);
 
   return (
-    <section className="relative bg-zinc-950 text-white">
+    <section className="relative bg-background">
       {/* Grid background */}
-      <div 
-        className="absolute inset-0 opacity-20"
+      <div
+        className="absolute inset-0 opacity-20 dark:opacity-20"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgb(63, 63, 70) 1px, transparent 1px),
-            linear-gradient(to bottom, rgb(63, 63, 70) 1px, transparent 1px)
+            linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--color-border) 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
         }}
       />
-      
+
       <div className="relative mx-auto max-w-7xl px-4 py-16 lg:py-24">
         {/* Header */}
         <div className="mb-12 text-center">
-          <Badge 
-            variant="outline" 
-            className="mb-4 border-emerald-500/50 bg-emerald-500/10 font-mono text-emerald-400"
+          <Badge
+            variant="outline"
+            className="mb-4 border-primary/50 bg-primary/10 font-mono text-primary"
           >
             TECH-CENTRUM // BUFFER SHEET NETWORK
           </Badge>
-          <h1 className="mb-4 font-mono text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-            <span className="text-zinc-400">DROP </span>
-            <span className="text-emerald-400">.DXF</span>
-            <span className="text-zinc-400"> → GET </span>
-            <span className="text-emerald-400">PARTS</span>
+          <h1 className="mb-4 font-mono text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+            <span className="text-muted-foreground">DROP </span>
+            <span className="text-primary">.DXF</span>
+            <span className="text-muted-foreground"> → GET </span>
+            <span className="text-primary">PARTS</span>
           </h1>
-          <p className="mx-auto max-w-2xl font-mono text-sm text-zinc-400 md:text-base">
+          <p className="mx-auto max-w-2xl font-mono text-sm text-muted-foreground md:text-base">
             Upload your CAD files. We nest them with other makers. You pay only for your share.
           </p>
         </div>
@@ -187,8 +208,8 @@ export function LandingCanvas() {
             <div
               className={`relative flex min-h-[200px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed p-8 transition-all ${
                 dragOver
-                  ? "border-emerald-400 bg-emerald-400/10"
-                  : "border-zinc-700 hover:border-emerald-400/50 hover:bg-zinc-900/50"
+                  ? "border-primary bg-primary/10"
+                  : "border-border hover:border-primary/50 hover:bg-muted/50"
               } ${isProcessing ? "pointer-events-none opacity-50" : ""}`}
               onDragOver={(e) => {
                 e.preventDefault();
@@ -198,12 +219,12 @@ export function LandingCanvas() {
               onDrop={handleDrop}
               onClick={() => document.getElementById("landing-dxf-input")?.click()}
             >
-              <Upload className={`h-12 w-12 ${dragOver ? "text-emerald-400" : "text-zinc-500"}`} />
+              <UploadIcon className={`h-12 w-12 ${dragOver ? "text-primary" : "text-muted-foreground"}`} />
               <div className="text-center">
-                <p className="font-mono text-lg font-medium text-white">
+                <p className="font-mono text-lg font-medium text-foreground">
                   {isProcessing ? "PROCESSING..." : "DROP DXF FILES HERE"}
                 </p>
-                <p className="font-mono text-xs text-zinc-500">
+                <p className="font-mono text-xs text-muted-foreground">
                   or click to browse • supports .dxf
                 </p>
               </div>
@@ -221,40 +242,40 @@ export function LandingCanvas() {
             {parts.length > 0 && (
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-zinc-500">
+                  <span className="font-mono text-xs text-muted-foreground">
                     LOADED PARTS ({parts.length})
                   </span>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-6 px-2 font-mono text-xs text-zinc-500 hover:text-white"
+                    className="h-6 px-2 font-mono text-xs text-muted-foreground hover:text-foreground"
                     onClick={() => setParts([])}
                   >
                     CLEAR ALL
                   </Button>
                 </div>
-                
+
                 <div className="max-h-[200px] space-y-1 overflow-y-auto">
                   {parts.map((part) => (
                     <div
                       key={part.id}
-                      className="group flex items-center gap-3 bg-zinc-900/50 px-3 py-2"
+                      className="group flex items-center gap-3 bg-muted/50 px-3 py-2"
                     >
-                      <div 
-                        className="h-3 w-3 rounded-sm" 
+                      <div
+                        className="h-3 w-3 rounded-sm"
                         style={{ backgroundColor: part.color }}
                       />
-                      <span className="flex-1 truncate font-mono text-xs text-white">
+                      <span className="flex-1 truncate font-mono text-xs text-foreground">
                         {part.fileName}
                       </span>
-                      <span className="font-mono text-xs text-zinc-500">
+                      <span className="font-mono text-xs text-muted-foreground">
                         {part.parsed.width.toFixed(0)}×{part.parsed.height.toFixed(0)}
                       </span>
                       <button
                         onClick={() => removePart(part.id)}
-                        className="text-zinc-600 opacity-0 transition-opacity hover:text-rose-400 group-hover:opacity-100"
+                        className="text-muted-foreground opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100"
                       >
-                        <X className="h-4 w-4" />
+                        <XIcon className="h-4 w-4" />
                       </button>
                     </div>
                   ))}
@@ -264,39 +285,39 @@ export function LandingCanvas() {
 
             {/* Metrics Panel */}
             {parts.length > 0 && (
-              <div className="grid grid-cols-2 gap-2 border border-zinc-800 bg-zinc-900/30 p-4">
+              <div className="grid grid-cols-2 gap-2 border border-border bg-card/30 p-4">
                 <div className="flex items-center gap-2">
-                  <Crosshair className="h-4 w-4 text-zinc-500" />
+                  <CrosshairIcon className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="font-mono text-xs text-zinc-500">PARTS</p>
-                    <p className="font-mono text-lg font-bold text-white">
+                    <p className="font-mono text-xs text-muted-foreground">PARTS</p>
+                    <p className="font-mono text-lg font-bold text-foreground">
                       {totals.partCount}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Ruler className="h-4 w-4 text-zinc-500" />
+                  <RulerIcon className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="font-mono text-xs text-zinc-500">AREA</p>
-                    <p className="font-mono text-lg font-bold text-white">
+                    <p className="font-mono text-xs text-muted-foreground">AREA</p>
+                    <p className="font-mono text-lg font-bold text-foreground">
                       {(totals.totalArea / 100).toFixed(0)} cm²
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Scissors className="h-4 w-4 text-zinc-500" />
+                  <ScissorsIcon className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="font-mono text-xs text-zinc-500">CUT LENGTH</p>
-                    <p className="font-mono text-lg font-bold text-white">
+                    <p className="font-mono text-xs text-muted-foreground">CUT LENGTH</p>
+                    <p className="font-mono text-lg font-bold text-foreground">
                       {(totals.totalCut / 1000).toFixed(1)} m
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CurrencyEur className="h-4 w-4 text-emerald-400" />
+                  <CurrencyEurIcon className="h-4 w-4 text-primary" />
                   <div>
-                    <p className="font-mono text-xs text-zinc-500">EST. PRICE</p>
-                    <p className="font-mono text-lg font-bold text-emerald-400">
+                    <p className="font-mono text-xs text-muted-foreground">EST. PRICE</p>
+                    <p className="font-mono text-lg font-bold text-primary">
                       €{totals.estimatedPrice.toFixed(2)}
                     </p>
                   </div>
@@ -305,16 +326,16 @@ export function LandingCanvas() {
             )}
 
             {/* CTA */}
-            <Button 
-              asChild 
-              size="lg" 
-              className="w-full bg-emerald-500 font-mono hover:bg-emerald-600"
+            <Button
+              asChild
+              size="lg"
+              className="w-full bg-primary font-mono text-primary-foreground hover:bg-primary/90"
             >
               <Link href={parts.length > 0 ? "/signup" : "/signup"}>
                 {parts.length > 0 ? (
                   <>
                     CONTINUE TO NEST
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <ArrowRightIcon className="ml-2 h-4 w-4" />
                   </>
                 ) : (
                   "GET STARTED"
@@ -325,36 +346,37 @@ export function LandingCanvas() {
 
           {/* Right: Sheet Canvas Preview */}
           <div className="relative">
-            <div className="absolute -left-4 top-0 font-mono text-xs text-zinc-600">
-              3000mm × 1500mm SHEET
+            {/* Sheet dimensions label - positioned inside the container */}
+            <div className="mb-2 font-mono text-xs text-muted-foreground">
+              3000mm × 1500mm SHEET PREVIEW
             </div>
-            
+
             <svg
-              viewBox={`-20 -20 ${SHEET_WIDTH + 40} ${SHEET_HEIGHT + 40}`}
-              className="w-full border border-zinc-800 bg-zinc-950"
+              viewBox={`0 0 ${SHEET_WIDTH} ${SHEET_HEIGHT}`}
+              className="w-full border border-border bg-card/50"
               style={{ aspectRatio: `${SHEET_WIDTH} / ${SHEET_HEIGHT}` }}
             >
-              {/* Grid lines */}
+              {/* Grid pattern - uses CSS-aware colors via class */}
               <defs>
                 <pattern id="smallGrid" width="100" height="100" patternUnits="userSpaceOnUse">
-                  <path 
-                    d="M 100 0 L 0 0 0 100" 
-                    fill="none" 
-                    stroke="rgb(39, 39, 42)" 
+                  <path
+                    d="M 100 0 L 0 0 0 100"
+                    fill="none"
+                    className="stroke-border/30"
                     strokeWidth="0.5"
                   />
                 </pattern>
                 <pattern id="largeGrid" width="500" height="500" patternUnits="userSpaceOnUse">
                   <rect width="500" height="500" fill="url(#smallGrid)" />
-                  <path 
-                    d="M 500 0 L 0 0 0 500" 
-                    fill="none" 
-                    stroke="rgb(63, 63, 70)" 
+                  <path
+                    d="M 500 0 L 0 0 0 500"
+                    fill="none"
+                    className="stroke-border/50"
                     strokeWidth="1"
                   />
                 </pattern>
               </defs>
-              
+
               {/* Sheet background with grid */}
               <rect
                 x={0}
@@ -363,7 +385,7 @@ export function LandingCanvas() {
                 height={SHEET_HEIGHT}
                 fill="url(#largeGrid)"
               />
-              
+
               {/* Sheet border */}
               <rect
                 x={0}
@@ -371,33 +393,9 @@ export function LandingCanvas() {
                 width={SHEET_WIDTH}
                 height={SHEET_HEIGHT}
                 fill="none"
-                stroke="rgb(100, 116, 139)"
-                strokeWidth="2"
-                strokeOpacity="0.5"
+                className="stroke-muted-foreground/50"
+                strokeWidth="4"
               />
-              
-              {/* Dimension labels */}
-              <text
-                x={SHEET_WIDTH / 2}
-                y={-8}
-                textAnchor="middle"
-                fill="rgb(113, 113, 122)"
-                fontFamily="JetBrains Mono, monospace"
-                fontSize="24"
-              >
-                3000mm
-              </text>
-              <text
-                x={-8}
-                y={SHEET_HEIGHT / 2}
-                textAnchor="middle"
-                fill="rgb(113, 113, 122)"
-                fontFamily="JetBrains Mono, monospace"
-                fontSize="24"
-                transform={`rotate(-90, -8, ${SHEET_HEIGHT / 2})`}
-              >
-                1500mm
-              </text>
 
               {/* Placed parts */}
               {placements.map(({ part, x, y }) => (
@@ -405,12 +403,35 @@ export function LandingCanvas() {
                   <path
                     d={part.svgPath}
                     fill={part.color}
-                    fillOpacity={0.2}
+                    fillOpacity={0.3}
                     stroke={part.color}
-                    strokeWidth="2"
+                    strokeWidth="3"
                   />
                 </g>
               ))}
+
+              {/* Corner dimension labels */}
+              <text
+                x={SHEET_WIDTH / 2}
+                y={40}
+                textAnchor="middle"
+                className="fill-muted-foreground"
+                fontFamily="ui-monospace, monospace"
+                fontSize="28"
+              >
+                3000mm
+              </text>
+              <text
+                x={50}
+                y={SHEET_HEIGHT / 2}
+                textAnchor="middle"
+                className="fill-muted-foreground"
+                fontFamily="ui-monospace, monospace"
+                fontSize="28"
+                transform={`rotate(-90, 50, ${SHEET_HEIGHT / 2})`}
+              >
+                1500mm
+              </text>
 
               {/* Empty state */}
               {parts.length === 0 && (
@@ -418,8 +439,8 @@ export function LandingCanvas() {
                   x={SHEET_WIDTH / 2}
                   y={SHEET_HEIGHT / 2}
                   textAnchor="middle"
-                  fill="rgb(63, 63, 70)"
-                  fontFamily="JetBrains Mono, monospace"
+                  className="fill-muted-foreground/50"
+                  fontFamily="ui-monospace, monospace"
                   fontSize="48"
                 >
                   DROP FILES TO PREVIEW
@@ -428,41 +449,43 @@ export function LandingCanvas() {
 
               {/* Utilization indicator */}
               {parts.length > 0 && (
-                <g transform={`translate(${SHEET_WIDTH - 300}, ${SHEET_HEIGHT - 80})`}>
+                <g transform={`translate(${SHEET_WIDTH - 320}, ${SHEET_HEIGHT - 100})`}>
                   <rect
-                    width="280"
-                    height="60"
-                    fill="rgb(24, 24, 27)"
-                    stroke="rgb(63, 63, 70)"
+                    width="300"
+                    height="80"
+                    rx="4"
+                    className="fill-card stroke-border"
                     strokeWidth="1"
                   />
                   <text
                     x="20"
-                    y="25"
-                    fill="rgb(161, 161, 170)"
-                    fontFamily="JetBrains Mono, monospace"
-                    fontSize="14"
+                    y="30"
+                    className="fill-muted-foreground"
+                    fontFamily="ui-monospace, monospace"
+                    fontSize="16"
                   >
-                    UTILIZATION
+                    SHEET UTILIZATION
                   </text>
                   <text
                     x="20"
-                    y="48"
-                    fill={totals.utilization > 0.7 ? "rgb(16, 185, 129)" : "rgb(255, 255, 255)"}
-                    fontFamily="JetBrains Mono, monospace"
-                    fontSize="20"
+                    y="60"
+                    className={totals.utilization > 0.7 ? "fill-primary" : "fill-foreground"}
+                    fontFamily="ui-monospace, monospace"
+                    fontSize="24"
                     fontWeight="bold"
                   >
                     {(totals.utilization * 100).toFixed(1)}%
                   </text>
-                  {/* Mini bar */}
-                  <rect x="150" y="20" width="110" height="30" fill="rgb(39, 39, 42)" />
-                  <rect 
-                    x="150" 
-                    y="20" 
-                    width={Math.min(110, 110 * totals.utilization)} 
-                    height="30" 
-                    fill={totals.utilization > 0.7 ? "rgb(16, 185, 129)" : "rgb(59, 130, 246)"}
+                  {/* Progress bar background */}
+                  <rect x="160" y="25" width="120" height="40" rx="2" className="fill-muted" />
+                  {/* Progress bar fill */}
+                  <rect
+                    x="160"
+                    y="25"
+                    width={Math.min(120, 120 * totals.utilization)}
+                    height="40"
+                    rx="2"
+                    className={totals.utilization > 0.7 ? "fill-primary" : "fill-blue-500"}
                   />
                 </g>
               )}
