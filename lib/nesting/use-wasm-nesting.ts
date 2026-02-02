@@ -5,7 +5,6 @@ import type {
   NestingProgress,
   NestingState,
   NestRequestPayload,
-  NestResultPayload,
   WorkerOutputMessage,
 } from "./worker-types";
 import type { NestingPart, NestingSheet, NestingResult } from "./types";

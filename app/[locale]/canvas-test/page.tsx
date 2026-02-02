@@ -52,7 +52,7 @@ export default function CanvasTestPage() {
       }
     });
 
-    const nestingParts = Array.from(partTypes.entries()).map(([key, data], idx) => ({
+    const nestingParts = Array.from(partTypes.entries()).map(([_key, data], idx) => ({
       id: `part-${idx}`,
       width: data.width,
       height: data.height,

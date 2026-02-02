@@ -10,7 +10,7 @@
  * - Output: READY, PROGRESS, RESULT, ERROR
  */
 
-/// <reference path="./wasm.d.ts" />
+// Type declarations for WASM module are defined inline below
 
 import type {
   WorkerInputMessage,

@@ -6,7 +6,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   getAllOrders,
   updateOrderStatus,
-  type OrderDoc,
   type OrderStatus,
 } from "@/lib/firebase/db/orders";
 import {

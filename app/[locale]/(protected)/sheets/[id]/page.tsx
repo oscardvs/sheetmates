@@ -14,7 +14,7 @@ export default function SheetDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const [sheet, setSheet] = useState<SheetDoc | null>(null);
+  const [_sheet, setSheet] = useState<SheetDoc | null>(null);
   const [parts, setParts] = useState<PartDoc[]>([]);
   const [placements, setPlacements] = useState<NestingPlacement[]>([]);
   const [sheetWidth, setSheetWidth] = useState(2500);

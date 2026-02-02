@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useState, useMemo } from "react";
-import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { parseDxfString, type ParsedDxf } from "@/lib/dxf/parser";
 import { dxfToSvgPath } from "@/lib/dxf/to-svg";
@@ -47,7 +46,6 @@ const PRICE_PER_CM2 = 0.003; // €/cm²
 const PRICE_PER_MM_CUT = 0.002; // €/mm
 
 export function LandingCanvas() {
-  const t = useTranslations("landing");
   const [parts, setParts] = useState<UploadedPart[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
