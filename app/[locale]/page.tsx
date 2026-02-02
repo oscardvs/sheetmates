@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/navbar";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { LandingCanvas } from "@/components/landing-canvas";
 import { LandingFooterLinks } from "@/components/landing-footer-links";
 import { LandingCta } from "@/components/landing-cta";
+import { generatePageMetadata } from "@/lib/seo/metadata";
 import {
   UploadIcon,
   GridFourIcon,
@@ -15,6 +17,35 @@ import {
   UsersIcon,
   CertificateIcon,
 } from "@phosphor-icons/react/dist/ssr";
+
+// SEO metadata for landing page
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  return generatePageMetadata({
+    title: "SheetMates - Community-Driven Laser Cutting Platform",
+    description:
+      "Transform industrial buffer sheets into precision laser-cut parts. Upload DXF files, get instant pricing, and access EU-based CNC manufacturing at maker-friendly prices. No minimums, fast turnaround.",
+    keywords: [
+      "laser cutting service",
+      "sheet metal fabrication",
+      "buffer sheets",
+      "dxf laser cutting",
+      "affordable laser cutting",
+      "CNC manufacturing Europe",
+      "laser cutting Belgium",
+      "prototype fabrication",
+      "small quantity laser cutting",
+      "maker fabrication",
+    ],
+    canonical: `/${locale}`,
+    locale,
+  });
+}
 
 export default function LandingPage() {
   const t = useTranslations("landing");
