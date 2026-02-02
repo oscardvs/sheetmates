@@ -43,9 +43,9 @@ const PART_COLORS = [
 const SHEET_WIDTH = 3000;
 const SHEET_HEIGHT = 1500;
 
-// Estimated pricing (simplified for demo)
-const PRICE_PER_CM2 = 0.003; // €/cm²
-const PRICE_PER_MM_CUT = 0.002; // €/mm
+// Estimated pricing (matches actual engine base rates for steel)
+const PRICE_PER_CM2 = 0.05; // €/cm²
+const PRICE_PER_MM_CUT = 0.01; // €/mm
 
 // Storage key for persisting parts across navigation
 const STORAGE_KEY = "sheetmates_landing_parts";
