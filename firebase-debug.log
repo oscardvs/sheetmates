@@ -1,0 +1,56 @@
+[debug] [2026-02-02T13:48:32.177Z] ----------------------------------------------------------------------
+[debug] [2026-02-02T13:48:32.178Z] Command:       /home/odesha/.nvm/versions/node/v20.20.0/bin/node /home/odesha/.nvm/versions/node/v20.20.0/bin/firebase deploy --only hosting
+[debug] [2026-02-02T13:48:32.179Z] CLI Version:   15.5.1
+[debug] [2026-02-02T13:48:32.179Z] Platform:      linux
+[debug] [2026-02-02T13:48:32.179Z] Node Version:  v20.20.0
+[debug] [2026-02-02T13:48:32.179Z] Time:          Mon Feb 02 2026 14:48:32 GMT+0100 (Central European Standard Time)
+[debug] [2026-02-02T13:48:32.179Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-02-02T13:48:32.652Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-02-02T13:48:32.652Z] > authorizing via signed-in user (osrdevos@gmail.com)
+[debug] [2026-02-02T13:48:32.652Z] [iam] checking project sheetmates for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-02-02T13:48:32.652Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:32.652Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:32.653Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sheetmates:testIamPermissions [none]
+[debug] [2026-02-02T13:48:32.653Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sheetmates:testIamPermissions  x-goog-user-project=sheetmates
+[debug] [2026-02-02T13:48:32.653Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sheetmates:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-02-02T13:48:33.379Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sheetmates:testIamPermissions 200
+[debug] [2026-02-02T13:48:33.379Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sheetmates:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-02-02T13:48:33.379Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:33.379Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:33.380Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sheetmates [none]
+[debug] [2026-02-02T13:48:34.061Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sheetmates 200
+[debug] [2026-02-02T13:48:34.061Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sheetmates {"projectId":"sheetmates","projectNumber":"889704244291","displayName":"sheetmates","name":"projects/sheetmates","resources":{"hostingSite":"sheetmates"},"state":"ACTIVE","etag":"1_a5b791c4-dbcc-4825-b1b9-7068d65c38d2"}
+[debug] [2026-02-02T13:48:35.220Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:35.221Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:35.221Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sheetmates/sites pageToken=&pageSize=10
+[debug] [2026-02-02T13:48:36.410Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sheetmates/sites 200
+[debug] [2026-02-02T13:48:36.410Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sheetmates/sites {"sites":[{"name":"projects/sheetmates/sites/sheetmates","defaultUrl":"https://sheetmates.web.app","appId":"1:889704244291:web:94b0168a292a567444a0f6","type":"DEFAULT_SITE"}]}
+[debug] [2026-02-02T13:48:36.411Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:36.411Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:36.411Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:889704244291:web:94b0168a292a567444a0f6/config [none]
+[debug] [2026-02-02T13:48:36.823Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:889704244291:web:94b0168a292a567444a0f6/config 200
+[debug] [2026-02-02T13:48:36.823Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:889704244291:web:94b0168a292a567444a0f6/config {"projectId":"sheetmates","appId":"1:889704244291:web:94b0168a292a567444a0f6","storageBucket":"sheetmates.firebasestorage.app","apiKey":"AIzaSyDfPXn_09W3iLhZ3QAj6oK3I8j0QDznlik","authDomain":"sheetmates.firebaseapp.com","messagingSenderId":"889704244291","measurementId":"G-ZJZ11X631X","projectNumber":"889704244291","version":"2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2026-02-02T13:48:38.962Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:38.962Z] Checked if tokens are valid: true, expires at: 1770041030438
+[debug] [2026-02-02T13:48:38.962Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sheetmates/sites/sheetmates [none]
+[debug] [2026-02-02T13:48:39.214Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sheetmates/sites/sheetmates 200
+[debug] [2026-02-02T13:48:39.214Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sheetmates/sites/sheetmates {"name":"projects/sheetmates/sites/sheetmates","defaultUrl":"https://sheetmates.web.app","appId":"1:889704244291:web:94b0168a292a567444a0f6","type":"DEFAULT_SITE"}
+[info] ⨯ Unable to acquire lock at /home/odesha/sheetmates/.next/lock, is another instance of next build running?
+
+[info]   Suggestion: If you intended to restart next build, terminate the other process, and then try again.
+
+[debug] [2026-02-02T13:48:40.955Z] Error: ENOENT: no such file or directory, open '/home/odesha/sheetmates/.next/export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.

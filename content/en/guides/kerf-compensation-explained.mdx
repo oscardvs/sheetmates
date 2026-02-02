@@ -1,0 +1,336 @@
+---
+title: "Kerf Compensation in Laser Cutting: When and How to Use It"
+description: "Understand kerf width, why it matters, and when to compensate for accurate laser cutting results. Includes practical examples and CAD techniques."
+keywords:
+  - what is kerf in laser cutting
+  - kerf compensation
+  - laser cutting kerf width
+  - kerf offset
+  - laser cutting tolerance
+  - kerf compensation calculator
+publishDate: "2026-02-02"
+category: "Technical"
+author: "SheetMates"
+---
+
+# Kerf Compensation in Laser Cutting Explained
+
+If you've ever laser cut a part and found the holes are slightly bigger than designed, or your parts are a hair smaller than expected, you've encountered **kerf**.
+
+## What is Kerf?
+
+**Kerf** is the width of material removed by the laser beam during cutting. Think of it as the "saw blade thickness" of laser cutting.
+
+**Typical kerf widths:**
+- Fiber lasers: 0.1mm - 0.2mm
+- CO2 lasers: 0.2mm - 0.4mm
+- Varies by material thickness and type
+
+**Why it happens:**
+The laser beam has a finite width (typically 0.1mm - 0.3mm diameter). When it cuts through material, it vaporizes a thin strip, creating the kerf.
+
+## How Kerf Affects Your Parts
+
+### Internal Features (Holes)
+
+When cutting a hole:
+- Laser removes material from **inside** the hole
+- **Result:** Hole diameter **increases** by the kerf width
+
+**Example:**
+- Design: 10.0mm diameter hole
+- Kerf: 0.2mm
+- Actual result: 10.2mm diameter hole
+
+**Visual:**
+```
+Designed hole: ●---10.0mm---●
+After cutting:  ○--10.2mm--○
+               ^ Laser removed material from inside
+```
+
+### External Features (Parts)
+
+When cutting the outer perimeter:
+- Laser removes material from **outside** the part
+- **Result:** Part dimensions **decrease** by the kerf width
+
+**Example:**
+- Design: 50.0mm square
+- Kerf: 0.2mm
+- Actual result: 49.8mm square
+
+## When to Compensate for Kerf
+
+### ✅ Compensate When:
+
+**1. Tight Tolerances Required**
+- Tolerance: ±0.2mm or tighter
+- Press-fit assemblies
+- Bearing seats
+- Precision jigs
+
+**2. Mating Parts**
+- Tab-and-slot joints
+- Interlocking pieces
+- Mechanical assemblies
+- Multi-part assemblies
+
+**3. High-Volume Production**
+- Consistent part dimensions critical
+- Quality control requirements
+- Customer specifications
+
+### ❌ Don't Compensate When:
+
+**1. General Fabrication**
+- Tolerance: ±1mm or looser
+- Cosmetic parts
+- Enclosures with clearance
+- Brackets with slotted holes
+
+**2. First Prototypes**
+- Test fit first
+- Measure actual kerf
+- Adjust for production run
+
+**3. Using SheetMates Auto-Compensation**
+- We handle kerf compensation automatically
+- No manual adjustment needed
+- Accurate results guaranteed
+
+## How to Compensate in CAD
+
+### Method 1: Offset Command (Recommended)
+
+**Works in:** Fusion 360, SolidWorks, AutoCAD, LibreCAD
+
+**Steps:**
+1. Draw part at **nominal size** (your target dimensions)
+2. Offset **internal features outward** by kerf/2
+3. Offset **external boundaries inward** by kerf/2
+
+**Why kerf/2?** The laser beam center follows your cut path. Half the beam removes material on each side.
+
+**Fusion 360 Example:**
+```
+1. Sketch → Select internal hole
+2. Modify → Offset → 0.1mm outward
+3. Select external profile
+4. Modify → Offset → 0.1mm inward
+```
+
+**AutoCAD Example:**
+```
+Command: OFFSET
+Specify offset distance: 0.1
+Select object: [click hole]
+Specify side: [click inside]
+```
+
+### Method 2: Adjust Dimensions
+
+**Quick math approach:**
+
+**Internal holes:**
+- Target diameter: 10mm
+- Kerf: 0.2mm
+- Design diameter: 9.8mm (10 - 0.2)
+
+**External parts:**
+- Target width: 50mm
+- Kerf: 0.2mm
+- Design width: 50.2mm (50 + 0.2)
+
+**Cons:**
+- Tedious for complex shapes
+- Easy to miss features
+- Hard to verify
+
+## Kerf Width by Material
+
+Different materials and thicknesses produce different kerf widths:
+
+| Material | Thickness | Typical Kerf | Notes |
+|----------|-----------|--------------|-------|
+| **Steel** | 1mm | 0.15mm | Very consistent |
+| **Steel** | 3mm | 0.20mm | Slight increase |
+| **Steel** | 10mm | 0.25mm | Thicker = wider kerf |
+| **Aluminum** | 2mm | 0.25mm | More reflective |
+| **Aluminum** | 6mm | 0.35mm | Wider than steel |
+| **Stainless** | 3mm | 0.20mm | Similar to steel |
+| **Copper** | 3mm | 0.40mm | Highly reflective |
+
+**Rule of thumb:** Thicker material = wider kerf
+
+## Testing Your Kerf
+
+Want to know the exact kerf for your setup?
+
+**Test Piece Method:**
+
+1. **Cut a square:**
+   - Design: 100.00mm × 100.00mm
+   - No compensation
+
+2. **Measure result:**
+   - Use digital calipers
+   - Measure to 0.01mm precision
+   - Result: 99.80mm × 99.80mm
+
+3. **Calculate kerf:**
+   - Kerf = Designed - Measured
+   - Kerf = 100.00 - 99.80 = 0.20mm
+
+4. **Cut a hole:**
+   - Design: 20.00mm diameter
+   - Measure result: 20.20mm
+   - Kerf confirmed: 0.20mm
+
+**Pro tip:** Test with your actual material and thickness.
+
+## Common Kerf Mistakes
+
+### Mistake #1: Over-Compensating
+
+**Problem:** Applying kerf compensation twice
+
+**How it happens:**
+- Software applies compensation
+- Laser machine also compensates
+- Result: Double compensation
+
+**Solution:**
+- Check CAM software settings
+- SheetMates handles this automatically
+
+### Mistake #2: Wrong Direction
+
+**Problem:** Offsetting the wrong way
+
+**Internal holes:** Offset OUTWARD (make hole smaller in design)
+**External parts:** Offset INWARD (make part bigger in design)
+
+**Visual Check:**
+- Internal features: Design should be **smaller** than target
+- External features: Design should be **larger** than target
+
+### Mistake #3: Forgetting Corners
+
+**Problem:** Sharp corners lose material differently
+
+**Solution:**
+- Internal corners need **larger** radius after compensation
+- External corners need **smaller** radius
+- Test fit critical corners first
+
+## Kerf Compensation Calculator
+
+**Quick reference:**
+
+**For a 10mm hole with 0.2mm kerf:**
+- Without compensation: 10.2mm result
+- With compensation: Design at 9.8mm → 10.0mm result
+
+**For a 50mm part with 0.2mm kerf:**
+- Without compensation: 49.8mm result
+- With compensation: Design at 50.2mm → 50.0mm result
+
+**General formula:**
+```
+Internal feature: DesignSize = TargetSize - Kerf
+External feature: DesignSize = TargetSize + Kerf
+```
+
+## CAD Software Specific Tips
+
+### Fusion 360
+
+**Manufacturing Workspace:**
+1. Create CAM setup
+2. Set kerf compensation: 0.1mm (for 0.2mm kerf)
+3. Direction: "Inside" for holes, "Outside" for external
+
+### SolidWorks
+
+**Sheet Metal:**
+1. Tools → Options → Document Properties
+2. Sheet Metal → Laser/Plasma
+3. Kerf width: 0.2mm
+4. Auto-applies to cut paths
+
+### AutoCAD / LibreCAD
+
+**Manual offset:**
+1. Use OFFSET command
+2. Specify distance: kerf/2
+3. Manually select direction for each feature
+
+## Real-World Example
+
+**Scenario:** Mounting bracket with 4× M6 bolt holes
+
+**Requirements:**
+- M6 bolts: 6mm diameter
+- Clearance fit: 6.5mm holes
+- Tolerance: ±0.1mm
+- Material: 3mm steel (kerf ~0.2mm)
+
+**Without compensation:**
+- Design: 6.5mm holes
+- Result: 6.7mm holes (too loose)
+
+**With compensation:**
+- Design: 6.3mm holes (6.5 - 0.2)
+- Result: 6.5mm holes ✓ Perfect fit
+
+## SheetMates Auto-Compensation
+
+**We handle kerf compensation automatically:**
+
+✅ No manual offset needed
+✅ Accurate results guaranteed
+✅ Material-specific kerf values
+✅ Thickness-aware compensation
+✅ Upload standard DXF files
+
+**How it works:**
+1. Upload your DXF at **target dimensions**
+2. Select material and thickness
+3. Our system applies optimal kerf compensation
+4. Parts cut to exact specifications
+
+## Frequently Asked Questions
+
+**Q: Should I always compensate for kerf?**
+A: No. For general fabrication with loose tolerances (±1mm), kerf doesn't matter. Compensate only when precision is critical.
+
+**Q: Is kerf the same for all materials?**
+A: No. Aluminum typically has wider kerf than steel. Copper even wider. Thicker materials also have wider kerf.
+
+**Q: Can I use the same kerf value for all thicknesses?**
+A: Not ideal. Kerf increases with thickness. Test each material/thickness combination for best results.
+
+**Q: What if I don't know the kerf width?**
+A: Cut a test piece and measure. Or use SheetMates—we know the kerf for each material/thickness combo.
+
+**Q: Does kerf affect nesting?**
+A: Yes, slightly. Parts with compensation are slightly different sizes, affecting how tightly they pack. SheetMates optimizes for this.
+
+## Summary
+
+**Kerf compensation in 3 rules:**
+
+1. **Internal features:** Design smaller (reduce by kerf)
+2. **External features:** Design larger (increase by kerf)
+3. **Only compensate when precision matters** (±0.2mm or tighter)
+
+**Using SheetMates?** Skip manual compensation—we handle it automatically for accurate results every time.
+
+---
+
+*Ready to cut precision parts? Upload your DXF and let SheetMates handle kerf compensation automatically.*
+
+**Related Guides:**
+- [Complete Guide to DXF Laser Cutting](/guides/dxf-laser-cutting-complete-guide)
+- [Minimum Hole Size Guide](/guides/minimum-hole-size-laser-cutting)

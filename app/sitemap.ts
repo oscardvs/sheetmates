@@ -35,6 +35,12 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { path: "/materials/stainless", priority: 0.8, changeFrequency: "weekly" },
   { path: "/materials/copper", priority: 0.8, changeFrequency: "weekly" },
 
+  // Content pages (educational, SEO-focused)
+  { path: "/guides", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/guides/dxf-laser-cutting-complete-guide", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/guides/kerf-compensation-explained", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/guides/minimum-hole-size-laser-cutting", priority: 0.7, changeFrequency: "monthly" },
+
   // Auth pages (lower priority, less frequent changes)
   { path: "/login", priority: 0.3, changeFrequency: "monthly" },
   { path: "/signup", priority: 0.3, changeFrequency: "monthly" },
