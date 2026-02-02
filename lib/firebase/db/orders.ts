@@ -12,6 +12,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../config";
 
+export type OrderStatus = "pending" | "paid" | "processing" | "shipped" | "delivered";
+
 export interface OrderItem {
   partId: string;
   fileName: string;
@@ -23,13 +25,15 @@ export interface OrderItem {
 export interface OrderDoc {
   id: string;
   userId: string;
+  userEmail?: string;
   items: OrderItem[];
   subtotal: number;
   vat: number;
   total: number;
-  status: "pending" | "paid" | "processing" | "shipped" | "delivered";
+  status: OrderStatus;
   stripeSessionId: string | null;
   createdAt: unknown;
+  updatedAt?: unknown;
 }
 
 const ordersCol = collection(db, "orders");
@@ -70,4 +74,24 @@ export async function updateOrder(
   data: Partial<Omit<OrderDoc, "id" | "createdAt">>
 ): Promise<void> {
   await updateDoc(doc(db, "orders", id), data);
+}
+
+export async function getOrdersByStatus(status: OrderStatus): Promise<OrderDoc[]> {
+  const q = query(
+    ordersCol,
+    where("status", "==", status),
+    orderBy("createdAt", "desc")
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as OrderDoc);
+}
+
+export async function updateOrderStatus(
+  orderId: string,
+  status: OrderStatus
+): Promise<void> {
+  await updateDoc(doc(db, "orders", orderId), {
+    status,
+    updatedAt: serverTimestamp(),
+  });
 }
