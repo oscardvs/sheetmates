@@ -216,6 +216,13 @@ export function createServiceSchema() {
  * Helper to inject schema into page head
  * Usage: <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
  */
-export function schemaToScript(schema: WithContext<any>): string {
+export function schemaToScript(
+  schema:
+    | WithContext<Organization>
+    | WithContext<Product>
+    | WithContext<BreadcrumbList>
+    | WithContext<FAQPage>
+    | WithContext<Article>
+): string {
   return JSON.stringify(schema);
 }

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Navbar } from "@/components/navbar";
 import { AuthProvider } from "@/components/providers/auth-provider";
@@ -34,7 +33,6 @@ export async function generateMetadata({
 }
 
 export default function MaterialsPage() {
-  const t = useTranslations("materials");
 
   const materials = [
     {
@@ -103,7 +101,7 @@ export default function MaterialsPage() {
               {materials.map((material) => (
                 <Link
                   key={material.id}
-                  href={`/materials/${material.id}` as any}
+                  href={`/materials/${material.id}` as never}
                   className="group relative border border-border bg-card/50 p-8 transition-all hover:border-primary/50 hover:bg-card"
                 >
                   <div className="absolute -top-3 left-6 bg-background px-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">

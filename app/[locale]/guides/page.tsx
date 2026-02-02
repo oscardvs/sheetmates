@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Navbar } from "@/components/navbar";
 import { AuthProvider } from "@/components/providers/auth-provider";
@@ -38,7 +37,6 @@ export default async function GuidesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = useTranslations("guides");
   const guides = getAllGuides(locale);
 
   return (
@@ -85,7 +83,7 @@ export default async function GuidesPage({
                 {guides.map((guide) => (
                   <Link
                     key={guide.slug}
-                    href={`/guides/${guide.slug}` as any}
+                    href={`/guides/${guide.slug}` as never}
                     className="group relative border border-border bg-card/50 p-6 transition-all hover:border-primary/50 hover:bg-card"
                   >
                     <div className="absolute -top-3 left-6 bg-background px-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
