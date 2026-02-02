@@ -3,39 +3,32 @@ import { test, expect } from "@playwright/test";
 test.describe("Homepage", () => {
   test("should load homepage successfully", async ({ page }) => {
     await page.goto("/en");
-    
+
     // Check that the page loaded
     await expect(page).toHaveTitle(/SheetMates/i);
   });
 
   test("should display navigation", async ({ page }) => {
     await page.goto("/en");
-    
-    // Check for navigation elements
-    const nav = page.locator("nav");
-    await expect(nav).toBeVisible();
+
+    // Check for header navigation (navbar uses <header> element)
+    const header = page.locator("header");
+    await expect(header).toBeVisible();
   });
 
   test("should have language switcher", async ({ page }) => {
     await page.goto("/en");
-    
-    // Look for language switching capability
-    // The specific selector depends on the implementation
-    const langSwitcher = page.locator('[data-testid="language-switcher"]');
-    
-    // If not found by testid, try common patterns
-    if (!(await langSwitcher.isVisible().catch(() => false))) {
-      // Try finding by text
-      const enLink = page.getByText(/english|en/i).first();
-      await expect(enLink).toBeVisible();
-    }
+
+    // Look for language select dropdown
+    const langSwitcher = page.locator("header select");
+    await expect(langSwitcher).toBeVisible();
   });
 
   test("should navigate to login page", async ({ page }) => {
     await page.goto("/en");
-    
-    // Find and click login link
-    const loginLink = page.getByRole("link", { name: /login|sign in/i });
+
+    // Find and click login link in header
+    const loginLink = page.locator("header").getByRole("link", { name: /login|sign in/i });
     await expect(loginLink).toBeVisible();
     await loginLink.click();
     await expect(page).toHaveURL(/\/login/);
@@ -43,9 +36,9 @@ test.describe("Homepage", () => {
 
   test("should navigate to pricing page", async ({ page }) => {
     await page.goto("/en");
-    
-    // Find and click pricing link
-    const pricingLink = page.getByRole("link", { name: /pricing/i });
+
+    // Find and click pricing link in header (not footer)
+    const pricingLink = page.locator("header").getByRole("link", { name: /pricing/i });
     await expect(pricingLink).toBeVisible();
     await pricingLink.click();
     await expect(page).toHaveURL(/\/pricing/);
@@ -55,26 +48,29 @@ test.describe("Homepage", () => {
 test.describe("Locale Routing", () => {
   test("should redirect root to default locale", async ({ page }) => {
     await page.goto("/");
-    
+
+    // Wait for navigation to complete
+    await page.waitForURL(/\/(en|cs|fr)/, { timeout: 5000 });
+
     // Should redirect to /en or default locale
-    await expect(page.url()).toMatch(/\/(en|cs|fr)/);
+    expect(page.url()).toMatch(/\/(en|cs|fr)/);
   });
 
   test("should load Czech locale", async ({ page }) => {
     await page.goto("/cs");
-    
+
     await expect(page).toHaveURL(/\/cs/);
   });
 
   test("should load French locale", async ({ page }) => {
     await page.goto("/fr");
-    
+
     await expect(page).toHaveURL(/\/fr/);
   });
 
   test("should show 404 for invalid routes", async ({ page }) => {
     const response = await page.goto("/en/this-page-does-not-exist");
-    
+
     // Should return 404 or show not-found page
     expect(response?.status()).toBe(404);
   });
