@@ -76,6 +76,19 @@ export function Navbar() {
             </Link>
           )}
 
+          {/* Admin link for admin users */}
+          {user && userDoc?.role === "admin" && (
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 px-3 py-2 font-mono text-sm text-amber-600 transition-colors hover:text-amber-500 dark:text-amber-500 dark:hover:text-amber-400"
+            >
+              {t("admin")}
+              <span className="rounded bg-amber-500/20 px-1 py-0.5 text-[10px] font-medium">
+                ●
+              </span>
+            </Link>
+          )}
+
           <LanguageSwitcher />
           <ThemeSwitcher />
 
@@ -175,6 +188,19 @@ export function Navbar() {
 
             {user ? (
               <>
+                {/* Admin link for mobile */}
+                {userDoc?.role === "admin" && (
+                  <Link
+                    href="/admin"
+                    className="flex items-center gap-2 px-3 py-2 font-mono text-sm text-amber-600 hover:text-amber-500 dark:text-amber-500 dark:hover:text-amber-400"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {t("admin")}
+                    <span className="rounded bg-amber-500/20 px-1 py-0.5 text-[10px] font-medium">
+                      ●
+                    </span>
+                  </Link>
+                )}
                 <Link
                   href="/account/orders"
                   className="flex items-center gap-2 px-3 py-2 font-mono text-sm text-muted-foreground hover:text-foreground"
