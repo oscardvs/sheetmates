@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import { getSheet, type SheetDoc } from "@/lib/firebase/db/sheets";
-import { getPartsByStatus, type PartDoc } from "@/lib/firebase/db/parts";
+import { getPartsByStatus, getPartsBySheetId, type PartDoc } from "@/lib/firebase/db/parts";
 import { SheetViewer } from "@/components/sheet-viewer";
 import { NestingControls } from "@/components/nesting-controls";
 import { shelfPack } from "@/lib/nesting";
@@ -17,7 +17,8 @@ export default function SheetDetailPage({
 }) {
   const { id } = use(params);
   const [_sheet, setSheet] = useState<SheetDoc | null>(null);
-  const [parts, setParts] = useState<PartDoc[]>([]);
+  const [pendingParts, setPendingParts] = useState<PartDoc[]>([]);
+  const [sheetParts, setSheetParts] = useState<PartDoc[]>([]);
   const [placements, setPlacements] = useState<NestingPlacement[]>([]);
   const [sheetWidth, setSheetWidth] = useState(2500);
   const [sheetHeight, setSheetHeight] = useState(1250);
@@ -26,15 +27,21 @@ export default function SheetDetailPage({
   const [utilization, setUtilization] = useState(0);
 
   useEffect(() => {
-    getSheet(id).then((s) => {
-      if (s) {
-        setSheet(s);
-        setSheetWidth(s.width);
-        setSheetHeight(s.height);
-        setMaterial(s.material);
-        if (s.placements.length > 0) {
+    async function loadData() {
+      const [sheet, pending, onSheet] = await Promise.all([
+        getSheet(id),
+        getPartsByStatus("pending"),
+        getPartsBySheetId(id),
+      ]);
+
+      if (sheet) {
+        setSheet(sheet);
+        setSheetWidth(sheet.width);
+        setSheetHeight(sheet.height);
+        setMaterial(sheet.material);
+        if (sheet.placements.length > 0) {
           setPlacements(
-            s.placements.map((p) => ({
+            sheet.placements.map((p) => ({
               partId: p.partId,
               sheetIndex: 0,
               x: p.x,
@@ -44,24 +51,38 @@ export default function SheetDetailPage({
               rotation: p.rotation,
             }))
           );
-          setUtilization(s.utilization);
+          setUtilization(sheet.utilization);
         }
       }
-    });
-    getPartsByStatus("pending").then(setParts);
+
+      setPendingParts(pending);
+      setSheetParts(onSheet);
+    }
+
+    loadData();
   }, [id]);
 
   function handleRunNesting() {
-    const nestingParts = parts.map((p) => ({
-      id: p.id,
-      width: p.boundingBox.width,
-      height: p.boundingBox.height,
-      quantity: p.quantity,
-      svgPath: p.svgPath,
-    }));
+    // Combine parts already on the sheet with pending parts
+    const allParts = [
+      ...sheetParts.map((p) => ({
+        id: p.id,
+        width: p.boundingBox.width,
+        height: p.boundingBox.height,
+        quantity: p.quantity,
+        svgPath: p.svgPath,
+      })),
+      ...pendingParts.map((p) => ({
+        id: p.id,
+        width: p.boundingBox.width,
+        height: p.boundingBox.height,
+        quantity: p.quantity,
+        svgPath: p.svgPath,
+      })),
+    ];
 
     const result = shelfPack(
-      nestingParts,
+      allParts,
       { width: sheetWidth, height: sheetHeight },
       kerf
     );
@@ -73,8 +94,12 @@ export default function SheetDetailPage({
     setUtilization(result.utilization[0] || 0);
   }
 
+  // Build SVG paths from both sheet parts and pending parts
   const partSvgPaths: Record<string, string> = {};
-  for (const p of parts) {
+  for (const p of sheetParts) {
+    partSvgPaths[p.id] = p.svgPath;
+  }
+  for (const p of pendingParts) {
     partSvgPaths[p.id] = p.svgPath;
   }
 
@@ -100,7 +125,7 @@ export default function SheetDetailPage({
           </div>
         </div>
         <div className="font-mono text-xs text-muted-foreground">
-          {parts.length} pending {parts.length === 1 ? "part" : "parts"}
+          {sheetParts.length} on sheet, {pendingParts.length} pending
         </div>
       </div>
 

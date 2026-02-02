@@ -58,6 +58,12 @@ export async function getPartsByStatus(
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as PartDoc);
 }
 
+export async function getPartsBySheetId(sheetId: string): Promise<PartDoc[]> {
+  const q = query(partsCol, where("sheetId", "==", sheetId));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as PartDoc);
+}
+
 export async function updatePart(
   id: string,
   data: Partial<Omit<PartDoc, "id" | "createdAt">>

@@ -6,24 +6,22 @@ import { useRouter } from "@/i18n/navigation";
 import { DxfUploader, type UploadedPart } from "@/components/dxf-uploader";
 import { useAuth } from "@/components/providers/auth-provider";
 import { createPart, getPart, type PartDoc } from "@/lib/firebase/db/parts";
+import { getAvailableInventory, type AvailableInventory } from "@/lib/firebase/db/sheets";
 import { uploadDxfFile } from "@/lib/firebase/storage";
 import { autoNestParts, NoMatchingSheetError } from "@/lib/nesting/auto-nest";
 import { toast } from "sonner";
-import { UploadIcon, SpinnerIcon, CheckCircleIcon, CaretDownIcon } from "@phosphor-icons/react";
+import { UploadIcon, SpinnerIcon, CheckCircleIcon, CaretDownIcon, BellIcon } from "@phosphor-icons/react";
 
 // Storage key matching landing-canvas
 const LANDING_STORAGE_KEY = "sheetmates_landing_parts";
 
-// Material options
-const MATERIALS = [
-  { value: "steel", label: "Steel" },
-  { value: "stainless", label: "Stainless Steel" },
-  { value: "aluminum", label: "Aluminum" },
-  { value: "copper", label: "Copper" },
-] as const;
-
-// Thickness options in mm
-const THICKNESSES = [0.5, 1, 1.5, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20] as const;
+// Material display labels
+const MATERIAL_LABELS: Record<string, string> = {
+  steel: "Steel",
+  stainless: "Stainless Steel",
+  aluminum: "Aluminum",
+  copper: "Copper",
+};
 
 interface RestoredPart {
   id: string;
@@ -47,8 +45,34 @@ export default function UploadPage() {
   const [uploading, setUploading] = useState(false);
   const [restoredParts, setRestoredParts] = useState<RestoredPart[]>([]);
   const [showRestored, setShowRestored] = useState(false);
-  const [material, setMaterial] = useState<string>("steel");
-  const [thickness, setThickness] = useState<number>(2);
+  const [inventory, setInventory] = useState<AvailableInventory | null>(null);
+  const [loadingInventory, setLoadingInventory] = useState(true);
+  const [material, setMaterial] = useState<string>("");
+  const [thickness, setThickness] = useState<number>(0);
+
+  // Load available inventory on mount
+  useEffect(() => {
+    async function loadInventory() {
+      try {
+        const inv = await getAvailableInventory();
+        setInventory(inv);
+        // Set defaults to first available option
+        if (inv.materials.length > 0) {
+          const firstMaterial = inv.materials[0];
+          setMaterial(firstMaterial);
+          const thicknesses = inv.thicknessesByMaterial[firstMaterial];
+          if (thicknesses && thicknesses.length > 0) {
+            setThickness(thicknesses[0]);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load inventory:", err);
+      } finally {
+        setLoadingInventory(false);
+      }
+    }
+    loadInventory();
+  }, []);
 
   // Check for parts from landing page on mount
   useEffect(() => {
@@ -67,6 +91,22 @@ export default function UploadPage() {
       sessionStorage.removeItem(LANDING_STORAGE_KEY);
     }
   }, []);
+
+  // Update thickness when material changes
+  function handleMaterialChange(newMaterial: string) {
+    setMaterial(newMaterial);
+    // Reset thickness to first available for this material
+    if (inventory) {
+      const thicknesses = inventory.thicknessesByMaterial[newMaterial];
+      if (thicknesses && thicknesses.length > 0) {
+        setThickness(thicknesses[0]);
+      }
+    }
+  }
+
+  // Get available thicknesses for selected material
+  const availableThicknesses = inventory?.thicknessesByMaterial[material] || [];
+  const hasInventory = inventory && inventory.materials.length > 0;
 
   async function handlePartsReady(parts: UploadedPart[]) {
     if (!user) return;
@@ -223,48 +263,69 @@ export default function UploadPage() {
           </span>
           <div className="h-px flex-1 bg-border" />
         </div>
-        <div className="flex flex-wrap gap-4">
-          {/* Material selector */}
-          <div className="flex-1 min-w-[140px]">
-            <label className="block font-mono text-xs text-muted-foreground mb-1.5">
-              {t("material")}
-            </label>
-            <div className="relative">
-              <select
-                value={material}
-                onChange={(e) => setMaterial(e.target.value)}
-                className="w-full appearance-none border border-border bg-background px-3 py-2 pr-8 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
-              >
-                {MATERIALS.map((m) => (
-                  <option key={m.value} value={m.value}>
-                    {m.label}
-                  </option>
-                ))}
-              </select>
-              <CaretDownIcon className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+
+        {loadingInventory ? (
+          <div className="flex items-center justify-center py-4">
+            <SpinnerIcon className="h-5 w-5 animate-spin text-muted-foreground" />
+          </div>
+        ) : !hasInventory ? (
+          <div className="border border-amber-500/30 bg-amber-500/10 p-4">
+            <div className="flex items-start gap-3">
+              <BellIcon className="h-5 w-5 shrink-0 text-amber-500" weight="fill" />
+              <div>
+                <p className="font-mono text-sm font-medium text-foreground">
+                  {t("noInventory")}
+                </p>
+                <p className="mt-1 font-mono text-xs text-muted-foreground">
+                  {t("noInventoryDescription")}
+                </p>
+              </div>
             </div>
           </div>
-          {/* Thickness selector */}
-          <div className="flex-1 min-w-[140px]">
-            <label className="block font-mono text-xs text-muted-foreground mb-1.5">
-              {t("thickness")}
-            </label>
-            <div className="relative">
-              <select
-                value={thickness}
-                onChange={(e) => setThickness(Number(e.target.value))}
-                className="w-full appearance-none border border-border bg-background px-3 py-2 pr-8 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
-              >
-                {THICKNESSES.map((th) => (
-                  <option key={th} value={th}>
-                    {th} mm
-                  </option>
-                ))}
-              </select>
-              <CaretDownIcon className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        ) : (
+          <div className="flex flex-wrap gap-4">
+            {/* Material selector */}
+            <div className="flex-1 min-w-[140px]">
+              <label className="block font-mono text-xs text-muted-foreground mb-1.5">
+                {t("material")}
+              </label>
+              <div className="relative">
+                <select
+                  value={material}
+                  onChange={(e) => handleMaterialChange(e.target.value)}
+                  className="w-full appearance-none border border-border bg-background px-3 py-2 pr-8 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
+                >
+                  {inventory.materials.map((m) => (
+                    <option key={m} value={m}>
+                      {MATERIAL_LABELS[m] || m}
+                    </option>
+                  ))}
+                </select>
+                <CaretDownIcon className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              </div>
+            </div>
+            {/* Thickness selector */}
+            <div className="flex-1 min-w-[140px]">
+              <label className="block font-mono text-xs text-muted-foreground mb-1.5">
+                {t("thickness")}
+              </label>
+              <div className="relative">
+                <select
+                  value={thickness}
+                  onChange={(e) => setThickness(Number(e.target.value))}
+                  className="w-full appearance-none border border-border bg-background px-3 py-2 pr-8 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
+                >
+                  {availableThicknesses.map((th) => (
+                    <option key={th} value={th}>
+                      {th} mm
+                    </option>
+                  ))}
+                </select>
+                <CaretDownIcon className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {uploading ? (

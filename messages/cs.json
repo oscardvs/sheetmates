@@ -153,7 +153,9 @@
     "unitConverted": "Rozměry převedeny z {unit} na mm",
     "partsTooLarge": "{count} díl(y) příliš velký pro standardní plechy",
     "nestedSuccess": "Díly umístěny na plech — {utilization}% využití",
-    "noMatchingSheet": "Žádný volný {material} {thickness}mm plech není k dispozici. Díly uloženy do fronty."
+    "noMatchingSheet": "Žádný volný {material} {thickness}mm plech není k dispozici. Díly uloženy do fronty.",
+    "noInventory": "Momentálně nejsou k dispozici žádné plechy",
+    "noInventoryDescription": "Ve skladu nejsou žádné otevřené plechy. Vraťte se později nebo nás kontaktujte ohledně nadcházejících dodávek."
   },
   "sheets": {
     "title": "Plechy",

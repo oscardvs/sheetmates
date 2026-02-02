@@ -153,7 +153,9 @@
     "unitConverted": "Dimensions converted from {unit} to mm",
     "partsTooLarge": "{count} part(s) too large for standard sheets",
     "nestedSuccess": "Parts nested onto sheet — {utilization}% utilization",
-    "noMatchingSheet": "No open {material} {thickness}mm sheet available. Parts saved to queue."
+    "noMatchingSheet": "No open {material} {thickness}mm sheet available. Parts saved to queue.",
+    "noInventory": "No sheets currently available",
+    "noInventoryDescription": "There are no open sheets in inventory. Check back later or contact us about upcoming drops."
   },
   "sheets": {
     "title": "Sheets",

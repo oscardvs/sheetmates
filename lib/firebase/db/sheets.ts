@@ -7,6 +7,8 @@ import {
   updateDoc,
   deleteDoc,
   serverTimestamp,
+  query,
+  where,
 } from "firebase/firestore";
 import { db } from "../config";
 
@@ -74,4 +76,43 @@ export async function updateSheet(
 
 export async function deleteSheet(id: string): Promise<void> {
   await deleteDoc(doc(db, "sheets", id));
+}
+
+export interface AvailableInventory {
+  materials: string[];
+  thicknessesByMaterial: Record<string, number[]>;
+}
+
+/**
+ * Get available inventory from open sheets.
+ * Returns unique materials and their available thicknesses.
+ */
+export async function getAvailableInventory(): Promise<AvailableInventory> {
+  const q = query(sheetsCol, where("status", "==", "open"));
+  const snap = await getDocs(q);
+
+  const materials = new Set<string>();
+  const thicknessesByMaterial: Record<string, Set<number>> = {};
+
+  for (const docSnap of snap.docs) {
+    const data = docSnap.data();
+    const material = data.material as string;
+    const thickness = data.thickness as number;
+
+    materials.add(material);
+    if (!thicknessesByMaterial[material]) {
+      thicknessesByMaterial[material] = new Set();
+    }
+    thicknessesByMaterial[material].add(thickness);
+  }
+
+  return {
+    materials: Array.from(materials).sort(),
+    thicknessesByMaterial: Object.fromEntries(
+      Object.entries(thicknessesByMaterial).map(([m, t]) => [
+        m,
+        Array.from(t).sort((a, b) => a - b),
+      ])
+    ),
+  };
 }
