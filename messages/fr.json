@@ -14,7 +14,9 @@
     "admin": "Admin",
     "login": "Se connecter",
     "signup": "S'inscrire",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "mobileMenuOpen": "Ouvrir le menu de navigation",
+    "mobileMenuClose": "Fermer le menu de navigation"
   },
   "landing": {
     "hero": {
@@ -425,7 +427,8 @@
   "cookieConsent": {
     "message": "Nous utilisons des cookies essentiels pour le fonctionnement du site et les paiements sécurisés.",
     "accept": "Accepter",
-    "learnMore": "En savoir plus"
+    "learnMore": "En savoir plus",
+    "learnMoreAriaLabel": "En savoir plus sur notre politique de cookies"
   },
   "contact": {
     "badge": "NOUS CONTACTER",

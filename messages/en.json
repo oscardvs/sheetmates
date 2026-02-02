@@ -14,7 +14,9 @@
     "admin": "Admin",
     "login": "Log in",
     "signup": "Sign up",
-    "logout": "Log out"
+    "logout": "Log out",
+    "mobileMenuOpen": "Open navigation menu",
+    "mobileMenuClose": "Close navigation menu"
   },
   "landing": {
     "hero": {
@@ -425,7 +427,8 @@
   "cookieConsent": {
     "message": "We use essential cookies for site functionality and secure payments.",
     "accept": "Accept",
-    "learnMore": "Learn more"
+    "learnMore": "Learn more",
+    "learnMoreAriaLabel": "Learn more about our cookie policy"
   },
   "contact": {
     "badge": "GET IN TOUCH",

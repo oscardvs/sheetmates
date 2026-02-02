@@ -14,7 +14,9 @@
     "admin": "Admin",
     "login": "Přihlásit se",
     "signup": "Registrace",
-    "logout": "Odhlásit se"
+    "logout": "Odhlásit se",
+    "mobileMenuOpen": "Otevřít navigační menu",
+    "mobileMenuClose": "Zavřít navigační menu"
   },
   "landing": {
     "hero": {
@@ -425,7 +427,8 @@
   "cookieConsent": {
     "message": "Používáme nezbytné cookies pro fungování webu a bezpečné platby.",
     "accept": "Přijmout",
-    "learnMore": "Více informací"
+    "learnMore": "Více informací",
+    "learnMoreAriaLabel": "Více informací o zásadách cookies"
   },
   "contact": {
     "badge": "KONTAKTUJTE NÁS",

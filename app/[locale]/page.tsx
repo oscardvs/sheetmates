@@ -195,19 +195,19 @@ export default function LandingPage() {
           <div className="mx-auto max-w-6xl px-4 py-16">
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
               <div className="text-center">
-                <div className="font-mono text-4xl font-bold text-primary">3000</div>
+                <div className="font-mono text-4xl font-bold text-foreground">3000</div>
                 <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.sheetWidth")}</div>
               </div>
               <div className="text-center">
-                <div className="font-mono text-4xl font-bold text-primary">0.1</div>
+                <div className="font-mono text-4xl font-bold text-foreground">0.1</div>
                 <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.precision")}</div>
               </div>
               <div className="text-center">
-                <div className="font-mono text-4xl font-bold text-primary">85%</div>
+                <div className="font-mono text-4xl font-bold text-foreground">85%</div>
                 <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.utilization")}</div>
               </div>
               <div className="text-center">
-                <div className="font-mono text-4xl font-bold text-primary">EU</div>
+                <div className="font-mono text-4xl font-bold text-foreground">EU</div>
                 <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.manufactured")}</div>
               </div>
             </div>
