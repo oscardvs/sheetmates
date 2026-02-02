@@ -387,5 +387,434 @@
   "playground": {
     "upload": "Nahrát",
     "settings": "Nastavení"
+  },
+  "auction": {
+    "floorReached": "Minimální cena",
+    "nextDrop": "Další snížení",
+    "priceDropping": "Cena rychle klesá!"
+  },
+  "viability": {
+    "sheetViability": "Životaschopnost plechu",
+    "target": "Cíl",
+    "readyToCut": "Připraveno k řezání!",
+    "waitingForParticipants": "Čeká na účastníky",
+    "participants": "účastníků",
+    "busDriverDescription": "Zaplaťte za okamžitou výrobu",
+    "forceRun": "Vynutit spuštění"
+  },
+  "footer": {
+    "rights": "Všechna práva vyhrazena.",
+    "help": "Nápověda",
+    "legal": "Právní",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "pricing": "Ceník",
+    "privacy": "Ochrana soukromí",
+    "terms": "Obchodní podmínky",
+    "cookies": "Zásady cookies"
+  },
+  "cookieConsent": {
+    "message": "Používáme nezbytné cookies pro fungování webu a bezpečné platby.",
+    "accept": "Přijmout",
+    "learnMore": "Více informací"
+  },
+  "contact": {
+    "badge": "KONTAKTUJTE NÁS",
+    "title": "Kontaktujte nás",
+    "subtitle": "Máte otázku, potřebujete cenovou nabídku nebo chcete probrat projekt? Jsme tu, abychom pomohli.",
+    "fields": {
+      "reason": {
+        "label": "Důvod kontaktu",
+        "options": {
+          "general": "Obecný dotaz",
+          "quote": "Žádost o cenovou nabídku",
+          "orderSupport": "Podpora objednávky",
+          "technical": "Technický problém",
+          "other": "Jiné"
+        }
+      },
+      "name": {
+        "label": "Jméno",
+        "placeholder": "Vaše jméno"
+      },
+      "email": {
+        "label": "E-mail",
+        "placeholder": "vas@priklad.cz"
+      },
+      "orderReference": {
+        "label": "Reference objednávky",
+        "placeholder": "např. ORD-12345"
+      },
+      "message": {
+        "label": "Zpráva",
+        "placeholder": "Řekněte nám, jak vám můžeme pomoci..."
+      }
+    },
+    "submit": "Odeslat zprávu",
+    "submitting": "Odesílání...",
+    "success": "Zpráva úspěšně odeslána!",
+    "error": "Odeslání se nezdařilo. Zkuste to prosím znovu.",
+    "successTitle": "Zpráva odeslána",
+    "successMessage": "Děkujeme za kontakt. Odpovíme vám do 24-48 hodin.",
+    "sendAnother": "Odeslat další zprávu",
+    "directEmail": "Nebo nám napište přímo"
+  },
+  "faq": {
+    "badge": "CENTRUM NÁPOVĚDY",
+    "title": "Často kladené otázky",
+    "subtitle": "Najděte odpovědi na běžné otázky o naší službě laserového řezání, cenách a doručení.",
+    "categories": {
+      "gettingStarted": {
+        "title": "Začínáme",
+        "items": [
+          {
+            "question": "Co je SheetMates?",
+            "answer": "SheetMates je kolaborativní platforma pro laserové řezání, kde více uživatelů sdílí plech a snižuje tak náklady. Spojujeme díly od různých makerů na sdílených plechách, takže platíte pouze za materiál, který skutečně použijete."
+          },
+          {
+            "question": "Jak to funguje?",
+            "answer": "Nahrajte své DXF soubory a náš systém vypočítá plochu a délku řezu. Vaše díly jsou složeny s ostatními na sdílených plechách. Jakmile plech dosáhne 85% využití, jde do výroby. Platíte pouze svůj podíl na materiálu a nákladech na řezání."
+          },
+          {
+            "question": "Potřebuji účet, abych mohl začít?",
+            "answer": "Můžete prozkoumat a nahrávat soubory bez účtu, ale budete ho potřebovat k zadání objednávky. Registrace je zdarma a trvá jen minutu."
+          },
+          {
+            "question": "Jaké formáty souborů přijímáte?",
+            "answer": "Přijímáme DXF soubory (AutoCAD R12-R2018). Pro nejlepší výsledky exportujte své návrhy s polyčarami a ujistěte se, že všechny řezné dráhy jsou na vrstvě 0."
+          }
+        ]
+      },
+      "pricing": {
+        "title": "Ceník",
+        "items": [
+          {
+            "question": "Jak se počítá cena?",
+            "answer": "Cena je založena na dvou faktorech: ploše materiálu (za cm²) a délce řezu (za mm). Tyto základní sazby se násobí faktory typu materiálu a tloušťky. Přesný vzorec najdete na naší stránce Ceník."
+          },
+          {
+            "question": "Existují minimální poplatky za objednávku?",
+            "answer": "Ano, máme minimální hodnotu objednávky 5,00 € na pokrytí manipulačních nákladů. Pokud vaše díly stojí méně, uplatní se minimum."
+          },
+          {
+            "question": "Co je zahrnuto v ceně?",
+            "answer": "Cena zahrnuje materiál, laserové řezání a standardní dopravu v rámci Belgie. DPH (21%) se přidává při platbě pro zákazníky z EU."
+          },
+          {
+            "question": "Jak model sdíleného plechu šetří peníze?",
+            "answer": "Tradiční služby účtují celý plech, i když využijete jen 10%. S SheetMates platíte pouze za skutečné využití materiálu. Čím více se plech zaplní, tím více všichni ušetří."
+          }
+        ]
+      },
+      "materials": {
+        "title": "Materiály a možnosti",
+        "items": [
+          {
+            "question": "Jaké materiály můžete řezat?",
+            "answer": "Řežeme ocel, nerezovou ocel, hliník a měď. Každý materiál má různé cenové násobky podle obtížnosti řezání a ceny materiálu."
+          },
+          {
+            "question": "Jaké tloušťky jsou k dispozici?",
+            "answer": "Podporujeme tloušťky od 0,5 mm do 20 mm pro ocel a od 0,5 mm do 25 mm pro hliník. Silnější materiály mají vyšší násobky kvůli pomalejším rychlostem řezání."
+          },
+          {
+            "question": "Jaká je maximální velikost dílu?",
+            "answer": "Naše plechy jsou 3000 mm x 1500 mm. Vaše díly se musí vejít do těchto rozměrů s rezervou pro skládání. Systém vás upozorní, pokud je díl příliš velký."
+          },
+          {
+            "question": "Jakou přesnost mohu očekávat?",
+            "answer": "Náš Trumpf TruLaser 3030 Fiber dosahuje přesnosti ±0,1 mm. Pro kritické tolerance to prosím uveďte ve vaší objednávce."
+          }
+        ]
+      },
+      "dxfBestPractices": {
+        "title": "Osvědčené postupy pro DXF",
+        "items": [
+          {
+            "question": "Jak exportovat DXF z mého CAD softwaru?",
+            "answer": "Většina CAD softwaru (Fusion 360, SolidWorks, AutoCAD, FreeCAD) má možnost 'Uložit jako' nebo 'Export' pro DXF. Vyberte formát AutoCAD R12-R2018 pro nejlepší kompatibilitu."
+          },
+          {
+            "question": "Jaká nastavení exportu mám použít?",
+            "answer": "Použijte milimetry jako jednotky, převeďte spline na polyčáry a umístěte veškerou řeznou geometrii na vrstvu 0. Vyhněte se šrafám, kótám a textu v souboru pro řezání."
+          },
+          {
+            "question": "Jakým běžným chybám se vyhnout?",
+            "answer": "Běžné problémy: otevřené dráhy (čáry, které se nepropojují), překrývající se geometrie, jednotky v palcích místo mm a zahrnuté konstrukční čáry. Náš systém většinu z nich označí."
+          },
+          {
+            "question": "Musím počítat s šířkou řezu (kerf)?",
+            "answer": "Pro většinu aplikací nemusíte přidávat kompenzaci šířky řezu. Pokud potřebujete velmi přesné lícování (jako ozuby), přidejte 0,05-0,1 mm k rozměrům otvorů. Naše příručky to vysvětlují podrobně."
+          }
+        ]
+      },
+      "delivery": {
+        "title": "Doručení a dodací lhůty",
+        "items": [
+          {
+            "question": "Za jak dlouho se mé díly odešlou?",
+            "answer": "Jakmile váš plech dosáhne produkčního prahu (85% využití), řezání obvykle proběhne do 2-3 pracovních dnů. Doprava přidává 1-3 dny podle lokace."
+          },
+          {
+            "question": "Co je práh životaschopnosti?",
+            "answer": "Plechy jdou do výroby, když dosáhnou 85% využití. To zajišťuje efektivní využití materiálu. Můžete sledovat průběh plnění v reálném čase."
+          },
+          {
+            "question": "Mohu urychlit svou objednávku?",
+            "answer": "Ano! Možnost 'Bus Driver' vám umožňuje zaplatit příplatek za okamžité spuštění výroby plechu, i když nedosáhl prahu využití."
+          },
+          {
+            "question": "Kam doručujete?",
+            "answer": "Aktuálně doručujeme v rámci EU. Standardní doprava do Belgie je zahrnuta. Ostatní země EU mohou mít dodatečné poplatky za dopravu zobrazené při platbě."
+          }
+        ]
+      },
+      "support": {
+        "title": "Objednávky a podpora",
+        "items": [
+          {
+            "question": "Jak sledovat svou objednávku?",
+            "answer": "Přihlaste se do svého účtu a navštivte stránku Fronta, kde uvidíte stav svých dílů v reálném čase: čeká, složeno, řeže se nebo odesláno."
+          },
+          {
+            "question": "Mohu zrušit nebo upravit objednávku?",
+            "answer": "Můžete zrušit nebo upravit objednávky předtím, než plech jde do výroby. Jakmile řezání začne, úpravy nejsou možné. Kontaktujte nás okamžitě, pokud potřebujete změny."
+          },
+          {
+            "question": "Co když je něco špatně s mými díly?",
+            "answer": "Kontrolujeme kvalitu všech řezů před odesláním. Pokud obdržíte vadné díly kvůli naší chybě, vyměníme je zdarma. Kontaktujte nás do 7 dnů s fotografiemi."
+          }
+        ]
+      }
+    },
+    "cta": {
+      "title": "Máte stále otázky?",
+      "subtitle": "Nenašli jste, co hledáte? Náš tým je tu, aby pomohl.",
+      "button": "Kontaktujte nás"
+    }
+  },
+  "legal": {
+    "privacy": {
+      "badge": "PRÁVNÍ",
+      "title": "Zásady ochrany osobních údajů",
+      "lastUpdated": "Poslední aktualizace: únor 2026",
+      "sections": {
+        "intro": {
+          "title": "Úvod",
+          "content": "SheetMates (\"my\", \"nás\", \"naše\") se zavazuje chránit vaše soukromí. Tyto Zásady ochrany osobních údajů vysvětlují, jak shromažďujeme, používáme a chráníme vaše osobní údaje při používání naší platformy pro laserové řezání."
+        },
+        "controller": {
+          "title": "Správce údajů",
+          "content": "SheetMates je správcem vašich osobních údajů. Můžete nás kontaktovat ohledně jakýchkoli záležitostí týkajících se ochrany soukromí na:"
+        },
+        "dataCollected": {
+          "title": "Údaje, které shromažďujeme",
+          "intro": "Shromažďujeme následující kategorie osobních údajů:",
+          "account": {
+            "title": "Údaje o účtu",
+            "content": "E-mailová adresa, jméno a hash hesla při vytvoření účtu."
+          },
+          "order": {
+            "title": "Údaje o objednávce",
+            "content": "Doručovací adresa, fakturační adresa, historie objednávek a platební údaje (zpracovává Stripe)."
+          },
+          "technical": {
+            "title": "Technické údaje",
+            "content": "IP adresa, typ prohlížeče a informace o zařízení pro bezpečnost a zlepšení služeb."
+          },
+          "files": {
+            "title": "Nahrané soubory",
+            "content": "DXF soubory, které nahráváte pro laserové řezání. Jsou uloženy pro zpracování vašich objednávek."
+          }
+        },
+        "dataUse": {
+          "title": "Jak používáme vaše údaje",
+          "purposes": {
+            "orders": "Zpracování a plnění vašich objednávek na laserové řezání",
+            "communication": "Zasílání potvrzení objednávek, aktualizací o doručení a odpovědí na dotazy",
+            "improvement": "Zlepšování naší platformy a služeb",
+            "legal": "Plnění právních povinností a prevence podvodů"
+          }
+        },
+        "processors": {
+          "title": "Zpracovatelé údajů",
+          "intro": "Vaše údaje sdílíme s následujícími zpracovateli třetích stran, kteří nám pomáhají poskytovat naše služby:",
+          "firebase": "Autentizace, databáze a úložiště souborů (region EU: europe-west1)",
+          "stripe": "Zpracování plateb. Stripe je v souladu s PCI-DSS a zpracovává všechny údaje o platebních kartách."
+        },
+        "storage": {
+          "title": "Úložiště a zabezpečení údajů",
+          "content": "Všechny údaje jsou uloženy v Evropské unii (region Google Cloud europe-west1 v Belgii). Používáme šifrování při přenosu (TLS) i v klidu. Přístup k osobním údajům je omezen pouze na oprávněný personál."
+        },
+        "rights": {
+          "title": "Vaše práva podle GDPR",
+          "intro": "Podle Obecného nařízení o ochraně osobních údajů (GDPR) máte následující práva:",
+          "access": {
+            "title": "Právo na přístup",
+            "content": "Požádat o kopii vašich osobních údajů."
+          },
+          "rectification": {
+            "title": "Právo na opravu",
+            "content": "Požádat o opravu nepřesných údajů."
+          },
+          "erasure": {
+            "title": "Právo na výmaz",
+            "content": "Požádat o vymazání vašich osobních údajů (\"právo být zapomenut\")."
+          },
+          "portability": {
+            "title": "Právo na přenositelnost",
+            "content": "Získat vaše údaje ve strojově čitelném formátu."
+          },
+          "object": {
+            "title": "Právo vznést námitku",
+            "content": "Vznést námitku proti zpracování vašich údajů pro určité účely."
+          },
+          "exercise": "Pro uplatnění kteréhokoli z těchto práv nás prosím kontaktujte na contact@sheetmates.com. Odpovíme do 30 dnů."
+        },
+        "retention": {
+          "title": "Uchovávání údajů",
+          "account": "Údaje o účtu: Uchovávány do žádosti o vymazání",
+          "orders": "Údaje o objednávkách: Uchovávány 7 let z právních/daňových důvodů",
+          "guest": "Údaje o hostovských relacích: Automaticky smazány po 24 hodinách"
+        },
+        "contact": {
+          "title": "Kontaktujte nás",
+          "content": "Pro jakékoli dotazy týkající se ochrany soukromí nebo pro uplatnění vašich práv nás kontaktujte na contact@sheetmates.com."
+        }
+      }
+    },
+    "terms": {
+      "badge": "PRÁVNÍ",
+      "title": "Obchodní podmínky",
+      "lastUpdated": "Poslední aktualizace: únor 2026",
+      "sections": {
+        "intro": {
+          "title": "Úvod a přijetí",
+          "content": "Přístupem nebo používáním SheetMates (\"Služba\") souhlasíte s těmito Obchodními podmínkami. Pokud nesouhlasíte, prosím Službu nepoužívejte."
+        },
+        "service": {
+          "title": "Popis služby",
+          "content": "SheetMates je kolaborativní platforma pro laserové řezání, která umožňuje uživatelům:",
+          "features": {
+            "upload": "Nahrávat DXF soubory návrhů pro laserové řezání",
+            "nesting": "Nechat své díly složit s ostatními uživateli na sdílených plechách",
+            "cutting": "Získat přesně laserově řezané díly z různých materiálů",
+            "delivery": "Nechat si hotové díly doručit na adresu"
+          }
+        },
+        "account": {
+          "title": "Registrace účtu",
+          "content": "Pro používání některých funkcí může být nutné vytvořit účet. Jste odpovědni za zachování důvěrnosti přihlašovacích údajů a za všechny aktivity pod vaším účtem. Musíte poskytnout přesné informace a v případě potřeby je aktualizovat."
+        },
+        "orders": {
+          "title": "Objednávky a platby",
+          "content": "Když zadáte objednávku přes SheetMates:",
+          "points": {
+            "pricing": "Ceny se počítají na základě plochy materiálu, délky řezu, typu materiálu a tloušťky, jak je uvedeno na naší stránce Ceník.",
+            "payment": "Platba je zpracována bezpečně přes Stripe. Přijímáme hlavní kreditní karty.",
+            "confirmation": "Objednávky jsou potvrzeny po úspěšné platbě. Obdržíte potvrzovací e-mail.",
+            "vat": "Ceny jsou bez DPH. Pro zákazníky z EU se při platbě přidává belgická DPH 21%."
+          }
+        },
+        "production": {
+          "title": "Výroba a doručení",
+          "content": "Plechy jdou do výroby, když dosáhnou 85% využití nebo když uživatel spustí okamžitou výrobu (možnost \"Bus Driver\"). Dodací lhůty se liší podle rychlosti plnění a výrobního plánu. Snažíme se odeslat do 2-5 pracovních dnů od řezání. Standardní doprava v rámci Belgie je zahrnuta; jiné destinace v EU mohou mít dodatečné poplatky."
+        },
+        "quality": {
+          "title": "Kvalita a vrácení",
+          "content": "Usilujeme o vysoce kvalitní řezy u každé objednávky:",
+          "points": {
+            "dfm": "Kontroly DFM (Design for Manufacturing) jsou pouze orientační. Konečná odpovědnost za vhodnost návrhu leží na uživateli.",
+            "defects": "Pokud mají díly výrobní vady kvůli naší chybě, vyměníme je zdarma.",
+            "claims": "Reklamace kvality musí být podány do 7 dnů od doručení s fotografiemi problému."
+          }
+        },
+        "obligations": {
+          "title": "Povinnosti uživatele",
+          "points": {
+            "accurate": "Poskytovat přesné návrhové soubory se správnými rozměry v milimetrech.",
+            "legal": "Nahrávat pouze návrhy, které máte právo vyrábět.",
+            "ip": "Nenahrávat návrhy, které porušují duševní vlastnictví ostatních.",
+            "prohibited": "Nepoužívat službu pro zakázané předměty (zbraně, nelegální zboží)."
+          }
+        },
+        "ip": {
+          "title": "Duševní vlastnictví",
+          "content": "Zachováváte si všechna práva duševního vlastnictví ke svým nahraným návrhům. Nahráním nám udělujete omezenou licenci ke zpracování a výrobě vašich návrhů. Nenárokujeme si vlastnictví vašich návrhů. Značka SheetMates, software a platforma jsou naším duševním vlastnictvím."
+        },
+        "liability": {
+          "title": "Omezení odpovědnosti",
+          "content": "Odpovědnost SheetMates je omezena na hodnotu dotčené objednávky. Neneseme odpovědnost za nepřímé, následné nebo náhodné škody. Nezaručujeme nepřetržitou dostupnost služby."
+        },
+        "law": {
+          "title": "Rozhodné právo",
+          "content": "Tyto Podmínky se řídí belgickým právem. Jakékoli spory budou řešeny u soudů v Bruselu, Belgie."
+        },
+        "changes": {
+          "title": "Změny podmínek",
+          "content": "Tyto Podmínky můžeme čas od času aktualizovat. Pokračující používání Služby po změnách představuje přijetí nových Podmínek. Registrované uživatele budeme informovat o významných změnách e-mailem."
+        },
+        "contact": {
+          "title": "Kontakt",
+          "content": "Pro dotazy k těmto Podmínkám nás kontaktujte na contact@sheetmates.com."
+        }
+      }
+    },
+    "cookies": {
+      "badge": "PRÁVNÍ",
+      "title": "Zásady používání cookies",
+      "lastUpdated": "Poslední aktualizace: únor 2026",
+      "sections": {
+        "what": {
+          "title": "Co jsou cookies",
+          "content": "Cookies jsou malé textové soubory uložené ve vašem zařízení při návštěvě webových stránek. Pomáhají webům pamatovat si vaše preference a zlepšit váš zážitek."
+        },
+        "used": {
+          "title": "Cookies, které používáme",
+          "intro": "SheetMates používá pouze nezbytné cookies vyžadované pro fungování platformy. Nepoužíváme reklamní ani sledovací cookies."
+        },
+        "noTracking": {
+          "title": "Žádné sledování ani analytika",
+          "content": "Nepoužíváme Google Analytics, Facebook Pixel ani žádné jiné sledovací/reklamní cookies. Vaše aktivita prohlížení není sledována ani sdílena s třetími stranami pro reklamní účely."
+        },
+        "managing": {
+          "title": "Správa cookies",
+          "content": "Cookies můžete ovládat prostřednictvím nastavení prohlížeče. Většina prohlížečů umožňuje blokovat nebo mazat cookies. Blokování nezbytných cookies vám však může zabránit v používání některých funkcí naší platformy.",
+          "warning": "Poznámka: Blokování autentizačních cookies vám zabrání v přihlášení."
+        },
+        "contact": {
+          "title": "Kontaktujte nás",
+          "content": "Máte-li dotazy ohledně našich postupů s cookies, kontaktujte nás na contact@sheetmates.com."
+        }
+      },
+      "table": {
+        "cookie": "Cookie",
+        "purpose": "Účel",
+        "type": "Typ",
+        "duration": "Trvání"
+      },
+      "cookies": {
+        "auth": {
+          "purpose": "Udržuje vás přihlášené",
+          "type": "Nezbytné",
+          "duration": "Relace"
+        },
+        "stripeMid": {
+          "purpose": "Prevence podvodů Stripe",
+          "type": "Nezbytné",
+          "duration": "1 rok"
+        },
+        "stripeSid": {
+          "purpose": "Identifikátor relace Stripe",
+          "type": "Nezbytné",
+          "duration": "30 minut"
+        },
+        "consent": {
+          "purpose": "Pamatuje si vaši volbu cookies",
+          "type": "Nezbytné",
+          "duration": "1 rok"
+        }
+      }
+    }
   }
 }

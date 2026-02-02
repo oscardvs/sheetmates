@@ -401,5 +401,420 @@
     "participants": "participants",
     "busDriverDescription": "Pay to force immediate production",
     "forceRun": "Force Run"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "help": "Help",
+    "legal": "Legal",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "pricing": "Pricing",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "cookies": "Cookie Policy"
+  },
+  "cookieConsent": {
+    "message": "We use essential cookies for site functionality and secure payments.",
+    "accept": "Accept",
+    "learnMore": "Learn more"
+  },
+  "contact": {
+    "badge": "GET IN TOUCH",
+    "title": "Contact Us",
+    "subtitle": "Have a question, need a quote, or want to discuss a project? We're here to help.",
+    "fields": {
+      "reason": {
+        "label": "Reason for contact",
+        "options": {
+          "general": "General Inquiry",
+          "quote": "Quote Request",
+          "orderSupport": "Order Support",
+          "technical": "Technical Issue",
+          "other": "Other"
+        }
+      },
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "you@example.com"
+      },
+      "orderReference": {
+        "label": "Order Reference",
+        "placeholder": "e.g., ORD-12345"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell us how we can help..."
+      }
+    },
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again.",
+    "successTitle": "Message Sent",
+    "successMessage": "Thank you for reaching out. We'll get back to you within 24-48 hours.",
+    "sendAnother": "Send Another Message",
+    "directEmail": "Or email us directly"
+  },
+  "faq": {
+    "badge": "HELP CENTER",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our laser cutting service, pricing, and delivery.",
+    "categories": {
+      "gettingStarted": {
+        "title": "Getting Started",
+        "items": [
+          {
+            "question": "What is SheetMates?",
+            "answer": "SheetMates is a collaborative laser cutting platform where multiple users share sheet metal to reduce costs. We aggregate parts from different makers onto shared sheets, so you only pay for the material you actually use."
+          },
+          {
+            "question": "How does it work?",
+            "answer": "Upload your DXF files, and our system calculates the area and cut length. Your parts are nested with others on shared sheets. Once a sheet reaches 85% utilization, it goes to production. You pay only for your share of the material and cutting costs."
+          },
+          {
+            "question": "Do I need an account to get started?",
+            "answer": "You can explore and upload files without an account, but you'll need to create one to place orders. Registration is free and only takes a minute."
+          },
+          {
+            "question": "What file formats do you accept?",
+            "answer": "We accept DXF files (AutoCAD R12-R2018). For best results, export your designs with polylines and ensure all cutting paths are on layer 0."
+          }
+        ]
+      },
+      "pricing": {
+        "title": "Pricing",
+        "items": [
+          {
+            "question": "How is pricing calculated?",
+            "answer": "Pricing is based on two factors: material area (per cm²) and cut length (per mm). These base rates are multiplied by material type and thickness factors. You can see the exact formula on our Pricing page."
+          },
+          {
+            "question": "Are there minimum order fees?",
+            "answer": "Yes, we have a minimum order value of €5.00 to cover handling costs. If your parts cost less than this, the minimum will apply."
+          },
+          {
+            "question": "What's included in the price?",
+            "answer": "The price includes material, laser cutting, and standard shipping within Belgium. VAT (21%) is added at checkout for EU customers."
+          },
+          {
+            "question": "How does the community sheet model save money?",
+            "answer": "Traditional services charge for a full sheet even if you use 10% of it. With SheetMates, you only pay for your actual material usage. The more the sheet fills up, the more everyone saves."
+          }
+        ]
+      },
+      "materials": {
+        "title": "Materials & Capabilities",
+        "items": [
+          {
+            "question": "What materials can you cut?",
+            "answer": "We cut steel, stainless steel, aluminum, and copper. Each material has different pricing multipliers based on cutting difficulty and material cost."
+          },
+          {
+            "question": "What thicknesses are available?",
+            "answer": "We support thicknesses from 0.5mm to 20mm for steel, and 0.5mm to 25mm for aluminum. Thicker materials have higher multipliers due to slower cutting speeds."
+          },
+          {
+            "question": "What's the maximum part size?",
+            "answer": "Our sheets are 3000mm x 1500mm. Your parts must fit within these dimensions with margin for nesting. The system will warn you if a part is too large."
+          },
+          {
+            "question": "What precision can I expect?",
+            "answer": "Our Trumpf TruLaser 3030 Fiber achieves ±0.1mm precision. For critical tolerances, please note this in your order."
+          }
+        ]
+      },
+      "dxfBestPractices": {
+        "title": "DXF Best Practices",
+        "items": [
+          {
+            "question": "How do I export a DXF from my CAD software?",
+            "answer": "Most CAD software (Fusion 360, SolidWorks, AutoCAD, FreeCAD) has a 'Save As' or 'Export' option for DXF. Choose AutoCAD R12-R2018 format for best compatibility."
+          },
+          {
+            "question": "What export settings should I use?",
+            "answer": "Use millimeters as units, convert splines to polylines, and place all cutting geometry on layer 0. Avoid hatches, dimensions, and text in the cutting file."
+          },
+          {
+            "question": "What are common mistakes to avoid?",
+            "answer": "Common issues: open paths (lines that don't connect), overlapping geometry, units set to inches instead of mm, and including construction lines. Our system will flag most of these."
+          },
+          {
+            "question": "Do I need to account for kerf?",
+            "answer": "For most applications, you don't need to add kerf compensation. If you need very precise fits (like finger joints), add 0.05-0.1mm to hole dimensions. Our guides explain this in detail."
+          }
+        ]
+      },
+      "delivery": {
+        "title": "Delivery & Lead Times",
+        "items": [
+          {
+            "question": "How long until my parts ship?",
+            "answer": "Once your sheet reaches production threshold (85% utilization), cutting typically happens within 2-3 business days. Shipping adds 1-3 days depending on location."
+          },
+          {
+            "question": "What's the viability threshold?",
+            "answer": "Sheets go to production when they reach 85% utilization. This ensures efficient material usage. You can track sheet fill progress in real-time."
+          },
+          {
+            "question": "Can I expedite my order?",
+            "answer": "Yes! The 'Bus Driver' option lets you pay a premium to force immediate production of a sheet, even if it hasn't reached the utilization threshold."
+          },
+          {
+            "question": "Where do you ship?",
+            "answer": "We currently ship within the EU. Standard shipping to Belgium is included. Other EU countries may have additional shipping fees shown at checkout."
+          }
+        ]
+      },
+      "support": {
+        "title": "Orders & Support",
+        "items": [
+          {
+            "question": "How do I track my order?",
+            "answer": "Log into your account and visit the Queue page to see real-time status of your parts: pending, nested, cutting, or shipped."
+          },
+          {
+            "question": "Can I cancel or modify an order?",
+            "answer": "You can cancel or modify orders before the sheet goes to production. Once cutting starts, modifications aren't possible. Contact us immediately if you need changes."
+          },
+          {
+            "question": "What if something is wrong with my parts?",
+            "answer": "We quality-check all cuts before shipping. If you receive defective parts due to our error, we'll replace them free of charge. Contact us within 7 days with photos."
+          }
+        ]
+      }
+    },
+    "cta": {
+      "title": "Still have questions?",
+      "subtitle": "Can't find what you're looking for? Our team is here to help.",
+      "button": "Contact Us"
+    }
+  },
+  "legal": {
+    "privacy": {
+      "badge": "LEGAL",
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: February 2026",
+      "sections": {
+        "intro": {
+          "title": "Introduction",
+          "content": "SheetMates (\"we\", \"us\", \"our\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal data when you use our laser cutting platform."
+        },
+        "controller": {
+          "title": "Data Controller",
+          "content": "SheetMates is the data controller for your personal information. You can contact us regarding any privacy matters at:"
+        },
+        "dataCollected": {
+          "title": "Data We Collect",
+          "intro": "We collect the following categories of personal data:",
+          "account": {
+            "title": "Account Data",
+            "content": "Email address, name, and password hash when you create an account."
+          },
+          "order": {
+            "title": "Order Data",
+            "content": "Shipping address, billing address, order history, and payment information (processed by Stripe)."
+          },
+          "technical": {
+            "title": "Technical Data",
+            "content": "IP address, browser type, and device information for security and service improvement."
+          },
+          "files": {
+            "title": "Uploaded Files",
+            "content": "DXF files you upload for laser cutting. These are stored to process your orders."
+          }
+        },
+        "dataUse": {
+          "title": "How We Use Your Data",
+          "purposes": {
+            "orders": "Process and fulfill your laser cutting orders",
+            "communication": "Send order confirmations, shipping updates, and respond to inquiries",
+            "improvement": "Improve our platform and services",
+            "legal": "Comply with legal obligations and prevent fraud"
+          }
+        },
+        "processors": {
+          "title": "Data Processors",
+          "intro": "We share your data with the following third-party processors who help us deliver our services:",
+          "firebase": "Authentication, database, and file storage (EU region: europe-west1)",
+          "stripe": "Payment processing. Stripe is PCI-DSS compliant and handles all payment card data."
+        },
+        "storage": {
+          "title": "Data Storage & Security",
+          "content": "All data is stored in the European Union (Google Cloud europe-west1 region in Belgium). We use encryption in transit (TLS) and at rest. Access to personal data is restricted to authorized personnel only."
+        },
+        "rights": {
+          "title": "Your GDPR Rights",
+          "intro": "Under the General Data Protection Regulation (GDPR), you have the following rights:",
+          "access": {
+            "title": "Right of Access",
+            "content": "Request a copy of your personal data."
+          },
+          "rectification": {
+            "title": "Right to Rectification",
+            "content": "Request correction of inaccurate data."
+          },
+          "erasure": {
+            "title": "Right to Erasure",
+            "content": "Request deletion of your personal data (\"right to be forgotten\")."
+          },
+          "portability": {
+            "title": "Right to Data Portability",
+            "content": "Receive your data in a machine-readable format."
+          },
+          "object": {
+            "title": "Right to Object",
+            "content": "Object to processing of your data for certain purposes."
+          },
+          "exercise": "To exercise any of these rights, please contact us at contact@sheetmates.com. We will respond within 30 days."
+        },
+        "retention": {
+          "title": "Data Retention",
+          "account": "Account data: Retained until you request deletion",
+          "orders": "Order data: Retained for 7 years for legal/tax purposes",
+          "guest": "Guest session data: Automatically deleted after 24 hours"
+        },
+        "contact": {
+          "title": "Contact Us",
+          "content": "For any privacy-related questions or to exercise your rights, contact us at contact@sheetmates.com."
+        }
+      }
+    },
+    "terms": {
+      "badge": "LEGAL",
+      "title": "Terms & Conditions",
+      "lastUpdated": "Last updated: February 2026",
+      "sections": {
+        "intro": {
+          "title": "Introduction & Acceptance",
+          "content": "By accessing or using SheetMates (the \"Service\"), you agree to be bound by these Terms & Conditions. If you do not agree, please do not use the Service."
+        },
+        "service": {
+          "title": "Service Description",
+          "content": "SheetMates is a collaborative laser cutting platform that allows users to:",
+          "features": {
+            "upload": "Upload DXF design files for laser cutting",
+            "nesting": "Have parts nested with other users on shared sheets",
+            "cutting": "Receive precision laser-cut parts in various materials",
+            "delivery": "Have finished parts delivered to their address"
+          }
+        },
+        "account": {
+          "title": "Account Registration",
+          "content": "You may need to create an account to use certain features. You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account. You must provide accurate information and update it as needed."
+        },
+        "orders": {
+          "title": "Orders & Payments",
+          "content": "When you place an order through SheetMates:",
+          "points": {
+            "pricing": "Prices are calculated based on material area, cut length, material type, and thickness as shown on our Pricing page.",
+            "payment": "Payment is processed securely through Stripe. We accept major credit cards.",
+            "confirmation": "Orders are confirmed once payment is successful. You will receive an email confirmation.",
+            "vat": "Prices exclude VAT. For EU customers, 21% Belgian VAT is added at checkout."
+          }
+        },
+        "production": {
+          "title": "Production & Delivery",
+          "content": "Sheets go to production when they reach 85% utilization or when a user triggers immediate production (\"Bus Driver\" option). Lead times vary based on sheet fill rates and production schedule. We aim to ship within 2-5 business days of cutting. Standard shipping within Belgium is included; other EU destinations may incur additional fees."
+        },
+        "quality": {
+          "title": "Quality & Returns",
+          "content": "We strive for high-quality cuts on every order:",
+          "points": {
+            "dfm": "DFM (Design for Manufacturing) checks are guidance only. Final responsibility for design suitability lies with the user.",
+            "defects": "If parts have manufacturing defects due to our error, we will replace them at no charge.",
+            "claims": "Quality claims must be submitted within 7 days of delivery with photos of the issue."
+          }
+        },
+        "obligations": {
+          "title": "User Obligations",
+          "points": {
+            "accurate": "Provide accurate design files with correct dimensions in millimeters.",
+            "legal": "Only upload designs you have the right to manufacture.",
+            "ip": "Do not upload designs that infringe on others' intellectual property.",
+            "prohibited": "Do not use the service for prohibited items (weapons, illegal goods)."
+          }
+        },
+        "ip": {
+          "title": "Intellectual Property",
+          "content": "You retain all intellectual property rights to your uploaded designs. By uploading, you grant us a limited license to process and manufacture your designs. We do not claim ownership of your designs. SheetMates branding, software, and platform are our intellectual property."
+        },
+        "liability": {
+          "title": "Limitation of Liability",
+          "content": "SheetMates liability is limited to the value of the affected order. We are not liable for indirect, consequential, or incidental damages. We do not guarantee uninterrupted service availability."
+        },
+        "law": {
+          "title": "Governing Law",
+          "content": "These Terms are governed by Belgian law. Any disputes shall be resolved in the courts of Brussels, Belgium."
+        },
+        "changes": {
+          "title": "Changes to Terms",
+          "content": "We may update these Terms from time to time. Continued use of the Service after changes constitutes acceptance of the new Terms. We will notify registered users of significant changes via email."
+        },
+        "contact": {
+          "title": "Contact",
+          "content": "For questions about these Terms, contact us at contact@sheetmates.com."
+        }
+      }
+    },
+    "cookies": {
+      "badge": "LEGAL",
+      "title": "Cookie Policy",
+      "lastUpdated": "Last updated: February 2026",
+      "sections": {
+        "what": {
+          "title": "What Are Cookies",
+          "content": "Cookies are small text files stored on your device when you visit websites. They help websites remember your preferences and improve your experience."
+        },
+        "used": {
+          "title": "Cookies We Use",
+          "intro": "SheetMates uses only essential cookies required for the platform to function. We do not use advertising or tracking cookies."
+        },
+        "noTracking": {
+          "title": "No Tracking or Analytics",
+          "content": "We do not use Google Analytics, Facebook Pixel, or any other tracking/advertising cookies. Your browsing activity is not tracked or shared with third parties for advertising purposes."
+        },
+        "managing": {
+          "title": "Managing Cookies",
+          "content": "You can control cookies through your browser settings. Most browsers allow you to block or delete cookies. However, blocking essential cookies may prevent you from using certain features of our platform.",
+          "warning": "Note: Blocking authentication cookies will prevent you from logging in."
+        },
+        "contact": {
+          "title": "Contact Us",
+          "content": "If you have questions about our cookie practices, contact us at contact@sheetmates.com."
+        }
+      },
+      "table": {
+        "cookie": "Cookie",
+        "purpose": "Purpose",
+        "type": "Type",
+        "duration": "Duration"
+      },
+      "cookies": {
+        "auth": {
+          "purpose": "Keeps you logged in",
+          "type": "Essential",
+          "duration": "Session"
+        },
+        "stripeMid": {
+          "purpose": "Stripe fraud prevention",
+          "type": "Essential",
+          "duration": "1 year"
+        },
+        "stripeSid": {
+          "purpose": "Stripe session identifier",
+          "type": "Essential",
+          "duration": "30 minutes"
+        },
+        "consent": {
+          "purpose": "Remembers your cookie choice",
+          "type": "Essential",
+          "duration": "1 year"
+        }
+      }
+    }
   }
 }
