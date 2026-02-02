@@ -86,8 +86,8 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
       <div
         className={`flex cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed p-12 transition-colors ${
           dragOver
-            ? "border-emerald-500 bg-emerald-500/10"
-            : "border-zinc-700 hover:border-emerald-500/50 hover:bg-zinc-900/50"
+            ? "border-primary bg-primary/10"
+            : "border-border hover:border-primary/50 hover:bg-muted/50"
         }`}
         onDragOver={(e) => {
           e.preventDefault();
@@ -97,13 +97,13 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
         onDrop={handleDrop}
         onClick={() => document.getElementById("dxf-file-input")?.click()}
       >
-        <div className="flex h-16 w-16 items-center justify-center border border-zinc-700 bg-zinc-800/50">
-          <UploadIcon className="h-8 w-8 text-emerald-400" weight="light" />
+        <div className="flex h-16 w-16 items-center justify-center border border-border bg-card/50">
+          <UploadIcon className="h-8 w-8 text-primary" weight="light" />
         </div>
         <div className="text-center">
-          <p className="font-mono text-sm font-medium text-white">{t("dragDrop")}</p>
-          <p className="mt-1 font-mono text-xs text-zinc-500">{t("orBrowse")}</p>
-          <p className="mt-2 font-mono text-xs text-zinc-600">{t("fileTypes")}</p>
+          <p className="font-mono text-sm font-medium text-foreground">{t("dragDrop")}</p>
+          <p className="mt-1 font-mono text-xs text-muted-foreground">{t("orBrowse")}</p>
+          <p className="mt-2 font-mono text-xs text-muted-foreground/70">{t("fileTypes")}</p>
         </div>
         <input
           id="dxf-file-input"
@@ -119,17 +119,17 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
       {parts.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <div className="h-px w-4 bg-zinc-700" />
-            <span className="font-mono text-xs uppercase tracking-wider text-zinc-500">
+            <div className="h-px w-4 bg-border" />
+            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
               {parts.length} {parts.length === 1 ? "FILE" : "FILES"} READY
             </span>
-            <div className="h-px flex-1 bg-zinc-700" />
+            <div className="h-px flex-1 bg-border" />
           </div>
 
           {parts.map((part, i) => (
-            <div key={i} className="border border-zinc-800 bg-zinc-900/50 p-4">
+            <div key={i} className="border border-border bg-muted/50 p-4">
               <div className="flex items-start gap-4">
-                <div className="border border-zinc-700 bg-zinc-950 p-2">
+                <div className="border border-border bg-background p-2">
                   <DxfPreview
                     svgPath={part.svgPath}
                     width={part.parsed.width}
@@ -140,17 +140,17 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
                 </div>
                 <div className="flex-1 space-y-2">
                   <div className="flex items-center justify-between">
-                    <h4 className="font-mono text-sm font-medium text-white">
+                    <h4 className="font-mono text-sm font-medium text-foreground">
                       {part.fileName}
                     </h4>
                     <button
                       onClick={() => removePart(i)}
-                      className="flex h-6 w-6 items-center justify-center text-zinc-500 transition-colors hover:text-white"
+                      className="flex h-6 w-6 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
                     >
                       <XIcon className="h-4 w-4" />
                     </button>
                   </div>
-                  <div className="flex gap-4 font-mono text-xs text-zinc-500">
+                  <div className="flex gap-4 font-mono text-xs text-muted-foreground">
                     <span>
                       {part.parsed.width.toFixed(1)} x {part.parsed.height.toFixed(1)} mm
                     </span>
@@ -160,7 +160,7 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
                     <span>Cut: {part.cutLength.toFixed(1)} mm</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <label htmlFor={`qty-${i}`} className="font-mono text-xs text-zinc-400">
+                    <label htmlFor={`qty-${i}`} className="font-mono text-xs text-muted-foreground">
                       {t("quantity")}
                     </label>
                     <input
@@ -171,7 +171,7 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
                       onChange={(e) =>
                         updateQuantity(i, parseInt(e.target.value) || 1)
                       }
-                      className="w-20 border border-zinc-700 bg-zinc-800/50 px-3 py-1.5 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none"
+                      className="w-20 border border-border bg-card/50 px-3 py-1.5 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
                     />
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
           ))}
 
           <button
-            className="group flex w-full items-center justify-center gap-2 bg-emerald-500 px-6 py-3 font-mono text-sm font-semibold text-black transition-colors hover:bg-emerald-400"
+            className="group flex w-full items-center justify-center gap-2 bg-primary px-6 py-3 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
             onClick={() => onPartsReady(parts)}
           >
             {t("confirm")}

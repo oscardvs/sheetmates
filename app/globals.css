@@ -49,6 +49,7 @@
 
 /* Light theme - clean zinc palette with emerald accent */
 :root {
+  color-scheme: light;
   --background: oklch(0.985 0 0);
   --foreground: oklch(0.145 0.005 285);
   --card: oklch(1 0 0);
@@ -85,6 +86,7 @@
 
 /* Dark theme - Robot-Human zinc-950 palette with emerald accent */
 .dark {
+  color-scheme: dark;
   --background: oklch(0.141 0.005 285.823);  /* zinc-950 */
   --foreground: oklch(0.985 0.002 248);  /* zinc-50 */
   --card: oklch(0.21 0.006 286);  /* zinc-900 */
