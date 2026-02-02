@@ -138,7 +138,7 @@
     "preview": "Aperçu",
     "confirm": "Confirmer & Enregistrer",
     "uploading": "Téléchargement…",
-    "success": "Pièces téléchargées avec succès !",
+    "success": "Pièces imbriquées avec succès !",
     "error": "Échec du téléchargement.",
     "badge": "ÉTAPE 1",
     "description": "Téléchargez vos fichiers DXF et nous calculerons automatiquement la surface et la longueur de coupe",
@@ -146,7 +146,13 @@
     "restoredMessage": "Vous avez téléchargé {count} pièce{plural} sur la page d'accueil. Téléchargez à nouveau les fichiers DXF originaux ci-dessous pour les sauvegarder sur votre compte.",
     "dismiss": "Ignorer",
     "helpTitle": "Formats supportés",
-    "helpDescription": "Nous acceptons les fichiers DXF (R12-R2018). Pour de meilleurs résultats, exportez avec des polylignes et assurez-vous que toutes les entités sont sur le calque 0."
+    "helpDescription": "Nous acceptons les fichiers DXF (R12-R2018). Pour de meilleurs résultats, exportez avec des polylignes et assurez-vous que toutes les entités sont sur le calque 0.",
+    "sheetConfig": "CONFIGURATION DE LA TÔLE",
+    "material": "Matériau",
+    "thickness": "Épaisseur",
+    "unitConverted": "Dimensions converties de {unit} en mm",
+    "partsTooLarge": "{count} pièce(s) trop grande(s) pour les tôles standard",
+    "nestedSuccess": "Pièces imbriquées sur la tôle — {utilization}% d'utilisation"
   },
   "sheets": {
     "title": "Tôles",

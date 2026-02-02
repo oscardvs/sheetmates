@@ -14,6 +14,8 @@ function createParsedDxf(entities: DxfEntity[]): ParsedDxf {
       maxX: 100,
       maxY: 100,
     },
+    detectedUnit: "mm",
+    wasConverted: false,
   };
 }
 

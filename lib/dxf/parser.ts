@@ -1,11 +1,33 @@
 import DxfParser from "dxf-parser";
 
+export type DxfUnit = "mm" | "inches" | "feet" | "cm" | "unknown";
+
 export interface ParsedDxf {
   entities: DxfEntity[];
   boundingBox: { minX: number; minY: number; maxX: number; maxY: number };
   width: number;
   height: number;
+  detectedUnit: DxfUnit;
+  wasConverted: boolean;
 }
+
+// AutoCAD $INSUNITS codes
+const UNIT_CODES: Record<number, DxfUnit> = {
+  0: "unknown", // Unitless
+  1: "inches",
+  2: "feet",
+  4: "mm",
+  5: "cm",
+};
+
+// Conversion factors to mm
+const TO_MM: Record<DxfUnit, number> = {
+  mm: 1,
+  inches: 25.4,
+  feet: 304.8,
+  cm: 10,
+  unknown: 1, // No conversion for unknown
+};
 
 export interface DxfEntity {
   type: string;
@@ -29,8 +51,14 @@ export function parseDxfString(content: string): ParsedDxf {
     throw new Error("No entities found in DXF file");
   }
 
+  // Detect units from $INSUNITS header
+  let detectedUnit: DxfUnit = "unknown";
+  if (dxf.header && typeof dxf.header.$INSUNITS === "number") {
+    detectedUnit = UNIT_CODES[dxf.header.$INSUNITS] || "unknown";
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const entities: DxfEntity[] = dxf.entities.map((e: any) => ({
+  let entities: DxfEntity[] = dxf.entities.map((e: any) => ({
     type: e.type as string,
     vertices: e.vertices as DxfEntity["vertices"],
     startPoint: e.startPoint as DxfEntity["startPoint"],
@@ -45,14 +73,63 @@ export function parseDxfString(content: string): ParsedDxf {
     shape: e.shape as boolean | undefined,
   }));
 
-  const bbox = computeBoundingBox(entities);
+  // Compute initial bounding box to check dimensions
+  let bbox = computeBoundingBox(entities);
+  let width = bbox.maxX - bbox.minX;
+  let height = bbox.maxY - bbox.minY;
+
+  // Heuristic: if units are unknown and dimensions are small, assume inches
+  if (detectedUnit === "unknown" && width < 50 && height < 50) {
+    detectedUnit = "inches";
+  }
+
+  // Apply unit conversion if not already in mm
+  let wasConverted = false;
+  if (detectedUnit !== "mm" && detectedUnit !== "unknown") {
+    const factor = TO_MM[detectedUnit];
+    entities = convertEntitiesToMm(entities, factor);
+    bbox = computeBoundingBox(entities);
+    width = bbox.maxX - bbox.minX;
+    height = bbox.maxY - bbox.minY;
+    wasConverted = true;
+  }
 
   return {
     entities,
     boundingBox: bbox,
-    width: bbox.maxX - bbox.minX,
-    height: bbox.maxY - bbox.minY,
+    width,
+    height,
+    detectedUnit,
+    wasConverted,
   };
+}
+
+function convertEntitiesToMm(entities: DxfEntity[], factor: number): DxfEntity[] {
+  return entities.map((e) => ({
+    ...e,
+    vertices: e.vertices?.map((v) => ({
+      ...v,
+      x: v.x * factor,
+      y: v.y * factor,
+    })),
+    startPoint: e.startPoint
+      ? { x: e.startPoint.x * factor, y: e.startPoint.y * factor }
+      : undefined,
+    endPoint: e.endPoint
+      ? { x: e.endPoint.x * factor, y: e.endPoint.y * factor }
+      : undefined,
+    center: e.center
+      ? { x: e.center.x * factor, y: e.center.y * factor }
+      : undefined,
+    radius: e.radius != null ? e.radius * factor : undefined,
+    majorAxisEndPoint: e.majorAxisEndPoint
+      ? { x: e.majorAxisEndPoint.x * factor, y: e.majorAxisEndPoint.y * factor }
+      : undefined,
+    controlPoints: e.controlPoints?.map((p) => ({
+      x: p.x * factor,
+      y: p.y * factor,
+    })),
+  }));
 }
 
 function computeBoundingBox(entities: DxfEntity[]) {

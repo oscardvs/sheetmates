@@ -5,13 +5,25 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { DxfUploader, type UploadedPart } from "@/components/dxf-uploader";
 import { useAuth } from "@/components/providers/auth-provider";
-import { createPart } from "@/lib/firebase/db/parts";
+import { createPart, getPart, type PartDoc } from "@/lib/firebase/db/parts";
 import { uploadDxfFile } from "@/lib/firebase/storage";
+import { autoNestParts } from "@/lib/nesting/auto-nest";
 import { toast } from "sonner";
-import { UploadIcon, SpinnerIcon, CheckCircleIcon } from "@phosphor-icons/react";
+import { UploadIcon, SpinnerIcon, CheckCircleIcon, CaretDownIcon } from "@phosphor-icons/react";
 
 // Storage key matching landing-canvas
 const LANDING_STORAGE_KEY = "sheetmates_landing_parts";
+
+// Material options
+const MATERIALS = [
+  { value: "steel", label: "Steel" },
+  { value: "stainless", label: "Stainless Steel" },
+  { value: "aluminum", label: "Aluminum" },
+  { value: "copper", label: "Copper" },
+] as const;
+
+// Thickness options in mm
+const THICKNESSES = [0.5, 1, 1.5, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20] as const;
 
 interface RestoredPart {
   id: string;
@@ -35,6 +47,8 @@ export default function UploadPage() {
   const [uploading, setUploading] = useState(false);
   const [restoredParts, setRestoredParts] = useState<RestoredPart[]>([]);
   const [showRestored, setShowRestored] = useState(false);
+  const [material, setMaterial] = useState<string>("steel");
+  const [thickness, setThickness] = useState<number>(2);
 
   // Check for parts from landing page on mount
   useEffect(() => {
@@ -58,13 +72,22 @@ export default function UploadPage() {
     if (!user) return;
     setUploading(true);
     try {
+      // Check if any parts were unit-converted
+      const convertedParts = parts.filter((p) => p.parsed.wasConverted);
+      if (convertedParts.length > 0) {
+        const unit = convertedParts[0].parsed.detectedUnit;
+        toast.info(t("unitConverted", { unit }));
+      }
+
+      // 1. Save parts to Firestore and collect their IDs
+      const savedPartIds: string[] = [];
       for (const part of parts) {
         const downloadUrl = await uploadDxfFile(
           user.uid,
           part.fileName,
           part.file
         );
-        await createPart({
+        const partId = await createPart({
           userId: user.uid,
           fileName: part.fileName,
           boundingBox: {
@@ -79,13 +102,33 @@ export default function UploadPage() {
           sheetId: null,
           position: null,
         });
+        savedPartIds.push(partId);
         void downloadUrl;
       }
-      toast.success(t("success"));
+
+      // 2. Fetch the saved parts for auto-nesting
+      const savedParts: PartDoc[] = [];
+      for (const id of savedPartIds) {
+        const part = await getPart(id);
+        if (part) savedParts.push(part);
+      }
+
+      // 3. Auto-nest the parts onto a sheet
+      const result = await autoNestParts(savedParts, material, thickness);
+
+      // 4. Show appropriate toast
+      if (result.unplacedPartIds.length > 0) {
+        toast.warning(t("partsTooLarge", { count: result.unplacedPartIds.length }));
+      }
+
+      const utilizationPercent = (result.utilization * 100).toFixed(1);
+      toast.success(t("nestedSuccess", { utilization: utilizationPercent }));
+
       setShowRestored(false);
       setRestoredParts([]);
-      // Redirect to queue page to see uploaded parts
-      router.push("/queue");
+
+      // 5. Redirect to sheet view to see the nested parts
+      router.push(`/sheets/${result.sheetId}`);
     } catch (err) {
       console.error("Upload failed:", err);
       toast.error(t("error"));
@@ -157,6 +200,59 @@ export default function UploadPage() {
           </div>
         </div>
       )}
+
+      {/* Material & Thickness Selector */}
+      <div className="border border-border bg-card/30 p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-px w-4 bg-border" />
+          <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            {t("sheetConfig")}
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+        <div className="flex flex-wrap gap-4">
+          {/* Material selector */}
+          <div className="flex-1 min-w-[140px]">
+            <label className="block font-mono text-xs text-muted-foreground mb-1.5">
+              {t("material")}
+            </label>
+            <div className="relative">
+              <select
+                value={material}
+                onChange={(e) => setMaterial(e.target.value)}
+                className="w-full appearance-none border border-border bg-background px-3 py-2 pr-8 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
+              >
+                {MATERIALS.map((m) => (
+                  <option key={m.value} value={m.value}>
+                    {m.label}
+                  </option>
+                ))}
+              </select>
+              <CaretDownIcon className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            </div>
+          </div>
+          {/* Thickness selector */}
+          <div className="flex-1 min-w-[140px]">
+            <label className="block font-mono text-xs text-muted-foreground mb-1.5">
+              {t("thickness")}
+            </label>
+            <div className="relative">
+              <select
+                value={thickness}
+                onChange={(e) => setThickness(Number(e.target.value))}
+                className="w-full appearance-none border border-border bg-background px-3 py-2 pr-8 font-mono text-sm text-foreground focus:border-primary focus:outline-none"
+              >
+                {THICKNESSES.map((th) => (
+                  <option key={th} value={th}>
+                    {th} mm
+                  </option>
+                ))}
+              </select>
+              <CaretDownIcon className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            </div>
+          </div>
+        </div>
+      </div>
 
       {uploading ? (
         <div className="flex flex-col items-center justify-center gap-4 border border-border bg-muted/50 p-12">

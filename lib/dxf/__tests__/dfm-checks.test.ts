@@ -22,6 +22,8 @@ function createParsedDxf(
     boundingBox: { minX: 0, minY: 0, maxX: width, maxY: height },
     width,
     height,
+    detectedUnit: "mm",
+    wasConverted: false,
   };
 }
 

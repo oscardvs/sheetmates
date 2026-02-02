@@ -138,7 +138,7 @@
     "preview": "Preview",
     "confirm": "Confirm & Save",
     "uploading": "Uploading…",
-    "success": "Parts uploaded successfully!",
+    "success": "Parts nested successfully!",
     "error": "Failed to upload parts.",
     "badge": "STEP 1",
     "description": "Upload your DXF files and we'll calculate the area and cut length automatically",
@@ -146,7 +146,13 @@
     "restoredMessage": "You uploaded {count} part{plural} on the landing page. Re-upload the original DXF files below to save them to your account.",
     "dismiss": "Dismiss",
     "helpTitle": "Supported Formats",
-    "helpDescription": "We accept DXF files (R12-R2018). For best results, export with polylines and ensure all entities are on layer 0."
+    "helpDescription": "We accept DXF files (R12-R2018). For best results, export with polylines and ensure all entities are on layer 0.",
+    "sheetConfig": "SHEET CONFIGURATION",
+    "material": "Material",
+    "thickness": "Thickness",
+    "unitConverted": "Dimensions converted from {unit} to mm",
+    "partsTooLarge": "{count} part(s) too large for standard sheets",
+    "nestedSuccess": "Parts nested onto sheet — {utilization}% utilization"
   },
   "sheets": {
     "title": "Sheets",

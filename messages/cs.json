@@ -138,7 +138,7 @@
     "preview": "Náhled",
     "confirm": "Potvrdit & Uložit",
     "uploading": "Nahrávání…",
-    "success": "Díly úspěšně nahrány!",
+    "success": "Díly úspěšně umístěny!",
     "error": "Nahrávání se nezdařilo.",
     "badge": "KROK 1",
     "description": "Nahrajte své DXF soubory a automaticky vypočítáme plochu a délku řezu",
@@ -146,7 +146,13 @@
     "restoredMessage": "Nahráli jste {count} díl{plural} na úvodní stránce. Znovu nahrajte původní DXF soubory níže, abyste je uložili do svého účtu.",
     "dismiss": "Zavřít",
     "helpTitle": "Podporované formáty",
-    "helpDescription": "Přijímáme DXF soubory (R12-R2018). Pro nejlepší výsledky exportujte s polyčarami a ujistěte se, že všechny entity jsou na vrstvě 0."
+    "helpDescription": "Přijímáme DXF soubory (R12-R2018). Pro nejlepší výsledky exportujte s polyčarami a ujistěte se, že všechny entity jsou na vrstvě 0.",
+    "sheetConfig": "KONFIGURACE PLECHU",
+    "material": "Materiál",
+    "thickness": "Tloušťka",
+    "unitConverted": "Rozměry převedeny z {unit} na mm",
+    "partsTooLarge": "{count} díl(y) příliš velký pro standardní plechy",
+    "nestedSuccess": "Díly umístěny na plech — {utilization}% využití"
   },
   "sheets": {
     "title": "Plechy",

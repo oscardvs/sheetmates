@@ -18,6 +18,8 @@ function createParsedDxf(
       maxX: width,
       maxY: height,
     },
+    detectedUnit: "mm",
+    wasConverted: false,
   };
 }
 
