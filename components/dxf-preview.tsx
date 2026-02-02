@@ -24,14 +24,14 @@ export function DxfPreview({
   return (
     <svg
       viewBox={`${vbX} ${vbY} ${vbW} ${vbH}`}
-      className={`border rounded bg-background ${className}`}
+      className={`bg-zinc-950 ${className}`}
       preserveAspectRatio="xMidYMid meet"
     >
       <path
         d={svgPath}
         fill="none"
-        stroke="currentColor"
-        strokeWidth={Math.max(width, height) * 0.005}
+        stroke="#10b981"
+        strokeWidth={Math.max(width, height) * 0.008}
       />
     </svg>
   );

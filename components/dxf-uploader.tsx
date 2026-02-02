@@ -6,11 +6,7 @@ import { parseDxfString, type ParsedDxf } from "@/lib/dxf/parser";
 import { dxfToSvgPath } from "@/lib/dxf/to-svg";
 import { computeArea } from "@/lib/dxf/compute-area";
 import { computeCutLength } from "@/lib/dxf/compute-cut-length";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Upload } from "@phosphor-icons/react";
+import { UploadIcon, XIcon, ArrowRightIcon } from "@phosphor-icons/react";
 import { DxfPreview } from "@/components/dxf-preview";
 
 export interface UploadedPart {
@@ -88,10 +84,10 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
     <div className="space-y-6">
       {/* Drop zone */}
       <div
-        className={`flex cursor-pointer flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed p-12 transition-colors ${
+        className={`flex cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed p-12 transition-colors ${
           dragOver
-            ? "border-primary bg-primary/5"
-            : "border-muted-foreground/25 hover:border-primary/50"
+            ? "border-emerald-500 bg-emerald-500/10"
+            : "border-zinc-700 hover:border-emerald-500/50 hover:bg-zinc-900/50"
         }`}
         onDragOver={(e) => {
           e.preventDefault();
@@ -101,11 +97,13 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
         onDrop={handleDrop}
         onClick={() => document.getElementById("dxf-file-input")?.click()}
       >
-        <Upload className="h-10 w-10 text-muted-foreground" />
+        <div className="flex h-16 w-16 items-center justify-center border border-zinc-700 bg-zinc-800/50">
+          <UploadIcon className="h-8 w-8 text-emerald-400" weight="light" />
+        </div>
         <div className="text-center">
-          <p className="font-medium">{t("dragDrop")}</p>
-          <p className="text-sm text-muted-foreground">{t("orBrowse")}</p>
-          <p className="text-xs text-muted-foreground">{t("fileTypes")}</p>
+          <p className="font-mono text-sm font-medium text-white">{t("dragDrop")}</p>
+          <p className="mt-1 font-mono text-xs text-zinc-500">{t("orBrowse")}</p>
+          <p className="mt-2 font-mono text-xs text-zinc-600">{t("fileTypes")}</p>
         </div>
         <input
           id="dxf-file-input"
@@ -120,63 +118,74 @@ export function DxfUploader({ onPartsReady }: DxfUploaderProps) {
       {/* Part list */}
       {parts.length > 0 && (
         <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <div className="h-px w-4 bg-zinc-700" />
+            <span className="font-mono text-xs uppercase tracking-wider text-zinc-500">
+              {parts.length} {parts.length === 1 ? "FILE" : "FILES"} READY
+            </span>
+            <div className="h-px flex-1 bg-zinc-700" />
+          </div>
+
           {parts.map((part, i) => (
-            <Card key={i}>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">{part.fileName}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-start gap-4">
+            <div key={i} className="border border-zinc-800 bg-zinc-900/50 p-4">
+              <div className="flex items-start gap-4">
+                <div className="border border-zinc-700 bg-zinc-950 p-2">
                   <DxfPreview
                     svgPath={part.svgPath}
                     width={part.parsed.width}
                     height={part.parsed.height}
                     boundingBox={part.parsed.boundingBox}
-                    className="h-24 w-24 shrink-0"
+                    className="h-20 w-20 shrink-0"
                   />
-                  <div className="flex-1 space-y-2">
-                    <p className="text-xs text-muted-foreground">
-                      {part.parsed.width.toFixed(1)} x{" "}
-                      {part.parsed.height.toFixed(1)} mm
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      Area: {part.area.toFixed(1)} mm&sup2; | Cut:{" "}
-                      {part.cutLength.toFixed(1)} mm
-                    </p>
-                    <div className="flex items-center gap-2">
-                      <Label htmlFor={`qty-${i}`} className="text-xs">
-                        {t("quantity")}
-                      </Label>
-                      <Input
-                        id={`qty-${i}`}
-                        type="number"
-                        min={1}
-                        value={part.quantity}
-                        onChange={(e) =>
-                          updateQuantity(i, parseInt(e.target.value) || 1)
-                        }
-                        className="w-20"
-                      />
-                    </div>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => removePart(i)}
-                  >
-                    &times;
-                  </Button>
                 </div>
-              </CardContent>
-            </Card>
+                <div className="flex-1 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-mono text-sm font-medium text-white">
+                      {part.fileName}
+                    </h4>
+                    <button
+                      onClick={() => removePart(i)}
+                      className="flex h-6 w-6 items-center justify-center text-zinc-500 transition-colors hover:text-white"
+                    >
+                      <XIcon className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <div className="flex gap-4 font-mono text-xs text-zinc-500">
+                    <span>
+                      {part.parsed.width.toFixed(1)} x {part.parsed.height.toFixed(1)} mm
+                    </span>
+                    <span>|</span>
+                    <span>Area: {(part.area / 100).toFixed(2)} cm²</span>
+                    <span>|</span>
+                    <span>Cut: {part.cutLength.toFixed(1)} mm</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <label htmlFor={`qty-${i}`} className="font-mono text-xs text-zinc-400">
+                      {t("quantity")}
+                    </label>
+                    <input
+                      id={`qty-${i}`}
+                      type="number"
+                      min={1}
+                      value={part.quantity}
+                      onChange={(e) =>
+                        updateQuantity(i, parseInt(e.target.value) || 1)
+                      }
+                      className="w-20 border border-zinc-700 bg-zinc-800/50 px-3 py-1.5 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
 
-          <Button
-            className="w-full"
+          <button
+            className="group flex w-full items-center justify-center gap-2 bg-emerald-500 px-6 py-3 font-mono text-sm font-semibold text-black transition-colors hover:bg-emerald-400"
             onClick={() => onPartsReady(parts)}
           >
             {t("confirm")}
-          </Button>
+            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </button>
         </div>
       )}
     </div>

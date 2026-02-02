@@ -8,40 +8,57 @@ import {
   updatePart,
   type PartDoc,
 } from "@/lib/firebase/db/parts";
+import { Link } from "@/i18n/navigation";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+  ListIcon,
+  ArrowCounterClockwiseIcon,
+  PackageIcon,
+  CheckCircleIcon,
+  SpinnerIcon,
+  TruckIcon,
+} from "@phosphor-icons/react";
 
 export default function QueuePage() {
   const t = useTranslations("queue");
   const { user } = useAuth();
   const [parts, setParts] = useState<PartDoc[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
-      getPartsByUser(user.uid).then(setParts);
+      getPartsByUser(user.uid)
+        .then(setParts)
+        .finally(() => setLoading(false));
     }
   }, [user]);
 
-  const statusVariant = (status: string) => {
+  const statusColor = (status: string) => {
     switch (status) {
       case "pending":
-        return "secondary" as const;
+        return "text-amber-400 border-amber-500/30 bg-amber-500/10";
       case "nested":
-        return "outline" as const;
+        return "text-cyan-400 border-cyan-500/30 bg-cyan-500/10";
       case "cut":
-        return "default" as const;
+        return "text-emerald-400 border-emerald-500/30 bg-emerald-500/10";
       case "shipped":
-        return "default" as const;
+        return "text-violet-400 border-violet-500/30 bg-violet-500/10";
       default:
-        return "secondary" as const;
+        return "text-zinc-400 border-zinc-700 bg-zinc-800/50";
+    }
+  };
+
+  const statusIcon = (status: string) => {
+    switch (status) {
+      case "pending":
+        return <SpinnerIcon className="h-3 w-3" />;
+      case "nested":
+        return <PackageIcon className="h-3 w-3" />;
+      case "cut":
+        return <CheckCircleIcon className="h-3 w-3" />;
+      case "shipped":
+        return <TruckIcon className="h-3 w-3" />;
+      default:
+        return null;
     }
   };
 
@@ -60,7 +77,7 @@ export default function QueuePage() {
     }
   };
 
-  async function handleDelete(id: string) {
+  async function handleReset(id: string) {
     await updatePart(id, { status: "pending" });
     if (user) {
       const updated = await getPartsByUser(user.uid);
@@ -68,52 +85,120 @@ export default function QueuePage() {
     }
   }
 
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4 py-20">
+        <SpinnerIcon className="h-8 w-8 animate-spin text-emerald-400" />
+        <p className="font-mono text-sm text-zinc-500">Loading queue...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold">{t("title")}</h1>
+    <div className="space-y-8">
+      {/* Header */}
+      <div>
+        <div className="mb-4 flex items-center gap-2">
+          <div className="h-px w-8 bg-emerald-500" />
+          <span className="font-mono text-xs uppercase tracking-widest text-emerald-400">
+            PRODUCTION
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <h1 className="font-mono text-3xl font-bold text-white">{t("title")}</h1>
+          <div className="font-mono text-xs text-zinc-500">
+            {parts.length} {parts.length === 1 ? "part" : "parts"} in queue
+          </div>
+        </div>
+      </div>
 
       {parts.length === 0 ? (
-        <p className="text-muted-foreground">No parts in queue.</p>
+        <div className="flex flex-col items-center justify-center gap-4 border border-zinc-800 bg-zinc-900/50 py-20">
+          <div className="flex h-16 w-16 items-center justify-center border border-zinc-700 bg-zinc-800/50">
+            <ListIcon className="h-8 w-8 text-zinc-600" weight="light" />
+          </div>
+          <p className="font-mono text-sm text-zinc-500">No parts in queue.</p>
+          <Link
+            href="/upload"
+            className="font-mono text-xs text-emerald-400 transition-colors hover:text-emerald-300"
+          >
+            Upload your first DXF file
+          </Link>
+        </div>
       ) : (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{t("partName")}</TableHead>
-              <TableHead>Dimensions</TableHead>
-              <TableHead>Qty</TableHead>
-              <TableHead>{t("status")}</TableHead>
-              <TableHead>{t("actions")}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {parts.map((part) => (
-              <TableRow key={part.id}>
-                <TableCell className="font-medium">{part.fileName}</TableCell>
-                <TableCell>
-                  {part.boundingBox.width.toFixed(1)} x{" "}
-                  {part.boundingBox.height.toFixed(1)} mm
-                </TableCell>
-                <TableCell>{part.quantity}</TableCell>
-                <TableCell>
-                  <Badge variant={statusVariant(part.status)}>
-                    {statusLabel(part.status)}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  {part.status === "pending" && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleDelete(part.id)}
+        <div className="overflow-hidden border border-zinc-800">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-zinc-800 bg-zinc-900/50">
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                  {t("partName")}
+                </th>
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                  Dimensions
+                </th>
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                  Qty
+                </th>
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                  {t("status")}
+                </th>
+                <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-zinc-500">
+                  {t("actions")}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {parts.map((part) => (
+                <tr
+                  key={part.id}
+                  className="border-b border-zinc-800/50 transition-colors hover:bg-zinc-900/30"
+                >
+                  <td className="px-4 py-4 font-mono text-sm font-medium text-white">
+                    {part.fileName}
+                  </td>
+                  <td className="px-4 py-4 font-mono text-sm text-zinc-400">
+                    {part.boundingBox.width.toFixed(1)} x{" "}
+                    {part.boundingBox.height.toFixed(1)} mm
+                  </td>
+                  <td className="px-4 py-4 font-mono text-sm text-zinc-300">
+                    {part.quantity}
+                  </td>
+                  <td className="px-4 py-4">
+                    <span
+                      className={`inline-flex items-center gap-1.5 border px-2 py-0.5 font-mono text-xs uppercase ${statusColor(part.status)}`}
                     >
-                      Reset
-                    </Button>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                      {statusIcon(part.status)}
+                      {statusLabel(part.status)}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4">
+                    {part.status === "pending" && (
+                      <button
+                        onClick={() => handleReset(part.id)}
+                        className="inline-flex items-center gap-1 font-mono text-xs text-zinc-500 transition-colors hover:text-white"
+                      >
+                        <ArrowCounterClockwiseIcon className="h-3 w-3" />
+                        Reset
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Action buttons */}
+      {parts.length > 0 && parts.some((p) => p.status === "pending" || p.status === "nested") && (
+        <div className="flex justify-end">
+          <Link
+            href="/checkout"
+            className="group inline-flex items-center gap-2 bg-emerald-500 px-6 py-3 font-mono text-sm font-semibold text-black transition-colors hover:bg-emerald-400"
+          >
+            Proceed to Checkout
+          </Link>
+        </div>
       )}
     </div>
   );
