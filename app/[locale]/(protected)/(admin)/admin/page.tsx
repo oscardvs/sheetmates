@@ -21,6 +21,12 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
+import {
+  CurrencyDollarIcon,
+  ReceiptIcon,
+  CheckCircleIcon,
+  ChartBarIcon,
+} from "@phosphor-icons/react";
 
 export default function AdminPage() {
   const t = useTranslations("admin");
@@ -52,56 +58,70 @@ export default function AdminPage() {
   );
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold">{t("title")}</h1>
+    <div className="space-y-6 p-6">
+      <div className="flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+          <ChartBarIcon className="h-5 w-5 text-primary" weight="duotone" />
+        </div>
+        <div>
+          <h1 className="font-mono text-2xl font-bold text-foreground">{t("title")}</h1>
+          <p className="text-sm text-muted-foreground">{t("overview")}</p>
+        </div>
+      </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">
+        <Card className="border-border bg-card">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               {t("revenue")}
             </CardTitle>
+            <CurrencyDollarIcon className="h-5 w-5 text-emerald-500" weight="duotone" />
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">€{totalRevenue.toFixed(2)}</p>
+            <p className="font-mono text-2xl font-bold text-foreground">€{totalRevenue.toFixed(2)}</p>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">
+        <Card className="border-border bg-card">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Total Orders
             </CardTitle>
+            <ReceiptIcon className="h-5 w-5 text-blue-500" weight="duotone" />
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{orders.length}</p>
+            <p className="font-mono text-2xl font-bold text-foreground">{orders.length}</p>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">
+        <Card className="border-border bg-card">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Paid Orders
             </CardTitle>
+            <CheckCircleIcon className="h-5 w-5 text-primary" weight="duotone" />
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{paidOrders.length}</p>
+            <p className="font-mono text-2xl font-bold text-foreground">{paidOrders.length}</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Revenue Chart */}
       {chartData.length > 0 && (
-        <Card>
+        <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle>{t("revenue")}</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-foreground">
+              <ChartBarIcon className="h-5 w-5 text-primary" weight="duotone" />
+              {t("revenue")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData}>
-                  <XAxis dataKey="month" />
-                  <YAxis />
+                  <XAxis dataKey="month" stroke="currentColor" className="text-muted-foreground" />
+                  <YAxis stroke="currentColor" className="text-muted-foreground" />
                   <Tooltip />
-                  <Bar dataKey="revenue" fill="oklch(0.59 0.14 242)" />
+                  <Bar dataKey="revenue" fill="oklch(0.59 0.14 242)" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -110,9 +130,12 @@ export default function AdminPage() {
       )}
 
       {/* Recent Orders */}
-      <Card>
+      <Card className="border-border bg-card">
         <CardHeader>
-          <CardTitle>{t("recentOrders")}</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-foreground">
+            <ReceiptIcon className="h-5 w-5 text-primary" weight="duotone" />
+            {t("recentOrders")}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           {orders.length === 0 ? (

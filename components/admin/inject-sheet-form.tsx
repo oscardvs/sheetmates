@@ -70,7 +70,7 @@ export function InjectSheetForm() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <Card className="border-zinc-800 bg-zinc-900">
+      <Card className="border-border bg-card">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <PlusIcon className="h-5 w-5" />
@@ -178,7 +178,7 @@ export function InjectSheetForm() {
 
       {/* QR Code results */}
       {injectedSheets.length > 0 && (
-        <Card className="border-zinc-800 bg-zinc-900">
+        <Card className="border-border bg-card">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <QrCodeIcon className="h-5 w-5" />
@@ -190,7 +190,7 @@ export function InjectSheetForm() {
               {injectedSheets.map((sheet) => (
                 <div
                   key={sheet.id}
-                  className="flex items-center justify-between rounded border border-zinc-800 p-2"
+                  className="flex items-center justify-between rounded border border-border bg-muted/50 p-2"
                 >
                   <code className="text-xs">{sheet.qrCode}</code>
                   <Button variant="ghost" size="sm">

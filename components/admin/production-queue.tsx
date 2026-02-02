@@ -116,7 +116,7 @@ function SheetCard({ sheet, onStart, onComplete, loading, t }: SheetCardProps) {
     sheet.status === "cutting" ? "bg-amber-500" : "bg-emerald-500";
 
   return (
-    <Card className="border-zinc-800 bg-zinc-900">
+    <Card className="border-border bg-card">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="font-mono text-sm">

@@ -95,7 +95,7 @@ export function OrderList() {
   }
 
   return (
-    <Card className="border-zinc-800 bg-zinc-900">
+    <Card className="border-border bg-card">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">

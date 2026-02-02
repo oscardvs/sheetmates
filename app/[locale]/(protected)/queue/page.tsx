@@ -89,7 +89,7 @@ export default function QueuePage() {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20">
         <SpinnerIcon className="h-8 w-8 animate-spin text-primary" />
-        <p className="font-mono text-sm text-muted-foreground">Loading queue...</p>
+        <p className="font-mono text-sm text-muted-foreground">{t("loading")}</p>
       </div>
     );
   }
@@ -101,13 +101,16 @@ export default function QueuePage() {
         <div className="mb-4 flex items-center gap-2">
           <div className="h-px w-8 bg-primary" />
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
-            PRODUCTION
+            {t("badge")}
           </span>
         </div>
         <div className="flex items-center justify-between">
           <h1 className="font-mono text-3xl font-bold text-foreground">{t("title")}</h1>
           <div className="font-mono text-xs text-muted-foreground">
-            {parts.length} {parts.length === 1 ? "part" : "parts"} in queue
+            {t("partsCount", {
+              count: parts.length,
+              type: parts.length === 1 ? t("partSingular") : t("partPlural")
+            })}
           </div>
         </div>
       </div>
@@ -117,12 +120,12 @@ export default function QueuePage() {
           <div className="flex h-16 w-16 items-center justify-center border border-border bg-card/50">
             <ListIcon className="h-8 w-8 text-muted-foreground" weight="light" />
           </div>
-          <p className="font-mono text-sm text-foreground">No parts in queue.</p>
+          <p className="font-mono text-sm text-foreground">{t("emptyState")}</p>
           <Link
             href="/upload"
             className="font-mono text-xs text-primary transition-colors hover:text-primary/80"
           >
-            Upload your first DXF file
+            {t("emptyStateCta")}
           </Link>
         </div>
       ) : (
@@ -134,10 +137,10 @@ export default function QueuePage() {
                   {t("partName")}
                 </th>
                 <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                  Dimensions
+                  {t("dimensions")}
                 </th>
                 <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                  Qty
+                  {t("qty")}
                 </th>
                 <th className="px-4 py-3 text-left font-mono text-xs uppercase tracking-wider text-muted-foreground">
                   {t("status")}
@@ -178,7 +181,7 @@ export default function QueuePage() {
                         className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
                       >
                         <ArrowCounterClockwiseIcon className="h-3 w-3" />
-                        Reset
+                        {t("reset")}
                       </button>
                     )}
                   </td>
@@ -196,7 +199,7 @@ export default function QueuePage() {
             href="/checkout"
             className="group inline-flex items-center gap-2 bg-primary px-6 py-3 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Proceed to Checkout
+            {t("proceedToCheckout")}
           </Link>
         </div>
       )}

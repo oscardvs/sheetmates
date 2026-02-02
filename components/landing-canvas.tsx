@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState, useMemo, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { parseDxfString, type ParsedDxf } from "@/lib/dxf/parser";
 import { dxfToSvgPath } from "@/lib/dxf/to-svg";
@@ -49,6 +50,8 @@ const PRICE_PER_MM_CUT = 0.002; // €/mm
 const STORAGE_KEY = "sheetmates_landing_parts";
 
 export function LandingCanvas() {
+  const t = useTranslations("landing.canvas");
+  const tHero = useTranslations("landing.hero");
   const [parts, setParts] = useState<UploadedPart[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -188,25 +191,25 @@ export function LandingCanvas() {
             variant="outline"
             className="mb-4 border-primary/50 bg-primary/10 font-mono text-primary"
           >
-            TECH-CENTRUM // BUFFER SHEET NETWORK
+            {t("badge")}
           </Badge>
           <h1 className="mb-4 font-mono text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
-            <span className="text-muted-foreground">DROP </span>
-            <span className="text-primary">.DXF</span>
-            <span className="text-muted-foreground"> → GET </span>
-            <span className="text-primary">PARTS</span>
+            <span className="text-muted-foreground">{t("heroDrop")} </span>
+            <span className="text-primary">{t("heroDxf")}</span>
+            <span className="text-muted-foreground"> {t("heroArrow")} </span>
+            <span className="text-primary">{t("heroParts")}</span>
           </h1>
           <p className="mx-auto max-w-2xl font-mono text-sm text-muted-foreground md:text-base">
-            Upload your CAD files. We nest them with other makers. You pay only for your share.
+            {t("heroSubtitle")}
           </p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Left: Drop Zone & Parts List */}
-          <div className="space-y-4">
-            {/* Drop Zone */}
+          <div className="flex flex-col gap-4">
+            {/* Drop Zone - matches sheet preview height */}
             <div
-              className={`relative flex min-h-[200px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed p-8 transition-all ${
+              className={`relative flex min-h-[280px] flex-1 cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed p-8 transition-all lg:min-h-0 ${
                 dragOver
                   ? "border-primary bg-primary/10"
                   : "border-border hover:border-primary/50 hover:bg-muted/50"
@@ -219,13 +222,13 @@ export function LandingCanvas() {
               onDrop={handleDrop}
               onClick={() => document.getElementById("landing-dxf-input")?.click()}
             >
-              <UploadIcon className={`h-12 w-12 ${dragOver ? "text-primary" : "text-muted-foreground"}`} />
+              <UploadIcon className={`h-16 w-16 ${dragOver ? "text-primary" : "text-muted-foreground"}`} />
               <div className="text-center">
-                <p className="font-mono text-lg font-medium text-foreground">
-                  {isProcessing ? "PROCESSING..." : "DROP DXF FILES HERE"}
+                <p className="font-mono text-xl font-medium text-foreground">
+                  {isProcessing ? t("processing") : t("dropZone")}
                 </p>
-                <p className="font-mono text-xs text-muted-foreground">
-                  or click to browse • supports .dxf
+                <p className="mt-1 font-mono text-sm text-muted-foreground">
+                  {t("dropHelper")}
                 </p>
               </div>
               <input
@@ -243,7 +246,7 @@ export function LandingCanvas() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-muted-foreground">
-                    LOADED PARTS ({parts.length})
+                    {t("loadedParts")} ({parts.length})
                   </span>
                   <Button
                     variant="ghost"
@@ -251,7 +254,7 @@ export function LandingCanvas() {
                     className="h-6 px-2 font-mono text-xs text-muted-foreground hover:text-foreground"
                     onClick={() => setParts([])}
                   >
-                    CLEAR ALL
+                    {t("clearAll")}
                   </Button>
                 </div>
 
@@ -289,7 +292,7 @@ export function LandingCanvas() {
                 <div className="flex items-center gap-2">
                   <CrosshairIcon className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="font-mono text-xs text-muted-foreground">PARTS</p>
+                    <p className="font-mono text-xs text-muted-foreground">{t("metricParts")}</p>
                     <p className="font-mono text-lg font-bold text-foreground">
                       {totals.partCount}
                     </p>
@@ -298,7 +301,7 @@ export function LandingCanvas() {
                 <div className="flex items-center gap-2">
                   <RulerIcon className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="font-mono text-xs text-muted-foreground">AREA</p>
+                    <p className="font-mono text-xs text-muted-foreground">{t("metricArea")}</p>
                     <p className="font-mono text-lg font-bold text-foreground">
                       {(totals.totalArea / 100).toFixed(0)} cm²
                     </p>
@@ -307,7 +310,7 @@ export function LandingCanvas() {
                 <div className="flex items-center gap-2">
                   <ScissorsIcon className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="font-mono text-xs text-muted-foreground">CUT LENGTH</p>
+                    <p className="font-mono text-xs text-muted-foreground">{t("metricCutLength")}</p>
                     <p className="font-mono text-lg font-bold text-foreground">
                       {(totals.totalCut / 1000).toFixed(1)} m
                     </p>
@@ -316,7 +319,7 @@ export function LandingCanvas() {
                 <div className="flex items-center gap-2">
                   <CurrencyEurIcon className="h-4 w-4 text-primary" />
                   <div>
-                    <p className="font-mono text-xs text-muted-foreground">EST. PRICE</p>
+                    <p className="font-mono text-xs text-muted-foreground">{t("metricPrice")}</p>
                     <p className="font-mono text-lg font-bold text-primary">
                       €{totals.estimatedPrice.toFixed(2)}
                     </p>
@@ -334,11 +337,11 @@ export function LandingCanvas() {
               <Link href={parts.length > 0 ? "/signup" : "/signup"}>
                 {parts.length > 0 ? (
                   <>
-                    CONTINUE TO NEST
+                    {t("ctaContinue")}
                     <ArrowRightIcon className="ml-2 h-4 w-4" />
                   </>
                 ) : (
-                  "GET STARTED"
+                  tHero("cta")
                 )}
               </Link>
             </Button>
@@ -348,7 +351,7 @@ export function LandingCanvas() {
           <div className="relative">
             {/* Sheet dimensions label - positioned inside the container */}
             <div className="mb-2 font-mono text-xs text-muted-foreground">
-              3000mm × 1500mm SHEET PREVIEW
+              {t("sheetPreview")}
             </div>
 
             <svg
@@ -443,7 +446,7 @@ export function LandingCanvas() {
                   fontFamily="ui-monospace, monospace"
                   fontSize="48"
                 >
-                  DROP FILES TO PREVIEW
+                  {t("emptyPreview")}
                 </text>
               )}
 
@@ -464,7 +467,7 @@ export function LandingCanvas() {
                     fontFamily="ui-monospace, monospace"
                     fontSize="16"
                   >
-                    SHEET UTILIZATION
+                    {t("sheetUtilization")}
                   </text>
                   <text
                     x="20"

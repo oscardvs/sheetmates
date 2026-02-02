@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import { CurrencyDollarIcon, SpinnerGapIcon } from "@phosphor-icons/react";
 
 export default function AdminPricingPage() {
   const t = useTranslations("admin");
@@ -34,15 +35,29 @@ export default function AdminPricingPage() {
     }
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <SpinnerGapIcon className="h-8 w-8 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold">{t("pricingConfig")}</h1>
+    <div className="space-y-6 p-6">
+      <div className="flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
+          <CurrencyDollarIcon className="h-5 w-5 text-emerald-500" weight="duotone" />
+        </div>
+        <div>
+          <h1 className="font-mono text-2xl font-bold text-foreground">{t("pricingConfig")}</h1>
+          <p className="text-sm text-muted-foreground">Configure pricing rates and multipliers</p>
+        </div>
+      </div>
 
-      <Card>
+      <Card className="border-border bg-card">
         <CardHeader>
-          <CardTitle>Base Rates</CardTitle>
+          <CardTitle className="text-foreground">Base Rates</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
@@ -140,9 +155,9 @@ export default function AdminPricingPage() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-border bg-card">
         <CardHeader>
-          <CardTitle>Material Multipliers</CardTitle>
+          <CardTitle className="text-foreground">Material Multipliers</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {Object.entries(config.materialMultipliers).map(([mat, val]) => (
@@ -168,9 +183,9 @@ export default function AdminPricingPage() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-border bg-card">
         <CardHeader>
-          <CardTitle>Thickness Multipliers</CardTitle>
+          <CardTitle className="text-foreground">Thickness Multipliers</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {Object.entries(config.thicknessMultipliers).map(([thick, val]) => (
