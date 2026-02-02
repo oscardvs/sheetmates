@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import { DxfUploader, type UploadedPart } from "@/components/dxf-uploader";
 import { useAuth } from "@/components/providers/auth-provider";
 import { createPart } from "@/lib/firebase/db/parts";
@@ -29,6 +30,7 @@ interface RestoredPart {
 
 export default function UploadPage() {
   const t = useTranslations("upload");
+  const router = useRouter();
   const { user } = useAuth();
   const [uploading, setUploading] = useState(false);
   const [restoredParts, setRestoredParts] = useState<RestoredPart[]>([]);
@@ -82,6 +84,8 @@ export default function UploadPage() {
       toast.success(t("success"));
       setShowRestored(false);
       setRestoredParts([]);
+      // Redirect to queue page to see uploaded parts
+      router.push("/queue");
     } catch (err) {
       console.error("Upload failed:", err);
       toast.error(t("error"));

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import type { NestingPlacement } from "@/lib/nesting/types";
 
 interface SheetViewerProps {
@@ -37,8 +37,12 @@ export function SheetViewer({
   const [isPanning, setIsPanning] = useState(false);
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
 
-  const handleWheel = useCallback(
-    (e: React.WheelEvent) => {
+  // Attach wheel handler with passive: false to allow preventDefault
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+
+    const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       const factor = e.deltaY > 0 ? 1.1 : 0.9;
       setViewBox((vb) => {
@@ -48,9 +52,11 @@ export function SheetViewer({
         const nh = vb.h * factor;
         return { x: cx - nw / 2, y: cy - nh / 2, w: nw, h: nh };
       });
-    },
-    []
-  );
+    };
+
+    svg.addEventListener("wheel", handleWheel, { passive: false });
+    return () => svg.removeEventListener("wheel", handleWheel);
+  }, []);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     setIsPanning(true);
@@ -89,7 +95,6 @@ export function SheetViewer({
       viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`}
       className="w-full bg-zinc-950"
       style={{ aspectRatio: `${sheetWidth} / ${sheetHeight}` }}
-      onWheel={handleWheel}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
