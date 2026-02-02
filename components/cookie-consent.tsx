@@ -49,7 +49,7 @@ export function CookieConsent() {
             asChild
             className="font-mono text-xs text-zinc-400 hover:text-zinc-100"
           >
-            <Link href="/cookies">{t("learnMore")}</Link>
+            <Link href="/cookies" aria-label={t("learnMoreAriaLabel")}>{t("learnMore")}</Link>
           </Button>
           <Button
             size="sm"

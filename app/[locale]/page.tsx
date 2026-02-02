@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { Navbar } from "@/components/navbar";
 import { AuthProvider } from "@/components/providers/auth-provider";
-import { LandingCanvas } from "@/components/landing-canvas";
+import { LandingCanvasStatic } from "@/components/landing-canvas-static";
+import { LandingCanvasWrapper } from "@/components/landing-canvas-wrapper";
 import { LandingFooterLinks } from "@/components/landing-footer-links";
 import { LandingCta } from "@/components/landing-cta";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -55,8 +56,15 @@ export default function LandingPage() {
       <div className="flex min-h-screen flex-col bg-background">
         <Navbar />
 
-        {/* Interactive Canvas Hero */}
-        <LandingCanvas />
+        {/* Canvas Hero with Progressive Enhancement */}
+        {/* Static version renders immediately for fast LCP */}
+        <div className="relative">
+          <LandingCanvasStatic />
+          {/* Interactive version loads after hydration, replaces static */}
+          <div className="absolute inset-0">
+            <LandingCanvasWrapper />
+          </div>
+        </div>
 
         {/* How It Works */}
         <section className="relative border-t border-border bg-background">
@@ -195,19 +203,19 @@ export default function LandingPage() {
           <div className="mx-auto max-w-6xl px-4 py-16">
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
               <div className="text-center">
-                <div className="font-mono text-4xl font-bold text-primary">3000</div>
+                <div className="font-mono text-4xl font-bold text-foreground">3000</div>
                 <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.sheetWidth")}</div>
               </div>
               <div className="text-center">
-                <div className="font-mono text-4xl font-bold text-primary">0.1</div>
+                <div className="font-mono text-4xl font-bold text-foreground">0.1</div>
                 <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.precision")}</div>
               </div>
               <div className="text-center">
-                <div className="font-mono text-4xl font-bold text-primary">85%</div>
+                <div className="font-mono text-4xl font-bold text-foreground">85%</div>
                 <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.utilization")}</div>
               </div>
               <div className="text-center">
-                <div className="font-mono text-4xl font-bold text-primary">EU</div>
+                <div className="font-mono text-4xl font-bold text-foreground">EU</div>
                 <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{t("stats.manufactured")}</div>
               </div>
             </div>

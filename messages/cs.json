@@ -14,7 +14,9 @@
     "admin": "Admin",
     "login": "Přihlásit se",
     "signup": "Registrace",
-    "logout": "Odhlásit se"
+    "logout": "Odhlásit se",
+    "mobileMenuOpen": "Otevřít navigační menu",
+    "mobileMenuClose": "Zavřít navigační menu"
   },
   "landing": {
     "hero": {
@@ -84,6 +86,7 @@
       "metricCutLength": "DÉLKA ŘEZU",
       "metricPrice": "ODH. CENA",
       "ctaContinue": "POKRAČOVAT KE SKLÁDÁNÍ",
+      "ctaGetStarted": "ZAČÍT",
       "sheetPreview": "NÁHLED PLECHU 3000mm × 1500mm",
       "emptyPreview": "PŘETÁHNĚTE SOUBORY PRO NÁHLED",
       "sheetUtilization": "VYUŽITÍ PLECHU"
@@ -425,7 +428,8 @@
   "cookieConsent": {
     "message": "Používáme nezbytné cookies pro fungování webu a bezpečné platby.",
     "accept": "Přijmout",
-    "learnMore": "Více informací"
+    "learnMore": "Více informací",
+    "learnMoreAriaLabel": "Více informací o zásadách cookies"
   },
   "contact": {
     "badge": "KONTAKTUJTE NÁS",

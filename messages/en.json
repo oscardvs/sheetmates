@@ -14,7 +14,9 @@
     "admin": "Admin",
     "login": "Log in",
     "signup": "Sign up",
-    "logout": "Log out"
+    "logout": "Log out",
+    "mobileMenuOpen": "Open navigation menu",
+    "mobileMenuClose": "Close navigation menu"
   },
   "landing": {
     "hero": {
@@ -84,6 +86,7 @@
       "metricCutLength": "CUT LENGTH",
       "metricPrice": "EST. PRICE",
       "ctaContinue": "CONTINUE TO NEST",
+      "ctaGetStarted": "GET STARTED",
       "sheetPreview": "3000mm × 1500mm SHEET PREVIEW",
       "emptyPreview": "DROP FILES TO PREVIEW",
       "sheetUtilization": "SHEET UTILIZATION"
@@ -425,7 +428,8 @@
   "cookieConsent": {
     "message": "We use essential cookies for site functionality and secure payments.",
     "accept": "Accept",
-    "learnMore": "Learn more"
+    "learnMore": "Learn more",
+    "learnMoreAriaLabel": "Learn more about our cookie policy"
   },
   "contact": {
     "badge": "GET IN TOUCH",

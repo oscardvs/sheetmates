@@ -40,11 +40,19 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "GPTBot", // OpenAI crawler
-        disallow: ["/"], // Block AI scrapers from content (optional)
+        disallow: ["/"],
+      },
+      {
+        userAgent: "Google-Extended", // Google AI training
+        disallow: ["/"],
       },
       {
         userAgent: "CCBot", // Common Crawl
-        disallow: ["/"], // Block AI scrapers (optional)
+        disallow: ["/"],
+      },
+      {
+        userAgent: "anthropic-ai", // Anthropic crawler
+        disallow: ["/"],
       },
     ],
     sitemap: "https://sheetmates.com/sitemap.xml",
