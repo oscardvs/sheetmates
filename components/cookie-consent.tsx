@@ -1,27 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 const COOKIE_CONSENT_KEY = "cookie-consent";
 
-function getInitialVisibility(): boolean {
-  if (typeof window === "undefined") return false;
-  return !localStorage.getItem(COOKIE_CONSENT_KEY);
-}
-
 export function CookieConsent() {
   const t = useTranslations("cookieConsent");
-  const [isVisible, setIsVisible] = useState(getInitialVisibility);
+  const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+    if (!consent) {
+      setIsVisible(true);
+    }
+  }, []);
 
   const handleAccept = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
     setIsVisible(false);
   };
 
-  if (!isVisible) return null;
+  // Don't render anything until mounted to avoid hydration mismatch
+  if (!mounted || !isVisible) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800 bg-zinc-900">
