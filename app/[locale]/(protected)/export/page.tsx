@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import { getAllSheets, type SheetDoc } from "@/lib/firebase/db/sheets";
-import { generateNestingDxf } from "@/lib/export/dxf-writer";
+import { useAuth } from "@/components/providers/auth-provider";
+import { downloadSheetDxf } from "@/lib/export/download-sheet-dxf";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -17,8 +19,10 @@ import {
 
 export default function ExportPage() {
   const t = useTranslations("export");
+  const { user } = useAuth();
   const [sheets, setSheets] = useState<SheetDoc[]>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     getAllSheets().then(setSheets);
@@ -33,30 +37,30 @@ export default function ExportPage() {
     });
   }
 
-  function handleDownload() {
-    for (const sheet of sheets.filter((s) => selected.has(s.id))) {
-      const placements = sheet.placements.map((p) => ({
-        partId: p.partId,
-        sheetIndex: 0,
-        x: p.x,
-        y: p.y,
-        width: p.width,
-        height: p.height,
-        rotation: p.rotation,
-      }));
-
-      const dxfContent = generateNestingDxf(
-        placements,
-        sheet.width,
-        sheet.height
-      );
-      const blob = new Blob([dxfContent], { type: "application/dxf" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `sheet-${sheet.id}.dxf`;
-      a.click();
-      URL.revokeObjectURL(url);
+  async function handleDownload() {
+    if (!user) {
+      toast.error(t("loginRequired"));
+      return;
+    }
+    setDownloading(true);
+    try {
+      const idToken = await user.getIdToken();
+      let totalSkipped = 0;
+      // Sequential so each file save dialog/blob is handled cleanly.
+      for (const id of selected) {
+        const { skipped } = await downloadSheetDxf(id, idToken);
+        totalSkipped += skipped;
+      }
+      if (totalSkipped > 0) {
+        toast.warning(t("downloadPartial", { count: totalSkipped }));
+      } else {
+        toast.success(t("downloadStarted"));
+      }
+    } catch (err) {
+      console.error("DXF download failed:", err);
+      toast.error(err instanceof Error ? err.message : t("downloadError"));
+    } finally {
+      setDownloading(false);
     }
   }
 
@@ -100,7 +104,7 @@ export default function ExportPage() {
 
           <Button
             onClick={handleDownload}
-            disabled={selected.size === 0}
+            disabled={selected.size === 0 || downloading}
           >
             {t("generateDxf")} & {t("download")}
           </Button>

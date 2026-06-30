@@ -22,6 +22,12 @@ export interface PartDoc {
   thickness: number;
   boundingBox: { width: number; height: number };
   svgPath: string;
+  /**
+   * Storage path of the original uploaded DXF (e.g. `dxf/{uid}/{ts}_{name}`).
+   * Used by the production DXF export to re-emit true geometry; absent on legacy
+   * parts, which fall back to `svgPath`.
+   */
+  dxfStoragePath?: string;
   area: number;
   cutLength: number;
   quantity: number;

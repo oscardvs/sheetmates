@@ -240,7 +240,11 @@
     "selectSheets": "Select Sheets",
     "generateDxf": "Generate DXF",
     "download": "Download",
-    "noSheets": "No sheets available for export."
+    "noSheets": "No sheets available for export.",
+    "downloadStarted": "DXF download started",
+    "downloadError": "Failed to generate DXF",
+    "downloadPartial": "DXF downloaded, but {count} part(s) could not be included",
+    "loginRequired": "You must be signed in to download"
   },
   "checkout": {
     "title": "Checkout",
@@ -338,7 +342,12 @@
       "startCutting": "Start Cutting",
       "markComplete": "Mark Complete",
       "full": "Ready",
-      "cutting": "Cutting"
+      "cutting": "Cutting",
+      "downloadDxf": "Download DXF",
+      "downloadStarted": "DXF download started",
+      "downloadError": "Failed to generate DXF",
+      "downloadPartial": "DXF downloaded, but {count} part(s) could not be included",
+      "loginRequired": "You must be signed in to download"
     },
     "orders": {
       "title": "Orders",

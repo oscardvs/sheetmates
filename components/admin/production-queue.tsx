@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -7,6 +8,8 @@ import {
   updateSheetStatus,
 } from "@/lib/firebase/db/production";
 import type { SheetDoc } from "@/lib/firebase/db/sheets";
+import { useAuth } from "@/components/providers/auth-provider";
+import { downloadSheetDxf } from "@/lib/export/download-sheet-dxf";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -17,11 +20,37 @@ import {
   PlayIcon,
   CheckCircleIcon,
   ScissorsIcon,
+  DownloadSimpleIcon,
+  SpinnerIcon,
 } from "@phosphor-icons/react";
 
 export function ProductionQueue() {
   const t = useTranslations("admin.queue");
   const queryClient = useQueryClient();
+  const { user } = useAuth();
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
+
+  async function handleDownload(sheetId: string) {
+    if (!user) {
+      toast.error(t("loginRequired"));
+      return;
+    }
+    setDownloadingId(sheetId);
+    try {
+      const idToken = await user.getIdToken();
+      const { skipped } = await downloadSheetDxf(sheetId, idToken);
+      if (skipped > 0) {
+        toast.warning(t("downloadPartial", { count: skipped }));
+      } else {
+        toast.success(t("downloadStarted"));
+      }
+    } catch (err) {
+      console.error("DXF download failed:", err);
+      toast.error(err instanceof Error ? err.message : t("downloadError"));
+    } finally {
+      setDownloadingId(null);
+    }
+  }
 
   const { data: sheets, isLoading } = useQuery({
     queryKey: ["productionQueue"],
@@ -67,6 +96,8 @@ export function ProductionQueue() {
                 onComplete={() =>
                   statusMutation.mutate({ id: sheet.id, status: "done" })
                 }
+                onDownload={() => handleDownload(sheet.id)}
+                downloading={downloadingId === sheet.id}
                 loading={statusMutation.isPending}
                 t={t}
               />
@@ -92,6 +123,8 @@ export function ProductionQueue() {
                 onStart={() =>
                   statusMutation.mutate({ id: sheet.id, status: "cutting" })
                 }
+                onDownload={() => handleDownload(sheet.id)}
+                downloading={downloadingId === sheet.id}
                 loading={statusMutation.isPending}
                 t={t}
               />
@@ -107,11 +140,21 @@ interface SheetCardProps {
   sheet: SheetDoc;
   onStart?: () => void;
   onComplete?: () => void;
+  onDownload?: () => void;
+  downloading?: boolean;
   loading: boolean;
   t: (key: string) => string;
 }
 
-function SheetCard({ sheet, onStart, onComplete, loading, t }: SheetCardProps) {
+function SheetCard({
+  sheet,
+  onStart,
+  onComplete,
+  onDownload,
+  downloading,
+  loading,
+  t,
+}: SheetCardProps) {
   const statusColor =
     sheet.status === "cutting" ? "bg-amber-500" : "bg-emerald-500";
 
@@ -181,6 +224,23 @@ function SheetCard({ sheet, onStart, onComplete, loading, t }: SheetCardProps) {
           >
             <CheckCircleIcon className="mr-2 h-4 w-4" />
             {t("markComplete")}
+          </Button>
+        )}
+
+        {onDownload && (
+          <Button
+            size="sm"
+            variant="secondary"
+            className="w-full"
+            onClick={onDownload}
+            disabled={downloading}
+          >
+            {downloading ? (
+              <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <DownloadSimpleIcon className="mr-2 h-4 w-4" />
+            )}
+            {t("downloadDxf")}
           </Button>
         )}
       </CardContent>

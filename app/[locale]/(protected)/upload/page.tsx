@@ -122,7 +122,7 @@ export default function UploadPage() {
       // 1. Save parts to Firestore and collect their IDs
       const savedPartIds: string[] = [];
       for (const part of parts) {
-        const downloadUrl = await uploadDxfFile(
+        const { path: dxfStoragePath } = await uploadDxfFile(
           user.uid,
           part.fileName,
           part.file
@@ -137,6 +137,8 @@ export default function UploadPage() {
             height: part.parsed.height,
           },
           svgPath: part.svgPath,
+          // Persist the original DXF location for high-fidelity production export.
+          dxfStoragePath,
           area: part.area,
           cutLength: part.cutLength,
           quantity: part.quantity,
@@ -145,7 +147,6 @@ export default function UploadPage() {
           position: null,
         });
         savedPartIds.push(partId);
-        void downloadUrl;
       }
 
       // 2. Fetch the saved parts for auto-nesting

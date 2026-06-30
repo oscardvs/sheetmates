@@ -16,6 +16,7 @@ import {
 } from "firebase-admin/app";
 import { getAuth, type Auth } from "firebase-admin/auth";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
+import { getStorage, type Storage } from "firebase-admin/storage";
 
 let cachedApp: App | null = null;
 
@@ -46,4 +47,13 @@ export function adminAuth(): Auth {
 
 export function adminDb(): Firestore {
   return getFirestore(getAdminApp());
+}
+
+export function adminStorage(): Storage {
+  return getStorage(getAdminApp());
+}
+
+/** Default Storage bucket name (set on the public Firebase config). */
+export function defaultBucketName(): string | undefined {
+  return process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || undefined;
 }

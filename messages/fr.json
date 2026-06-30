@@ -240,7 +240,11 @@
     "selectSheets": "Sélectionner les tôles",
     "generateDxf": "Générer le DXF",
     "download": "Télécharger",
-    "noSheets": "Aucune tôle disponible pour l'export."
+    "noSheets": "Aucune tôle disponible pour l'export.",
+    "downloadStarted": "Téléchargement DXF démarré",
+    "downloadError": "Échec de la génération du DXF",
+    "downloadPartial": "DXF téléchargé, mais {count} pièce(s) n'ont pas pu être incluses",
+    "loginRequired": "Vous devez être connecté pour télécharger"
   },
   "checkout": {
     "title": "Paiement",
@@ -338,7 +342,12 @@
       "startCutting": "Commencer la découpe",
       "markComplete": "Marquer comme terminé",
       "full": "Prêt",
-      "cutting": "En découpe"
+      "cutting": "En découpe",
+      "downloadDxf": "Télécharger DXF",
+      "downloadStarted": "Téléchargement DXF démarré",
+      "downloadError": "Échec de la génération du DXF",
+      "downloadPartial": "DXF téléchargé, mais {count} pièce(s) n'ont pas pu être incluses",
+      "loginRequired": "Vous devez être connecté pour télécharger"
     },
     "orders": {
       "title": "Commandes",

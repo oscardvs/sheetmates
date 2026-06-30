@@ -394,15 +394,18 @@ See `.env.example` for the canonical list. Copy it to `.env.local`.
 
 1. **Nesting**: Shelf-packing (FFDH) only; no true-shape NFP. WASM `libnest2d`
    path is scaffolded in `wasm/` but **not built** (silently falls back).
-2. **Production export**: `lib/export/dxf-writer.ts` emits bounding boxes, not
-   real part outlines — **not yet usable for the laser** (top fulfillment gap).
-3. **Dutch Auction**: Implemented + tested in `lib/pricing/auction.ts` but **not
+2. **Dutch Auction**: Implemented + tested in `lib/pricing/auction.ts` but **not
    wired** into checkout (static cost-plus pricing is live).
-4. **Sheet locks**: `lib/firebase/db/sheet-locks.ts` exists and an hourly Cloud
+3. **Sheet locks**: `lib/firebase/db/sheet-locks.ts` exists and an hourly Cloud
    Function reaps stale locks, but the lock is **not yet acquired** during checkout.
-5. **Guest Flow**: No anonymous session persistence yet (cleanup job is ready).
+4. **Guest Flow**: No anonymous session persistence yet (cleanup job is ready).
 
 ### Resolved (previously listed as debt)
+
+- ✅ Production DXF export: `lib/export/` emits real AC1015 part outlines (true
+  arcs/curves) transformed per placement, in mm, no kerf baked in; downloaded via
+  the admin `GET /api/export/sheet/[sheetId]` route. See
+  `docs/plans/2026-06-30-dxf-export-research.md`.
 
 - ✅ State management: Zustand + TanStack Query in use.
 - ✅ Canvas: Konva.js playground live (SVG retained for read-only views).

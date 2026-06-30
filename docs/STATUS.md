@@ -47,10 +47,16 @@ real, and the unit suite (155 tests) is green.
 - [ ] Provision the first admin on the real project and create initial inventory.
 
 ### P1 — first real production run
-- [ ] **Real production DXF export.** Replace bounding-box export in
-      `lib/export/dxf-writer.ts` with actual part outlines (svgPath → DXF),
-      applying rotation and kerf. This is the largest remaining engineering item
-      and the current hard blocker for fulfilling an order on the laser.
+- [x] **Real production DXF export.** `lib/export/` now emits a valid AC1015
+      (R2000) DXF per sheet with each part's *true* geometry (arcs/circles/ellipses/
+      splines preserved), transformed by its placement, in millimetres
+      ($INSUNITS=4). Geometry comes from the original uploaded DXF (re-parsed from
+      Storage; `svgPath` is a lossy fallback for legacy parts). No kerf is baked into
+      contours — the laser controller applies half-kerf from its tech tables, so
+      pre-offsetting would double-compensate. Operators download via the admin-gated
+      `GET /api/export/sheet/[sheetId]` route (button on the production queue).
+      See `docs/plans/2026-06-30-dxf-export-research.md`. Validated with an ezdxf
+      audit (0 errors) and Vitest round-trips through `dxf-parser`.
 - [ ] Acquire the sheet lock during checkout (`use-sheet-lock` is built but
       unused) so two buyers can't claim the last capacity simultaneously.
 - [ ] Order confirmation email (the success copy promises one; nothing sends it).

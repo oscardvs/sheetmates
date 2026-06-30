@@ -240,7 +240,11 @@
     "selectSheets": "Vybrat plechy",
     "generateDxf": "Vygenerovat DXF",
     "download": "Stáhnout",
-    "noSheets": "Žádné plechy k exportu."
+    "noSheets": "Žádné plechy k exportu.",
+    "downloadStarted": "Stahování DXF zahájeno",
+    "downloadError": "Generování DXF se nezdařilo",
+    "downloadPartial": "DXF stažen, ale {count} díl(ů) nebylo možné zahrnout",
+    "loginRequired": "Pro stažení musíte být přihlášeni"
   },
   "checkout": {
     "title": "Platba",
@@ -338,7 +342,12 @@
       "startCutting": "Zahájit řezání",
       "markComplete": "Označit jako dokončené",
       "full": "Připraveno",
-      "cutting": "Řeže se"
+      "cutting": "Řeže se",
+      "downloadDxf": "Stáhnout DXF",
+      "downloadStarted": "Stahování DXF zahájeno",
+      "downloadError": "Generování DXF se nezdařilo",
+      "downloadPartial": "DXF stažen, ale {count} díl(ů) nebylo možné zahrnout",
+      "loginRequired": "Pro stažení musíte být přihlášeni"
     },
     "orders": {
       "title": "Objednávky",
