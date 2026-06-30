@@ -7,7 +7,11 @@ import {
   getPartsByUser,
   type PartDoc,
 } from "@/lib/firebase/db/parts";
-import { createOrder } from "@/lib/firebase/db/orders";
+import {
+  getPricingConfig,
+  defaultPricingConfig,
+  type PricingConfig,
+} from "@/lib/firebase/db/pricing-config";
 import { calculatePartPrice } from "@/lib/pricing/engine";
 import { PriceBreakdownDisplay } from "@/components/price-breakdown";
 import { Link } from "@/i18n/navigation";
@@ -24,6 +28,7 @@ export default function CheckoutPage() {
   const tPricing = useTranslations("pricing");
   const { user } = useAuth();
   const [parts, setParts] = useState<PartDoc[]>([]);
+  const [config, setConfig] = useState<PricingConfig>(defaultPricingConfig);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -34,14 +39,22 @@ export default function CheckoutPage() {
     }
   }, [user]);
 
+  useEffect(() => {
+    getPricingConfig().then(setConfig).catch(() => setConfig(defaultPricingConfig));
+  }, []);
+
+  // Display-only estimate; the server recomputes the authoritative price at checkout.
   const breakdowns = parts.map((part) =>
-    calculatePartPrice({
-      areaMm2: part.area,
-      cutLengthMm: part.cutLength,
-      material: "steel",
-      thickness: "2",
-      quantity: part.quantity,
-    })
+    calculatePartPrice(
+      {
+        areaMm2: part.area,
+        cutLengthMm: part.cutLength,
+        material: part.material,
+        thickness: String(part.thickness),
+        quantity: part.quantity,
+      },
+      config
+    )
   );
 
   const grandTotal = breakdowns.reduce((sum, b) => sum + b.total, 0);
@@ -53,35 +66,16 @@ export default function CheckoutPage() {
     setLoading(true);
 
     try {
-      const items = parts.map((part, i) => ({
-        partId: part.id,
-        fileName: part.fileName,
-        quantity: part.quantity,
-        pricePerUnit: breakdowns[i].pricePerUnit,
-        total: breakdowns[i].total,
-      }));
-
-      const orderId = await createOrder({
-        userId: user.uid,
-        items,
-        subtotal: totalBeforeVat,
-        vat: totalVat,
-        total: grandTotal,
-        status: "pending",
-        stripeSessionId: null,
-      });
-
+      // The server recomputes prices and creates the order; we only send the
+      // authenticated user's token and the part IDs being purchased.
+      const idToken = await user.getIdToken();
       const response = await fetch("/api/checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          items: parts.map((part, i) => ({
-            name: part.fileName,
-            quantity: part.quantity,
-            priceInCents: Math.round(breakdowns[i].pricePerUnit * 100),
-          })),
-          orderId,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ partIds: parts.map((p) => p.id) }),
       });
 
       const { url } = await response.json();

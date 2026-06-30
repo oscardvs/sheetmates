@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Firebase build artifacts
     ".firebase/**",
+    // Cloud Functions have their own toolchain/config
+    "functions/**",
   ]),
 ]);
 

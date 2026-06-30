@@ -258,7 +258,15 @@
     "itemCount": "{count} {type}",
     "itemSingular": "POLOŽKA",
     "itemPlural": "POLOŽEK",
-    "securityNote": "Zabezpečená platba přes Stripe. Vaše data jsou šifrována."
+    "securityNote": "Zabezpečená platba přes Stripe. Vaše data jsou šifrována.",
+    "verifying": "Ověřování vaší platby…",
+    "viewQueue": "Zobrazit frontu objednávek",
+    "orderRef": "Referenční číslo objednávky",
+    "successHint": "Potvrzení objednávky bylo odesláno na váš e-mail. Stav můžete sledovat ve frontě.",
+    "paymentPending": "Platba se zpracovává",
+    "paymentPendingMessage": "Vaše platba se stále zpracovává. Objednávku aktualizujeme, jakmile bude platba potvrzena.",
+    "paymentUnverified": "Platbu nelze ověřit",
+    "paymentUnverifiedMessage": "Tuto platbu se nepodařilo potvrdit. Pokud vám byla částka stržena, zkontrolujte frontu objednávek nebo kontaktujte podporu."
   },
   "account": {
     "title": "Účet",

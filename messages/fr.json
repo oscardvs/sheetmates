@@ -258,7 +258,15 @@
     "itemCount": "{count} {type}",
     "itemSingular": "ARTICLE",
     "itemPlural": "ARTICLES",
-    "securityNote": "Paiement sécurisé via Stripe. Vos données sont cryptées."
+    "securityNote": "Paiement sécurisé via Stripe. Vos données sont cryptées.",
+    "verifying": "Vérification de votre paiement…",
+    "viewQueue": "Voir la file d'attente",
+    "orderRef": "Référence de commande",
+    "successHint": "La confirmation de votre commande a été envoyée par e-mail. Vous pouvez suivre son statut dans la file d'attente.",
+    "paymentPending": "Paiement en attente",
+    "paymentPendingMessage": "Votre paiement est en cours de traitement. Nous mettrons à jour votre commande dès qu'il sera validé.",
+    "paymentUnverified": "Paiement non vérifié",
+    "paymentUnverifiedMessage": "Nous n'avons pas pu confirmer ce paiement. Si vous avez été débité, consultez votre file d'attente ou contactez le support."
   },
   "account": {
     "title": "Compte",

@@ -258,7 +258,15 @@
     "itemCount": "{count} {type}",
     "itemSingular": "ITEM",
     "itemPlural": "ITEMS",
-    "securityNote": "Secure payment via Stripe. Your data is encrypted."
+    "securityNote": "Secure payment via Stripe. Your data is encrypted.",
+    "verifying": "Verifying your payment…",
+    "viewQueue": "View Order Queue",
+    "orderRef": "Order reference",
+    "successHint": "Your order confirmation has been sent to your email. You can track its status in the queue.",
+    "paymentPending": "Payment Pending",
+    "paymentPendingMessage": "Your payment is still processing. We'll update your order as soon as it clears.",
+    "paymentUnverified": "Could Not Verify Payment",
+    "paymentUnverifiedMessage": "We couldn't confirm this payment. If you were charged, check your order queue or contact support."
   },
   "account": {
     "title": "Account",

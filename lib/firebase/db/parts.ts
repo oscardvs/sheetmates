@@ -16,6 +16,10 @@ export interface PartDoc {
   id: string;
   userId: string;
   fileName: string;
+  /** Material the part is cut from (e.g. "steel"). Drives pricing multipliers. */
+  material: string;
+  /** Sheet thickness in mm. Drives pricing multipliers. */
+  thickness: number;
   boundingBox: { width: number; height: number };
   svgPath: string;
   area: number;

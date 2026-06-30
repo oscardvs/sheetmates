@@ -6,6 +6,7 @@
 # dependencies
 .DS_Store
 .env*
+!.env.example
 # env files (can opt-in for committing if needed)
 /.firebase
 firebase-debug.log

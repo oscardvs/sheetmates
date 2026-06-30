@@ -11,12 +11,13 @@ SheetMates is a Belgian-incorporated digital platform that transforms Tech-Centr
 ```
 Frontend:     Next.js 16 + React 19 + TypeScript (strict mode)
 Styling:      Tailwind CSS v4 + Shadcn UI (customized, source-owned)
-State:        Zustand (canvas) + TanStack Query (server state) [planned]
-Canvas:       Konva.js / react-konva [planned, currently SVG]
+State:        Zustand (canvas) + TanStack Query (server state)
+Canvas:       Konva.js / react-konva (playground); SVG SheetViewer (read-only views)
 i18n:         next-intl (en, fr, cs)
 Backend:      Firebase (Auth, Firestore, Storage) - europe-west1 region
-Payments:     Stripe (Payment Intents, Tax API for EU VAT)
-Nesting:      Custom shelf-packer [WASM libnest2d planned]
+Server auth:  Firebase Admin SDK (checkout, Stripe webhook, Cloud Functions)
+Payments:     Stripe Checkout (Payment mode, EU VAT itemized as a line)
+Nesting:      Custom shelf-packer (FFDH); WASM libnest2d path scaffolded [not built]
 ```
 
 ## Architecture Overview
@@ -33,8 +34,10 @@ app/
 │   ├── login/signup/            # Auth pages
 │   └── page.tsx                 # Landing page
 ├── api/
-│   ├── checkout/                # Create Stripe Payment Intent
-│   └── webhooks/stripe/         # Handle Stripe events
+│   ├── checkout/                # Server-side price recompute + order + Stripe session
+│   ├── checkout/session/        # Verify a session after redirect (success page)
+│   └── webhooks/stripe/         # Handle Stripe events (Admin SDK writes orders)
+functions/                       # Cloud Functions: grantAdmin, TTL cleanup jobs
 components/
 ├── ui/                          # Shadcn primitives (owned, customizable)
 ├── providers/                   # Context providers (auth)
@@ -92,6 +95,23 @@ lib/
   status: "pending" | "paid" | "cutting" | "shipped" | "delivered";
 }
 
+// parts - Uploaded customer geometry
+{
+  id: string;
+  userId: string;
+  fileName: string;
+  material: string;           // drives pricing multiplier (set at upload)
+  thickness: number;          // mm; drives pricing multiplier (set at upload)
+  boundingBox: { width: number; height: number };
+  svgPath: string;
+  area: number;               // mm² (authoritative input for pricing)
+  cutLength: number;          // mm (authoritative input for pricing)
+  quantity: number;
+  status: "pending" | "nested" | "cut" | "shipped";
+  sheetId: string | null;
+  position: { x: number; y: number; rotation: number } | null;
+}
+
 // pricingConfig (singleton: "default")
 {
   perCm2Rate: number;
@@ -102,6 +122,13 @@ lib/
   // ... bulk discounts, minimums
 }
 ```
+
+> **Pricing is server-authoritative.** `POST /api/checkout` recomputes every
+> price from the part's stored `area`/`cutLength`/`material`/`thickness` against
+> `pricingConfig` (never trusting client-sent amounts), creates the `orders`
+> document via the Admin SDK, and itemizes VAT as its own Stripe line so the
+> amount charged equals the displayed gross total. The Stripe webhook (also
+> Admin SDK) marks the order `paid` only after confirming `amount_total` matches.
 
 ## Design Philosophy: "Robot-Human" Centricity
 
@@ -345,21 +372,43 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
 # Stripe
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
+
+# Firebase Admin SDK (server only; base64 service-account JSON).
+# Optional on Firebase Hosting / Cloud Run (uses Application Default Credentials).
+FIREBASE_SERVICE_ACCOUNT=
 ```
+
+See `.env.example` for the canonical list. Copy it to `.env.local`.
 
 ## Current Limitations / Tech Debt
 
-1. **Nesting**: Shelf-packing only; no true-shape NFP algorithm yet
-2. **Canvas**: SVG-based; needs migration to Konva.js for performance
-3. **State**: No Zustand/TanStack Query yet; using basic useState + useEffect
-4. **Real-time**: No Firestore listeners; polling-based refresh
-5. **Dutch Auction**: Not implemented; static pricing only
-6. **Guest Flow**: No anonymous session persistence yet
-7. **Tests**: No test suite configured
+> Status as of the customer-readiness audit — see `docs/STATUS.md` for the full
+> picture and the path to first customers.
+
+1. **Nesting**: Shelf-packing (FFDH) only; no true-shape NFP. WASM `libnest2d`
+   path is scaffolded in `wasm/` but **not built** (silently falls back).
+2. **Production export**: `lib/export/dxf-writer.ts` emits bounding boxes, not
+   real part outlines — **not yet usable for the laser** (top fulfillment gap).
+3. **Dutch Auction**: Implemented + tested in `lib/pricing/auction.ts` but **not
+   wired** into checkout (static cost-plus pricing is live).
+4. **Sheet locks**: `lib/firebase/db/sheet-locks.ts` exists and an hourly Cloud
+   Function reaps stale locks, but the lock is **not yet acquired** during checkout.
+5. **Guest Flow**: No anonymous session persistence yet (cleanup job is ready).
+
+### Resolved (previously listed as debt)
+
+- ✅ State management: Zustand + TanStack Query in use.
+- ✅ Canvas: Konva.js playground live (SVG retained for read-only views).
+- ✅ Real-time: Firestore `onSnapshot` subscriptions added.
+- ✅ Tests: Vitest suite (155 tests across dxf/nesting/pricing/canvas) passing.
+- ✅ Orders: created/updated server-side via Admin SDK (not client-trusted).
 
 ## Quick Reference
 
@@ -369,9 +418,17 @@ npm run dev              # Start dev server
 npm run build            # Production build
 npm run lint             # ESLint check
 
+# Test
+npm run test             # Vitest unit suite
+npm run test:e2e         # Playwright
+
 # Firebase
 npx firebase emulators:start   # Local emulators
-npx firebase deploy            # Deploy rules/functions
+npx firebase deploy            # Deploy hosting + rules + functions
+firebase deploy --only functions
+
+# Admin provisioning (first admin, run once with a service account)
+cd functions && npm run set-admin -- you@example.com
 
 # Stripe
 stripe listen --forward-to localhost:3000/api/webhooks/stripe
@@ -387,3 +444,6 @@ stripe listen --forward-to localhost:3000/api/webhooks/stripe
 | New Firestore collection | `lib/firebase/db/` |
 | New protected route | `app/[locale]/(protected)/` |
 | Add translation | `messages/{locale}.json` |
+| Change pricing/checkout | `app/api/checkout/route.ts`, `lib/pricing/engine.ts` |
+| Add a Cloud Function | `functions/src/index.ts` |
+| Server-side Firestore/Auth | `lib/firebase/admin.ts` |

@@ -1,5 +1,10 @@
 # SheetMates Full Engineering Roadmap
 
+> **⚠️ Historical plan.** Phases 1–3 (state, Konva canvas, real-time, admin,
+> auction model, DFM, tests) are largely **implemented**. For current build
+> status and the live path to first customers, see [`docs/STATUS.md`](../STATUS.md).
+> This document is retained as the original design record.
+
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
 **Goal:** Build a complete community-driven sheet metal fabrication marketplace that transforms Tech-Centrum's virgin buffer sheets into accessible manufacturing for makers, engineers, and hardware startups.

@@ -130,6 +130,8 @@ export default function UploadPage() {
         const partId = await createPart({
           userId: user.uid,
           fileName: part.fileName,
+          material,
+          thickness,
           boundingBox: {
             width: part.parsed.width,
             height: part.parsed.height,
