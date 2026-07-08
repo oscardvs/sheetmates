@@ -51,19 +51,19 @@ export function LandingFooterLinks() {
       <div className="flex gap-4">
         <Link
           href="/privacy"
-          className="font-mono text-[10px] text-muted-foreground/60 transition-colors hover:text-muted-foreground"
+          className="font-mono text-[10px] text-muted-foreground transition-colors hover:text-foreground"
         >
           {t("privacy")}
         </Link>
         <Link
           href="/terms"
-          className="font-mono text-[10px] text-muted-foreground/60 transition-colors hover:text-muted-foreground"
+          className="font-mono text-[10px] text-muted-foreground transition-colors hover:text-foreground"
         >
           {t("terms")}
         </Link>
         <Link
           href="/cookies"
-          className="font-mono text-[10px] text-muted-foreground/60 transition-colors hover:text-muted-foreground"
+          className="font-mono text-[10px] text-muted-foreground transition-colors hover:text-foreground"
         >
           {t("cookies")}
         </Link>
