@@ -1,10 +1,10 @@
 # SheetMates
 
-A Belgian community-driven sheet-metal fabrication marketplace. SheetMates turns
-Tech-Centrum's virgin **buffer sheets** (3000×1500 mm) into accessible, shared
-manufacturing for makers, engineers, and hardware startups: upload a DXF, get it
-nested onto a live sheet alongside other people's parts, and pay only for your
-share at industrial precision.
+SheetMates is a sheet-metal fabrication marketplace based in Belgium, live at
+https://sheetmates.com. Tech-Centrum's unused **buffer sheets** (3000×1500 mm
+virgin sheets procured on top of industrial orders) are listed on the site.
+You upload a DXF, it is nested onto an open sheet next to other people's parts,
+and you pay for your share of the sheet.
 
 ## Tech Stack
 
@@ -12,11 +12,11 @@ share at industrial precision.
 - **Styling:** Tailwind CSS v4 · Shadcn UI (source-owned) · monospaced "robot-human" aesthetic
 - **State:** Zustand (canvas) · TanStack Query (server state)
 - **Canvas:** Konva.js / react-konva for the nesting playground
-- **i18n:** next-intl (en, fr, cs — all complete)
-- **Backend:** Firebase (Auth, Firestore, Storage) — `europe-west1`
+- **i18n:** next-intl (en, fr, cs; all three complete)
+- **Backend:** Firebase (Auth, Firestore, Storage), region `europe-west1`
 - **Server auth:** Firebase Admin SDK (checkout + webhook + Cloud Functions)
 - **Payments:** Stripe Checkout (EU VAT itemized)
-- **Nesting:** custom shelf-packer (FFDH); optional WASM `libnest2d` path
+- **Nesting:** custom shelf-packer (FFDH); a WASM `libnest2d` path under `wasm/` is scaffolded but not built yet
 
 ## Getting Started
 
@@ -41,7 +41,7 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key (client) |
 | `STRIPE_SECRET_KEY` | Stripe secret key (server only) |
 | `STRIPE_WEBHOOK_SECRET` | Verifies incoming Stripe webhooks |
-| `FIREBASE_SERVICE_ACCOUNT` | Base64 service-account JSON for the Admin SDK (server). On Firebase Hosting / Cloud Run this is optional — Application Default Credentials are used automatically. |
+| `FIREBASE_SERVICE_ACCOUNT` | Base64 service-account JSON for the Admin SDK (server). On Firebase Hosting / Cloud Run this is optional; Application Default Credentials are used automatically. |
 
 ### 3. Run
 
@@ -77,9 +77,9 @@ After the first admin exists, promote others from within the app via the
 
 Located in [`functions/`](./functions) (Node 20, `europe-west1`):
 
-- `grantAdmin` — callable; an admin promotes another user.
-- `cleanupExpiredLocks` — hourly; releases stale sheet checkout locks.
-- `cleanupGuestDrafts` — every 6h; deletes guest drafts >24h old (GDPR).
+- `grantAdmin`: callable; an admin promotes another user.
+- `cleanupExpiredLocks`: hourly; releases stale sheet checkout locks.
+- `cleanupGuestDrafts`: every 6h; deletes guest drafts older than 24h (GDPR).
 
 ```bash
 firebase deploy --only functions
